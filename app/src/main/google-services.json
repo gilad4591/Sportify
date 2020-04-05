@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "23308545668",
+    "firebase_url": "https://engaged-hash-273312.firebaseio.com",
+    "project_id": "engaged-hash-273312",
+    "storage_bucket": "engaged-hash-273312.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23308545668:android:7c07fedf9dccb382745cd1",
+        "android_client_info": {
+          "package_name": "com.example.b7sportifyh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23308545668-c9ch3g9m5c91em58q95ssqdnge0kvv7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDrKU2nTRXe_er2ihaqbef7JWwWWr-AGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23308545668-c9ch3g9m5c91em58q95ssqdnge0kvv7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
