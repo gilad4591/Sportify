@@ -1,26 +1,27 @@
 pipeline {
   agent {
-    label 'android'
+    docker {
+      image 'windsekirun/jenkins-android-docker:1.1.1'
+    }
   }
   options {
     skipStagesAfterUnstable()
   }
   stages {
+    stage ('Prepare'){
+      steps {
+        sh 'chmod +x ./gradlew'
+      }
+    }
     stage('Compile') {
       steps {
         sh './gradlew compileDebugSources'
       }
     }
-    stage('Unit test') {
-      steps {
-        sh './gradlew testDebugUnitTest testDebugUnitTest'
-
-        junit '*/TEST-.xml'
-      }
-    }
     stage('Build APK') {
       steps {
         sh './gradlew assembleDebug'
-        archiveArtifacts '*/.apk'
       }
     }
+  }
+}
