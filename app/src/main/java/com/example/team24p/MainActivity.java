@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
+import com.example.team24p.ui.login.LoginActivity;
+
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -20,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent stNav = new Intent(getApplicationContext(),MapsActivity.class);
                 startActivity(stNav);
+            }
+        });
+
+        Button login = (Button)findViewById(R.id.button);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stlogn = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(stlogn);
             }
         });
     }

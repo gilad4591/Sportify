@@ -1,10 +1,15 @@
 package com.example.team24p;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -32,6 +37,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -40,9 +51,13 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener,GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+    private static final int REQUEST_PERMISSION_LOCATION = 255;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference();
-    private FusedLocationProviderClient fusedLocationClient;
+    private LocationManager lm;
+    private Location myLocation;
+    Marker marker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +74,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        // Add a marker in Sydney, Australia,
-        // and move the map's camera to the same location
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                double myLatitude = myLocation.getLatitude();
+                double myLongitude = myLocation.getLongitude();
 
+                LatLng latLng = new LatLng(myLatitude, myLongitude);
+                googleMap.addMarker(new MarkerOptions().position(latLng)
+                        .title(latLng.toString()));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18.0f));
+            } else {
+                // do request the permission
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 8);
+            }
+        }
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -94,7 +124,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     googleMap.addMarker(new MarkerOptions().position(latLng).title(names.get(i)));
                     i++;
                 }
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat,lon),18.0f));
+                //fusedLocationClient.getLastLocation();
+
             }
 
             @Override
@@ -103,6 +134,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+    }
+
+    private void askLocationPermission() {
     }
 
 
