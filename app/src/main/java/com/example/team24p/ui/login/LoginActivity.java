@@ -1,7 +1,17 @@
 package com.example.team24p.ui.login;
 
 import android.app.Activity;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -25,20 +35,30 @@ import android.widget.Toast;
 import com.example.team24p.R;
 import com.example.team24p.ui.login.LoginViewModel;
 import com.example.team24p.ui.login.LoginViewModelFactory;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private DatabaseReference userRef;
+    private FirebaseAuth fbAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        userRef = FirebaseDatabase.getInstance().getReference();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        CollectionReference users = db.collection("Users");
+        fbAuth = FirebaseAuth.getInstance();
 
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
