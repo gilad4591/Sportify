@@ -27,14 +27,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button login = (Button)findViewById(R.id.button);
-        login.setOnClickListener(new View.OnClickListener() {
+//        Button login = (Button)findViewById(R.id.button);
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent stlogn = new Intent(getApplicationContext(), LoginActivity.class);
+//                startActivity(stlogn);
+//            }
+//        });
+        Button LoginButton = (Button)findViewById(R.id.LoginButton);
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent stlogn = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(stlogn);
+                Intent stLogin = new Intent(getApplicationContext(), com.example.team24p.LoginActivity.class);
+                startActivity(stLogin);
             }
         });
-
     }
 }
