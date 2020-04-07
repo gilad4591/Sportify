@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 
-import com.example.team24p.ui.login.LoginActivity;
-
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -39,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent stLogin = new Intent(getApplicationContext(), com.example.team24p.LoginActivity.class);
+                Intent stLogin = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(stLogin);
             }
         });
