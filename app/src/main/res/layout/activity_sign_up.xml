@@ -8,11 +8,11 @@
 
     <EditText
         android:id="@+id/EmailTextView"
-        android:layout_width="410dp"
+        android:layout_width="409dp"
         android:layout_height="50dp"
         android:layout_marginTop="121dp"
-        android:inputType="textEmailAddress"
         android:hint="Email"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/PasswordTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,15 +20,29 @@
     <EditText
         android:id="@+id/PasswordTextView"
         android:layout_width="409dp"
-        android:layout_height="62dp"
+        android:layout_height="50dp"
         android:layout_marginTop="11dp"
         android:layout_marginBottom="72dp"
         android:hint="Password"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/signUpButton"
         app:layout_constraintEnd_toEndOf="@+id/EmailTextView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailTextView" />
+
+    <EditText
+        android:id="@+id/ValidatePasswordEditText"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="27dp"
+        android:hint="Validate Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
 
     <Button
         android:id="@+id/SignInButton"
@@ -43,15 +57,16 @@
         app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
 
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/RegisterButton"
         android:layout_width="191dp"
         android:layout_height="43dp"
         android:layout_marginTop="85dp"
         android:layout_marginBottom="25dp"
-        android:text="Sign Up"
+        android:text="Register"
         app:layout_constraintBottom_toTopOf="@+id/SignInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
