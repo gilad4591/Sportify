@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
 
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/Register"
         android:layout_width="163dp"
         android:layout_height="54dp"
         android:layout_marginTop="28dp"

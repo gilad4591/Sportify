@@ -21,6 +21,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
         findViewById(R.id.SignInButton).setOnClickListener(this);
         editTextEmail = (EditText) findViewById(R.id.EmailTextView);
         editTextPassword = (EditText) findViewById(R.id.PasswordTextView);
