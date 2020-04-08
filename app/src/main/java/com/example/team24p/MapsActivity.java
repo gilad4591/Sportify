@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -82,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Double lon = 0.0;
                 ArrayList<Map<String, String>> locations = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 ArrayList<LatLng> latLngList = new ArrayList<LatLng>();
+                ArrayList<String> names = new ArrayList<>();
                 for (Map<String, String> entry : locations) {
                     for (String key : entry.keySet()) {
                         String value = entry.get(key);
@@ -92,19 +94,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         else if (key.equals("lon")){
                             lon = Double.parseDouble(value);
                         }
+                        else if (key.equals("Name")){
+                            names.add(value);
+                        }
                     }
                     latLngList.add(new LatLng(lat, lon));
-                } //
+                }
+                int i =0;
                 for (LatLng latLng : latLngList) {
+
                     mMap.addMarker(new MarkerOptions().position(latLng)
-                            .title(latLng.toString()));
+                            .title(names.get(i)));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    i++;
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent intent = new Intent(MapsActivity.this, GamesActivity.class);
+                intent.putExtra("markerName", marker.getTitle());
+                startActivity(intent);
+
+                return false;
             }
         });
     }
