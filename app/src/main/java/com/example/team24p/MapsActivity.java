@@ -94,7 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
                     }
                     latLngList.add(new LatLng(lat, lon));
-                }
+                } //
                 for (LatLng latLng : latLngList) {
                     mMap.addMarker(new MarkerOptions().position(latLng)
                             .title(latLng.toString()));
