@@ -5,12 +5,28 @@ import java.util.Date;
 public class Events {
     String ground,username;
     String  date;
+    String Hour;
 
-    public Events(){}
-    public Events(String ground, String username, String date) {
+    public Events(){
+        this.ground = "";
+        this.username = "";
+        this.date = "";
+        this.Hour = "";
+    }
+
+    public Events(String ground, String username, String date,String Hour) {
         this.ground = ground;
         this.username = username;
         this.date = date;
+        this.Hour = Hour;
+    }
+
+    public void setHour(String hour) {
+        Hour = hour;
+    }
+
+    public String getHour() {
+        return Hour;
     }
 
     public String getGround() {

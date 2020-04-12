@@ -40,7 +40,7 @@ public class GamesActivity extends AppCompatActivity {
                 Intent intent = new Intent(GamesActivity.this,DayActivity.class);
                 String day,months,years;
                 day = String.valueOf(dayOfMonth);
-                months = String.valueOf(month);
+                months = String.valueOf(month+1);
                 years = String.valueOf(year);
                 intent.putExtra("dayOfMonth", day);
                 intent.putExtra("month", months);
