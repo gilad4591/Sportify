@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Events {
     String ground,username;
-    Date date;
+    String  date;
 
     public Events(){}
-    public Events(String ground, String username, Date date) {
+    public Events(String ground, String username, String date) {
         this.ground = ground;
         this.username = username;
         this.date = date;
@@ -21,7 +21,7 @@ public class Events {
         return username;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -33,7 +33,7 @@ public class Events {
         this.username = username;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

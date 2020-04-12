@@ -38,9 +38,13 @@ public class GamesActivity extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
                 Intent intent = new Intent(GamesActivity.this,DayActivity.class);
-                intent.putExtra("dayOfMonth", dayOfMonth);
-                intent.putExtra("month", month);
-                intent.putExtra("year", year);
+                String day,months,years;
+                day = String.valueOf(dayOfMonth);
+                months = String.valueOf(month);
+                years = String.valueOf(year);
+                intent.putExtra("dayOfMonth", day);
+                intent.putExtra("month", months);
+                intent.putExtra("year", years);
                 intent.putExtra("markerName", markerName);
 
                 startActivity(intent);

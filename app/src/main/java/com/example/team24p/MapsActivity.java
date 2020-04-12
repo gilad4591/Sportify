@@ -39,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private static final int REQUEST_PERMISSION_LOCATION = 255;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mRef = mDatabase.getReference();
+    private DatabaseReference mRef = mDatabase.getReference().child("locations");
     private LocationManager lm;
     private Location myLocation;
     Marker marker;
@@ -87,7 +87,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (Map<String, String> entry : locations) {
                     for (String key : entry.keySet()) {
                         String value = entry.get(key);
-                        System.out.println(key + ":" + value);
                         if (key.equals("lat")){
                             lat = Double.parseDouble(value);
                         }
