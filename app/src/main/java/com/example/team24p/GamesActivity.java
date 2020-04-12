@@ -25,7 +25,7 @@ public class GamesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
-        String markerName = getIntent().getStringExtra("markerName");
+        final String markerName = getIntent().getStringExtra("markerName");
 
         calendarView = (CalendarView)findViewById(R.id.cGames);
         final Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
@@ -37,13 +37,12 @@ public class GamesActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
-                Intent intent = new Intent(Intent.ACTION_EDIT);
-                intent.setType("vnd.android.cursor.item/event");
-                intent.putExtra("beginTime", currentCalendar.getTimeInMillis());
-                intent.putExtra("allDay", true);
-                intent.putExtra("rrule", "FREQ=YEARLY");
-                intent.putExtra("endTime", currentCalendar.getTimeInMillis()+60*60*1000);
-                intent.putExtra("title", "A Test Event from android app");
+                Intent intent = new Intent(GamesActivity.this,DayActivity.class);
+                intent.putExtra("dayOfMonth", dayOfMonth);
+                intent.putExtra("month", month);
+                intent.putExtra("year", year);
+                intent.putExtra("markerName", markerName);
+
                 startActivity(intent);
 
             }
