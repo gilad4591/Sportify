@@ -29,6 +29,7 @@ public class DayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
+        mMainList = (RecyclerView) findViewById(R.id.event_list);
         String year = getIntent().getStringExtra("year");
         String month = getIntent().getStringExtra("month");
         String dayOfMonth = getIntent().getStringExtra("dayOfMonth");
@@ -41,21 +42,21 @@ public class DayActivity extends AppCompatActivity {
         mMainList.setAdapter(eventListAdapter);
         mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("Events").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if(e!=null){
-                    Log.d(TAG,"Error : " +e.getMessage());
-                }
-                for(DocumentChange doc:queryDocumentSnapshots.getDocumentChanges() ){
-                    //compare
-                   Events events = doc.getDocument().toObject(Events.class);
-                   eventsList.add(events);
-                   eventListAdapter.notifyDataSetChanged();
-
-                }
-            }
-        });
+//        mFirestore.collection("Events").addSnapshotListener(new EventListener<QuerySnapshot>() {
+//            @Override
+//            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+//                if(e!=null){
+//                    Log.d(TAG,"Error : " +e.getMessage());
+//                }
+//                for(DocumentChange doc:queryDocumentSnapshots.getDocumentChanges() ){
+//                    //compare
+//                   Events events = doc.getDocument().toObject(Events.class);
+//                   eventsList.add(events);
+//                   eventListAdapter.notifyDataSetChanged();
+//
+//                }
+//            }
+//        });
         //select from data base events from day and ground
 
 
