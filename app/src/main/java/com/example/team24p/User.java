@@ -19,6 +19,16 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public User() {
+        this.userName = "";
+        this.name = "";
+        this.adress = "";
+        this.isAdmin = false;
+        this.id = "";
+        this.age = 0;
+        this.phoneNumber = "";
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
