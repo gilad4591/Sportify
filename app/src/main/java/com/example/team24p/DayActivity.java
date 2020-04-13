@@ -64,7 +64,7 @@ public class DayActivity extends AppCompatActivity {
 */
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
-
+        //Syste
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
