@@ -84,25 +84,27 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="494dp"
         android:layout_weight="1"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.267"
         tools:layout_editor_absoluteX="16dp" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/ground"
+        android:id="@+id/groundInput"
         android:layout_width="328dp"
         android:layout_height="48dp"
-        android:layout_above="@+id/spinner"
+        android:layout_above="@+id/maxPart"
         android:layout_marginBottom="71dp"
         android:layout_weight="1"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.393"
         tools:layout_editor_absoluteX="16dp" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/maxPart"
         android:layout_width="96dp"
         android:layout_height="54dp"
         android:layout_alignParentBottom="true"

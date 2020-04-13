@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     static int count = 0;
     private TextView welcomeTextView;
-
+    private String userNameLoggedIn = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
 
 
-        String userNameLoggedIn = "";
+
         try {
             userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
             welcomeTextView.setText("");
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent stNav = new Intent(getApplicationContext(), MapsActivity.class);
+                stNav.putExtra("userNameLoggedIn",userNameLoggedIn);
                 startActivity(stNav);
             }
         });
