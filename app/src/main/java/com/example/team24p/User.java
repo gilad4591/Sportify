@@ -4,7 +4,7 @@ public class User {
     private String userName;
     private String name;
     private String adress;
-    private boolean isAdmin;
+    private String isAdmin;
     private String id;
     private String age;
     private String phoneNumber;
@@ -13,13 +13,13 @@ public class User {
         this.userName = "";
         this.name = "";
         this.adress = "";
-        this.isAdmin = false;
+        this.isAdmin = "false";
         this.id = "";
         this.age = "";
         this.phoneNumber = "";
     }
 
-    public User(String userName, String name, String adress, boolean isAdmin, String id, String age, String phoneNumber) {
+    public User(String userName, String name, String adress, String isAdmin, String id, String age, String phoneNumber) {
         this.userName = userName;
         this.name = name;
         this.adress = adress;
@@ -41,7 +41,7 @@ public class User {
         this.adress = adress;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(String admin) {
         isAdmin = admin;
     }
 
@@ -65,7 +65,7 @@ public class User {
         return age;
     }
 
-    public boolean isAdmin() {
+    public String isAdmin() {
         return isAdmin;
     }
 
