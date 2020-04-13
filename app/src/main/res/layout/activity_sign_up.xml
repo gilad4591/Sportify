@@ -10,18 +10,28 @@
         android:id="@+id/EmailTextView"
         android:layout_width="409dp"
         android:layout_height="50dp"
-        android:layout_marginTop="121dp"
+        android:layout_marginTop="16dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/ValidatePasswordEditText"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:hint="Validate Password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
 
     <EditText
         android:id="@+id/PasswordTextView"
         android:layout_width="409dp"
         android:layout_height="50dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="72dp"
         android:hint="Password"
         android:inputType="textPassword"
@@ -32,29 +42,58 @@
         app:layout_constraintTop_toBottomOf="@+id/EmailTextView" />
 
     <EditText
-        android:id="@+id/ValidatePasswordEditText"
+        android:id="@+id/IdTextView"
         android:layout_width="409dp"
         android:layout_height="50dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginBottom="27dp"
-        android:hint="Validate Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="64dp"
+        android:hint="ID"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
+        app:layout_constraintTop_toTopOf="@+id/ValidatePasswordEditText"
+        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/SignInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="286dp"
-        android:text="Already have a user? \n sign in!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <EditText
+        android:id="@+id/PhoneTextView"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="Phone number"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
+        app:layout_constraintTop_toBottomOf="@+id/AddressTextView"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/AddressTextView"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:hint="Address"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameTextView"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/NameTextView"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Full Name"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/IdTextView" />
+
+    <EditText
+        android:id="@+id/AgeTextView"
+        android:layout_width="409dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:hint="Age"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PhoneTextView"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/RegisterButton"
@@ -66,7 +105,21 @@
         app:layout_constraintBottom_toTopOf="@+id/SignInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/PasswordTextView"
+        app:layout_constraintVertical_bias="0.994" />
+
+    <Button
+        android:id="@+id/SignInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="16dp"
+        android:text="Already have a user? \n sign in!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

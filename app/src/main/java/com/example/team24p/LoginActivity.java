@@ -37,13 +37,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-//        firebaseAuth = FirebaseAuth.getInstance();
-//        if (firebaseAuth.getCurrentUser()!= null){
-//            finish();
-//            startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
-//        }
-
-
         editTextPassword = (EditText) findViewById(R.id.EditTextPassword);
         editTextEmail =(EditText) findViewById(R.id.EditTextEmail);
         buttonSignIn = (Button) findViewById(R.id.loginButton);
