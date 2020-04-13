@@ -6,18 +6,8 @@ public class User {
     private String adress;
     private boolean isAdmin;
     private String id;
-    private int age;
+    private String age;
     private String phoneNumber;
-
-    public User(String userName, String name, String adress, boolean isAdmin, String id, int age, String phoneNumber) {
-        this.userName = userName;
-        this.name = name;
-        this.adress = adress;
-        this.isAdmin = isAdmin;
-        this.id = id;
-        this.age = age;
-        this.phoneNumber = phoneNumber;
-    }
 
     public User() {
         this.userName = "";
@@ -25,8 +15,18 @@ public class User {
         this.adress = "";
         this.isAdmin = false;
         this.id = "";
-        this.age = 0;
+        this.age = "";
         this.phoneNumber = "";
+    }
+
+    public User(String userName, String name, String adress, boolean isAdmin, String id, String age, String phoneNumber) {
+        this.userName = userName;
+        this.name = name;
+        this.adress = adress;
+        this.isAdmin = isAdmin;
+        this.id = id;
+        this.age = age;
+        this.phoneNumber = phoneNumber;
     }
 
     public void setUserName(String userName) {
@@ -49,7 +49,7 @@ public class User {
         this.id = id;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -61,7 +61,7 @@ public class User {
         return phoneNumber;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
