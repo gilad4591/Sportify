@@ -85,4 +85,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/unnamed" />
 
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="232dp"
+        android:layout_height="26dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -111,8 +111,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         succeded = 1;
                         Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                         intent.putExtra("userNameLoggedIn", email);
-
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        MainActivity.count+=1;
+                        startActivity(intent);
                     }
                 }
                 if (succeded == 0) {
