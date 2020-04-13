@@ -8,13 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ListActivity;
 import android.app.usage.UsageEvents;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -58,15 +54,14 @@ public class DayActivity extends AppCompatActivity {
         String dayOfMonth = getIntent().getStringExtra("dayOfMonth");
         final String groundName = getIntent().getStringExtra("markerName");
         final String date = dayOfMonth + "/" + month + "/" + year;
-
-        ImageButton button = (ImageButton)findViewById(R.id.addButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent stAddGame = new Intent(getApplicationContext(),addGameActivity.class);
-                startActivity(stAddGame);
-            }
-        });
+/*
+        eventsList = new ArrayList<>();
+        eventListAdapter = new EventListAdapter(eventsList);
+        mMainList.setHasFixedSize(true);
+        mMainList.setLayoutManager(new LinearLayoutManager(this));
+        mMainList = (RecyclerView) findViewById(R.id.event_list);
+        mMainList.setAdapter(eventListAdapter);
+*/
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
 
@@ -74,14 +69,13 @@ public class DayActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 ArrayList<Map<String, String>> events = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 for (Map<String, String> entry : events) {
                     Events event = new Events();
                     for (String key : entry.keySet()) {
                         for (int i = 0; i < 4; i++) {
                             String value = entry.get(key);
-                            //System.out.println(key + ":" + value);
+                            System.out.println(key + ":" + value);
                             switch (key) {
                                 case "date":
                                     event.setDate(value);
@@ -94,7 +88,7 @@ public class DayActivity extends AppCompatActivity {
                                     event.setHour(value);
 
                                     break;
-                                case "userList":
+                                case "username":
                                     event.setUsername(value);
 
                                     break;
