@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ListActivity;
 import android.app.usage.UsageEvents;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,10 +45,11 @@ public class DayActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
-
+    private String userNameLoggedIn;
     //private EventListAdapter eventListAdapter;
     private List<Events> eventsList;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
@@ -54,6 +59,7 @@ public class DayActivity extends AppCompatActivity {
         String dayOfMonth = getIntent().getStringExtra("dayOfMonth");
         final String groundName = getIntent().getStringExtra("markerName");
         final String date = dayOfMonth + "/" + month + "/" + year;
+        userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
 /*
         eventsList = new ArrayList<>();
         eventListAdapter = new EventListAdapter(eventsList);
@@ -68,6 +74,22 @@ public class DayActivity extends AppCompatActivity {
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                ImageButton button = (ImageButton) findViewById(R.id.addButton);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent stAdd = new Intent(getApplicationContext(), addGameActivity.class);
+                        stAdd.putExtra("date" ,date);
+                        stAdd.putExtra("groundName" ,date);
+                        stAdd.putExtra("date" ,date);
+                        stAdd.putExtra("userNameLoggedIn" ,userNameLoggedIn);
+
+                        startActivity(stAdd);
+                    }
+                });
+
+
 
                 ArrayList<Map<String, String>> events = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 ArrayList<User> userArrayList =new ArrayList<>();

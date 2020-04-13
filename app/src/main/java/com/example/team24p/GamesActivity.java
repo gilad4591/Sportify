@@ -19,6 +19,7 @@ import java.util.Locale;
 public class GamesActivity extends AppCompatActivity {
     EditText selectDate,selectTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private String userNameLoggedIn;
     private CalendarView calendarView;
 
     @Override
@@ -26,7 +27,7 @@ public class GamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
         final String markerName = getIntent().getStringExtra("markerName");
-
+        userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
         calendarView = (CalendarView)findViewById(R.id.cGames);
         final Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
         calendarView.setFirstDayOfWeek(Calendar.SUNDAY);
@@ -46,6 +47,7 @@ public class GamesActivity extends AppCompatActivity {
                 intent.putExtra("month", months);
                 intent.putExtra("year", years);
                 intent.putExtra("markerName", markerName);
+                intent.putExtra("userNameLoggedIn", userNameLoggedIn);
 
                 startActivity(intent);
 

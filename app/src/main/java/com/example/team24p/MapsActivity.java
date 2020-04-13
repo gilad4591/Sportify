@@ -42,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference mRef = mDatabase.getReference().child("locations");
     private LocationManager lm;
     private Location myLocation;
+    private String userNameLoggedIn;
     Marker marker;
 
     @Override
@@ -49,6 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
+        userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -119,6 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMarkerClick(Marker marker) {
                 Intent intent = new Intent(MapsActivity.this, GamesActivity.class);
                 intent.putExtra("markerName", marker.getTitle());
+                intent.putExtra("userNameLoggedIn",userNameLoggedIn);
                 startActivity(intent);
 
                 return false;
