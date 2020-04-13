@@ -8,6 +8,25 @@
 
     <ListView
         android:id="@+id/listEv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="700dp"
+        android:layout_height="550dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="47dp"
+        android:layout_marginBottom="134dp">
+
+    </ListView>
+
+    <ImageButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/listEv"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="335dp"
+        android:layout_marginBottom="-111dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
 </RelativeLayout>
