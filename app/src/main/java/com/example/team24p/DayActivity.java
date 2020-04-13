@@ -45,7 +45,7 @@ public class DayActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
-    private String userNameLoggedIn;
+    private String userNameLoggedIn,markerName;
     //private EventListAdapter eventListAdapter;
     private List<Events> eventsList;
     @Override
@@ -60,6 +60,7 @@ public class DayActivity extends AppCompatActivity {
         final String groundName = getIntent().getStringExtra("markerName");
         final String date = dayOfMonth + "/" + month + "/" + year;
         userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
+        markerName = getIntent().getStringExtra("markerName");
 /*
         eventsList = new ArrayList<>();
         eventListAdapter = new EventListAdapter(eventsList);
@@ -81,8 +82,7 @@ public class DayActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         Intent stAdd = new Intent(getApplicationContext(), addGameActivity.class);
                         stAdd.putExtra("date" ,date);
-                        stAdd.putExtra("groundName" ,date);
-                        stAdd.putExtra("date" ,date);
+                        stAdd.putExtra("markerName" ,markerName);
                         stAdd.putExtra("userNameLoggedIn" ,userNameLoggedIn);
 
                         startActivity(stAdd);
