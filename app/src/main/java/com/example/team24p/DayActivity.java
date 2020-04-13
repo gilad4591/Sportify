@@ -71,37 +71,72 @@ public class DayActivity extends AppCompatActivity {
 
                 ArrayList<Map<String, String>> events = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 ArrayList<User> userArrayList =new ArrayList<>();
-                User user = new User();
+                ArrayList<String> stringslist =new ArrayList<>();
+                String value="";
                 for (Map<String, String> entry : events) {
                     Events event = new Events();
                     for (String key : entry.keySet()) {
-                        for (int i = 0; i < 4; i++) {
-                            String value = entry.get(key);
-                            System.out.println(key + ":" + value);
+                   //     for (int i = 0; i < 4; i++) {
+
                             switch (key) {
                                 case "date":
+                                     value = entry.get(key);
+                                    System.out.println(key + ":" + value);
                                     event.setDate(value);
 
                                     break;
                                 case "ground":
+                                     value = entry.get(key);
+                                    System.out.println(key + ":" + value);
                                     event.setGround(value);
                                     break;
                                 case "hour":
+                                     value = entry.get(key);
+                                    System.out.println(key + ":" + value);
                                     event.setHour(value);
 
                                     break;
-                                case "userlist":
-                                    event.setUsername(value);
+
+                                default:
+                                   mRef= mRef.child("userlist");
+
+
+                                        User user = new User();
+                                        for (int x = 0; x < 3; x++) {
+                                            mRef= mRef.child("0");
+                                            String value2 = entry.get(key);
+                                            stringslist.add(entry.get(key));
+                                            System.out.println(key + ":" + value2);
+                                            switch (key) {
+                                                case "age":
+                                                    user.setAge(value2);
+                                                    System.out.println(key + ":" + value2);
+
+                                                    break;
+                                                case "name":
+                                                    user.setName(value2);
+                                                    System.out.println(key + ":" + value2);
+
+                                                    break;
+
+                                                case "phone":
+                                                    user.setPhoneNumber(value2);
+                                                    System.out.println(key + ":" + value2);
+                                                    break;
+                                            }
+                                        }
+                                        mRef=mRef.getParent();
+                                        userArrayList.add(user);
 
                                     break;
-                                default:
-                                    mRef.child("userlist");
-                            }
+                                            }
+                                      //  }
 
-                        }
+
 
                     }
                     eventsArrayList.add(event);
+
                 }
 
 
