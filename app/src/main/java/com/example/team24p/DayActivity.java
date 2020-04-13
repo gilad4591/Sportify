@@ -70,6 +70,8 @@ public class DayActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 ArrayList<Map<String, String>> events = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
+                ArrayList<User> userArrayList =new ArrayList<>();
+                User user = new User();
                 for (Map<String, String> entry : events) {
                     Events event = new Events();
                     for (String key : entry.keySet()) {
@@ -88,11 +90,12 @@ public class DayActivity extends AppCompatActivity {
                                     event.setHour(value);
 
                                     break;
-                                case "username":
+                                case "userlist":
                                     event.setUsername(value);
 
                                     break;
-
+                                default:
+                                    mRef.child("userlist");
                             }
 
                         }
