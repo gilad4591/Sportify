@@ -76,6 +76,7 @@ public class DayActivity extends AppCompatActivity {
                         for (int i = 0; i < 4; i++) {
                             String value = entry.get(key);
                             System.out.println(key + ":" + value);
+                            System.out.println(key + ":::" + value);
                             switch (key) {
                                 case "date":
                                     event.setDate(value);
