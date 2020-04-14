@@ -17,4 +17,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.091" />
 
+    <ImageButton
+        android:id="@+id/rateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="637dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

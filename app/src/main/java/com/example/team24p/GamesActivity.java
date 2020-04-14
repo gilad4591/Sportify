@@ -7,9 +7,11 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,6 +34,17 @@ public class GamesActivity extends AppCompatActivity {
         final Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
         calendarView.setFirstDayOfWeek(Calendar.SUNDAY);
         calendarView.setMinDate(System.currentTimeMillis()-1000);
+
+        ImageButton button = (ImageButton) findViewById(R.id.rateButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stRate = new Intent(getApplicationContext(), RatingActivity.class);
+                stRate.putExtra("userNameLoggedIn", userNameLoggedIn);
+                stRate.putExtra("markerName", markerName);
+                startActivity(stRate);
+            }
+        });
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
