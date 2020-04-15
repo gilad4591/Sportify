@@ -49,6 +49,7 @@ public class DayActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private String userNameLoggedIn,markerName;
+    private ArrayList<User> eveUserlist;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,6 @@ public class DayActivity extends AppCompatActivity {
 
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
-        final ArrayList<User> usersArrayList = new ArrayList<>();
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,6 +88,7 @@ public class DayActivity extends AppCompatActivity {
 
                 ArrayList<Map<String,Object>> events = (ArrayList<Map<String,Object>>)  dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                 for (Object key : events.toArray()) {
+                    ArrayList<User> usersArrayList = new ArrayList<>();
                     Events event = new Events();
                         Map<String, Object > singleEvent = (Map<String, Object>) key;
                     for (Object key2 : singleEvent.keySet()) {
@@ -131,21 +132,22 @@ public class DayActivity extends AppCompatActivity {
                                 usersArrayList.add(user);
                             }
                             //if userlist
-
+                            event.setUsername(usersArrayList);
                         }
 
                     }
-                    event.setUsername(usersArrayList);
+
                     event.setId(key.toString());
                     eventsArrayList.add(event);
 
                 }
 
-
+                eveUserlist = new ArrayList<>();
                 ArrayList<String> items = new ArrayList<>();
                 for(Events ev : eventsArrayList){
                     if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName))){
                         items.add(ev.getHour());
+                        eveUserlist=ev.getUsername();
                     }
                 }
 
@@ -159,8 +161,10 @@ public class DayActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                         appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
-                        appInfo.putExtra("userlistGame",(Serializable)usersArrayList);
+                        appInfo.putExtra("eventlistGame",(Serializable)eventsArrayList);
                         appInfo.putExtra("hour", (String) mMainList.getItemAtPosition(position));
+                        appInfo.putExtra("markerName",markerName);
+                        appInfo.putExtra("date",date);
 
                         startActivity(appInfo);
                     }

@@ -1,9 +1,10 @@
 package com.example.team24p;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Events {
+public class Events implements Serializable {
     String ground;
     String  date;
     String Hour;

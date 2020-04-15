@@ -25,9 +25,11 @@ public class UsersInGame extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef;
+    private ArrayList<Events> eventlistGame;
     private ArrayList<User> UserArrayList;
     private int flag = 0;
     private String emailUserLoggedIn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +37,20 @@ public class UsersInGame extends AppCompatActivity {
         //mRef = mDatabase.getReference().child("Events").child("userlist").child();
         ListView userView = (ListView)findViewById(R.id.userListView);
         Intent i = getIntent();
-        UserArrayList =  (ArrayList<User>)i.getSerializableExtra("userlistGame");
+        eventlistGame =  (ArrayList<Events>)i.getSerializableExtra("eventlistGame");
         emailUserLoggedIn = i.getStringExtra("userNameLoggedIn");
+        String hour = i.getStringExtra("hour");
+        String groundName = i.getStringExtra("markerName");
+        String date = i.getStringExtra("date");
+
         //String emailUserLoggedIn = "";
         Button joinButton = (Button)findViewById(R.id.joinButton);
 
+        for(Events ev : eventlistGame){
+            if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName)) && (ev.getHour().equals(hour))){//the selected event
+                UserArrayList = ev.getUsername();
+            }
+        }
 
         if((emailUserLoggedIn!=null))
         {
