@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminActivity"></activity>
+        <activity android:name=".UsersInGame"></activity>
+        <activity android:name=".AdminActivity" />
         <activity android:name=".addGameActivity" />
         <activity android:name=".GamesActivity" />
         <activity android:name=".ProfileActivity" />

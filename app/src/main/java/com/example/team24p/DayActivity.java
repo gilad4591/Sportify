@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -41,14 +42,11 @@ import java.util.List;
 import java.util.Map;
 
 public class DayActivity extends AppCompatActivity {
-    //private static final String TAG = "FireLog";
-    private ListView mMainList;
 
+    private ListView mMainList;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private String userNameLoggedIn,markerName;
-    //private EventListAdapter eventListAdapter;
-    private List<Events> eventsList;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +60,7 @@ public class DayActivity extends AppCompatActivity {
         final String date = dayOfMonth + "/" + month + "/" + year;
         userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
         markerName = getIntent().getStringExtra("markerName");
-/*
-        eventsList = new ArrayList<>();
-        eventListAdapter = new EventListAdapter(eventsList);
-        mMainList.setHasFixedSize(true);
-        mMainList.setLayoutManager(new LinearLayoutManager(this));
-        mMainList = (RecyclerView) findViewById(R.id.event_list);
-        mMainList.setAdapter(eventListAdapter);
-*/
+
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
         final ArrayList<User> usersArrayList = new ArrayList<>();
@@ -152,8 +143,19 @@ public class DayActivity extends AppCompatActivity {
                 ArrayAdapter<String>adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
                 mMainList.setAdapter(adapter);
 
-            }
+                //when clicking on hour:
 
+//                mMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Intent appInfo = new Intent(DayActivity.this, UsersInGame.class);
+//                        appInfo.putExtra("userlist", usersArrayList);
+//                        startActivity(appInfo);
+//                    }
+//                });
+
+
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
