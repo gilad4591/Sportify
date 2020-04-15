@@ -66,4 +66,16 @@
         android:layout_marginBottom="45dp"
         android:text="דירוג נוכחי"
         android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/avgRating"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="-144dp"
+        android:text="חזרה למפה" />
 </RelativeLayout>

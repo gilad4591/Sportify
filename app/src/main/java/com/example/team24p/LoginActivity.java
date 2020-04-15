@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextPassword;
     private Button buttonSignUp;
     private ProgressDialog progressDialog;
-    private FirebaseAuth firebaseAuth;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("UsersAndPasswords");
 
@@ -42,9 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextEmail =(EditText) findViewById(R.id.EditTextEmail);
         buttonSignIn = (Button) findViewById(R.id.loginButton);
         buttonSignUp = (Button) findViewById(R.id.signUpButton);
-
         progressDialog = new ProgressDialog(this);
-
         buttonSignUp.setOnClickListener(this);
         buttonSignIn.setOnClickListener(this);
     }
@@ -82,17 +79,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     for (String key : usersList.keySet()) {
                         Map<String,Object> value = (HashMap<String,Object>)usersList.get(key);
                         if (email.equalsIgnoreCase(value.get("UserName").toString()) && password.equals(value.get("Password").toString())) {
+                            String isAdmin = value.get("isAdmin").toString();
                             Toast.makeText(getApplicationContext(), "User login successfully", Toast.LENGTH_SHORT).show();
                             finish();
                             succeded = 1;
                             Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                             intent.putExtra("userNameLoggedIn", email);
+                            intent.putExtra("isAdmin",isAdmin);
                             MainActivity.count+=1;
                             startActivity(intent);
 
                     }
-                    //userAndPassArrayList.add(userAndPass);
-                //}
+
                 progressDialog.dismiss();
                 }
                 if (succeded == 0) {

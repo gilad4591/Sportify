@@ -119,13 +119,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     Map<String, String> userData = new HashMap<String, String>();
                     userData.put("Password",password);
                     userData.put("UserName",email);
+                    userData.put("isAdmin","False");
                     m_up.push().setValue(userData);
                     userData.clear();
                     userData.put("Name",fullName);
                     userData.put("address",adress);
                     userData.put("age",age);
                     userData.put("id",id);
-                    userData.put("isAdmin","False");
                     userData.put("phone",phone);
                     userData.put("username",email);
                     m_users.push().setValue(userData);

@@ -42,6 +42,17 @@
         app:layout_constraintTop_toTopOf="@+id/button2" />
 
     <Button
+        android:id="@+id/buttonManagePanel"
+        android:layout_width="141dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:text="פאנל ניהול"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
+
+    <Button
         android:id="@+id/button5"
         android:layout_width="127dp"
         android:layout_height="94dp"
@@ -53,12 +64,12 @@
 
     <Button
         android:id="@+id/LoginButton"
-        android:layout_width="69dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:text="Login"
+        android:layout_width="142dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="428dp"
+        android:text="התחברות"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -93,5 +104,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="73dp"
+        android:layout_height="36dp"
+        android:text="התנתק"
+        tools:layout_editor_absoluteY="7dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

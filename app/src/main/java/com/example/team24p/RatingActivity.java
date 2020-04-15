@@ -3,6 +3,7 @@ package com.example.team24p;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Rating;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,7 @@ public class RatingActivity extends AppCompatActivity {
     private DatabaseReference mRef = mDatabase.getReference().child("rating");;
     private Button button;
     private RatingBar ratingBar;
+    private Button backButton;
     private int flag;
     private double sum=0.0;
     private int count=0;
@@ -43,6 +45,7 @@ public class RatingActivity extends AppCompatActivity {
         MarkerName = getIntent().getStringExtra("markerName");
         UserName =  getIntent().getStringExtra("userNameLoggedIn");
         ratingBar = findViewById(R.id.ratingBar);
+        backButton = findViewById(R.id.buttonBack);
         final TextView rateUs = (TextView)findViewById(R.id.rateUs);
         flag = 0;
 
@@ -111,9 +114,16 @@ public class RatingActivity extends AppCompatActivity {
 
             }
 
+
         });
 
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RatingActivity.this,MapsActivity.class));
+                finish();
+            }
+        });
 
     }
 
