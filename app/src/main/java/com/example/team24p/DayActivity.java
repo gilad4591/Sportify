@@ -36,6 +36,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,7 @@ public class DayActivity extends AppCompatActivity {
 */
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
+        final ArrayList<User> usersArrayList = new ArrayList<>();
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -88,75 +90,53 @@ public class DayActivity extends AppCompatActivity {
                         startActivity(stAdd);
                     }
                 });
-
-
-
-                ArrayList<Map<String, String>> events = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
-                ArrayList<User> userArrayList =new ArrayList<>();
-                ArrayList<String> stringslist =new ArrayList<>();
-                String value="";
-                for (Map<String, String> entry : events) {
+                ArrayList<String> dd = new ArrayList<>();
+                String value = "";
+                ArrayList<Map<String,Object>> events = (ArrayList<Map<String,Object>>)  dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
+                for (Object key : events.toArray()) {
                     Events event = new Events();
-                    for (String key : entry.keySet()) {
-                   //     for (int i = 0; i < 4; i++) {
+                        Map<String, Object > singleEvent = (Map<String, Object>) key;
+                    for (Object key2 : singleEvent.keySet()) {
+                        if ("date".equals(key2)) {
+                            value = singleEvent.get("date").toString();
+                            System.out.println(key + ":" + value);
+                            event.setDate(value);
+                        } else if ("ground".equals(key2)) {
+                            value = singleEvent.get("ground").toString();
+                            System.out.println(key + ":" + value);
+                            event.setGround(value);
+                        } else if ("hour".equals(key2)) {
+                            value = singleEvent.get("hour").toString();
+                            System.out.println(key + ":" + value);
+                            event.setHour(value);
+                        } else {
+                            //if userlist
+                            String value2 = "";
+                            ArrayList<Map<String, String>> listOfUsers = (ArrayList<Map<String, String>>) singleEvent.get("userlist");
 
-                            switch (key) {
-                                case "date":
-                                     value = entry.get(key);
-                                    System.out.println(key + ":" + value);
-                                    event.setDate(value);
+                            //mRef= mRef.child(key);
+                            for (Object lists : listOfUsers.toArray()) {
+                                User user = new User();
+                                Map<String, String> singleUser = (Map<String, String>) lists;
+                                for(Object key3 : singleUser.keySet())
+                                if ("age".equals(key3.toString())) {
+                                    value2 = singleUser.get("age").toString();
+                                    user.setAge(value2);
+                                } else if ("name".equals(key3.toString())) {
+                                    value2 = singleUser.get("name").toString();
+                                    user.setName(value2);
+                                } else if ("phone".equals(key3.toString())) {
+                                    value2 = singleUser.get("phone").toString();
+                                    user.setPhoneNumber(value2);
+                                }
+                                usersArrayList.add(user);
+                            }
+                            //if userlist
 
-                                    break;
-                                case "ground":
-                                     value = entry.get(key);
-                                    System.out.println(key + ":" + value);
-                                    event.setGround(value);
-                                    break;
-                                case "hour":
-                                     value = entry.get(key);
-                                    System.out.println(key + ":" + value);
-                                    event.setHour(value);
-
-                                    break;
-
-                                default:
-                                   mRef= mRef.child("userlist");
-
-
-                                        User user = new User();
-                                        for (int x = 0; x < 3; x++) {
-                                            mRef= mRef.child("0");
-                                            String value2 = entry.get(key);
-                                            stringslist.add(entry.get(key));
-                                            System.out.println(key + ":" + value2);
-                                            switch (key) {
-                                                case "age":
-                                                    user.setAge(value2);
-                                                    System.out.println(key + ":" + value2);
-
-                                                    break;
-                                                case "name":
-                                                    user.setName(value2);
-                                                    System.out.println(key + ":" + value2);
-
-                                                    break;
-
-                                                case "phone":
-                                                    user.setPhoneNumber(value2);
-                                                    System.out.println(key + ":" + value2);
-                                                    break;
-                                            }
-                                        }
-                                        mRef=mRef.getParent();
-                                        userArrayList.add(user);
-
-                                    break;
-                                            }
-                                      //  }
-
-
+                        }
 
                     }
+                    event.setUsername(usersArrayList);
                     eventsArrayList.add(event);
 
                 }

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent stLogin = new Intent(getApplicationContext(), LoginActivity.class);
+                    userNameLoggedIn = "";
                     startActivity(stLogin);
                 }
             });

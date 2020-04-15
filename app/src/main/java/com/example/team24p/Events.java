@@ -1,22 +1,22 @@
 package com.example.team24p;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Events {
-    String ground,username;
+    String ground;
     String  date;
     String Hour;
+    ArrayList<User> users = new ArrayList<>();
 
     public Events(){
         this.ground = "";
-        this.username = "";
         this.date = "";
         this.Hour = "";
     }
 
-    public Events(String ground, String username, String date,String Hour) {
+    public Events(String ground, String users, String date,String Hour) {
         this.ground = ground;
-        this.username = username;
         this.date = date;
         this.Hour = Hour;
     }
@@ -33,8 +33,8 @@ public class Events {
         return ground;
     }
 
-    public String getUsername() {
-        return username;
+    public ArrayList<User> getUsername() {
+        return users;
     }
 
     public String getDate() {
@@ -45,8 +45,8 @@ public class Events {
         this.ground = ground;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(ArrayList users) {
+        this.users = users;
     }
 
     public void setDate(String date) {
