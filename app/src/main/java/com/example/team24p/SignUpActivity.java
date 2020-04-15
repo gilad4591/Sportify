@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.EventListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,13 +51,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser(){
         final String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
         String validate = editTextValidatePassword.getText().toString().trim();
-        String id = editTextId.getText().toString().trim();
-        String fullName = editTextFullName.getText().toString().trim();
-        String adress = editTextAddress.getText().toString().trim();
-        String phone = editTextPhoneNumber.getText().toString().trim();
-        String age = editTextAge.getText().toString().trim();
+        final String id = editTextId.getText().toString().trim();
+        final String fullName = editTextFullName.getText().toString().trim();
+        final String adress = editTextAddress.getText().toString().trim();
+        final String phone = editTextPhoneNumber.getText().toString().trim();
+        final String age = editTextAge.getText().toString().trim();
 
         if (!fullName.matches("^[a-zA-Z]+ [ a-zA-Z]+$")){
             editTextFullName.setError("Please enter valid name");
@@ -114,6 +115,27 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     progressDialog.setMessage("Registering User...");
                     progressDialog.show();
+//                  DatabaseReference m_up_child = m_up.child(id);
+                    Map<String, String> userData = new HashMap<String, String>();
+                    userData.put("Password",password);
+                    userData.put("UserName",email);
+                    m_up.push().setValue(userData);
+                    userData.clear();
+                    userData.put("Name",fullName);
+                    userData.put("address",adress);
+                    userData.put("age",age);
+                    userData.put("id",id);
+                    userData.put("isAdmin","False");
+                    userData.put("phone",phone);
+                    userData.put("username",email);
+                    m_users.push().setValue(userData);
+                    Intent intent = new Intent(SignUpActivity.this , MainActivity.class);
+                    intent.putExtra("userNameLoggedIn", email);
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                    finish();
+
                 }
             }
             @Override
@@ -132,7 +154,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         if (view == buttonRegister){
             registerUser();
-
 
         }
         if (view == buttonLogin)
