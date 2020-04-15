@@ -10,6 +10,7 @@ import android.app.ListActivity;
 import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,6 +85,7 @@ public class DayActivity extends AppCompatActivity {
                 });
                 ArrayList<String> dd = new ArrayList<>();
                 String value = "";
+
                 ArrayList<Map<String,Object>> events = (ArrayList<Map<String,Object>>)  dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                 for (Object key : events.toArray()) {
                     Events event = new Events();
@@ -119,7 +122,12 @@ public class DayActivity extends AppCompatActivity {
                                 } else if ("phone".equals(key3.toString())) {
                                     value2 = singleUser.get("phone").toString();
                                     user.setPhoneNumber(value2);
+                                } else if ("email".equals(key3.toString())) {
+                                    value2 = singleUser.get("email").toString();
+                                    user.setUserName(value2);
+
                                 }
+
                                 usersArrayList.add(user);
                             }
                             //if userlist
@@ -128,6 +136,7 @@ public class DayActivity extends AppCompatActivity {
 
                     }
                     event.setUsername(usersArrayList);
+                    event.setId(key.toString());
                     eventsArrayList.add(event);
 
                 }
@@ -145,14 +154,17 @@ public class DayActivity extends AppCompatActivity {
 
                 //when clicking on hour:
 
-//                mMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        Intent appInfo = new Intent(DayActivity.this, UsersInGame.class);
-//                        appInfo.putExtra("userlist", usersArrayList);
-//                        startActivity(appInfo);
-//                    }
-//                });
+                mMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
+                        appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
+                        appInfo.putExtra("userlistGame",(Serializable)usersArrayList);
+                        appInfo.putExtra("hour", (String) mMainList.getItemAtPosition(position));
+
+                        startActivity(appInfo);
+                    }
+                });
 
 
             }

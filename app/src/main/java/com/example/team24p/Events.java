@@ -7,18 +7,29 @@ public class Events {
     String ground;
     String  date;
     String Hour;
+    String id;
     ArrayList<User> users = new ArrayList<>();
 
     public Events(){
+        this.id = "";
         this.ground = "";
         this.date = "";
         this.Hour = "";
     }
 
-    public Events(String ground, String users, String date,String Hour) {
+    public Events(String ground, String users, String date,String Hour,String id) {
         this.ground = ground;
         this.date = date;
         this.Hour = Hour;
+        this.id = id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
     }
 
     public void setHour(String hour) {
@@ -52,4 +63,13 @@ public class Events {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
 }
