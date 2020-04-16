@@ -71,7 +71,7 @@ public class DayActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                ImageButton button = (ImageButton) findViewById(R.id.addButton);
+                ImageButton button = (ImageButton) findViewById(R.id.cButton);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -154,6 +154,7 @@ public class DayActivity extends AppCompatActivity {
                 }
 
                 ArrayAdapter<String>adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
+                mMainList.setAdapter(null);
                 mMainList.setAdapter(adapter);
 
                 //when clicking on hour:

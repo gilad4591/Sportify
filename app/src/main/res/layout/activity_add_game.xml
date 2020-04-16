@@ -115,7 +115,7 @@
         tools:layout_editor_absoluteY="352dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/gameAddcButton"
         android:layout_width="111dp"
         android:layout_height="62dp"
         android:layout_alignParentStart="true"

@@ -73,6 +73,7 @@ public class UsersInGame extends AppCompatActivity {
             }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
+        userView.setAdapter(null);
         userView.setAdapter(adapter);
         mRef = mDatabase.getReference().child("Users");
         mRef.addValueEventListener(new ValueEventListener() {
@@ -81,7 +82,6 @@ public class UsersInGame extends AppCompatActivity {
                 Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
                 for (String key : usersList.keySet()) {
                     Map<String, Object> value = (HashMap<String, Object>) usersList.get(key);
-                    //if (email.equalsIgnoreCase(value.get("UserName").toString()) && password.equals(value.get("Password").toString())) {
                     if (value.get("username").toString().equals(emailUserLoggedIn)) {
                         age=value.get("age").toString();
                         phone=value.get("phone").toString();
