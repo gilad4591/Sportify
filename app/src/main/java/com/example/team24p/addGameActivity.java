@@ -42,7 +42,7 @@ public class addGameActivity extends AppCompatActivity {
         TextInputEditText dateText = (TextInputEditText)findViewById(R.id.dateInput);
         TextInputEditText groundText = (TextInputEditText)findViewById(R.id.groundInput);
 
-        final String hour = hourText.getText().toString().trim();
+        hour = hourText.getText().toString().trim();
         dateText.setText(date);
         groundText.setText(ground);
 
