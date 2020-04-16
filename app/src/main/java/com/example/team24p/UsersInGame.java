@@ -28,13 +28,13 @@ public class UsersInGame extends AppCompatActivity {
     private ArrayList<Events> eventlistGame;
     private ArrayList<User> UserArrayList;
     private int flag = 0;
-    private String emailUserLoggedIn;
+    private String emailUserLoggedIn,age,phone,name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_in_game);
-        //mRef = mDatabase.getReference().child("Events").child("userlist").child();
+
         ListView userView = (ListView)findViewById(R.id.userListView);
         Intent i = getIntent();
         eventlistGame =  (ArrayList<Events>)i.getSerializableExtra("eventlistGame");
@@ -45,10 +45,11 @@ public class UsersInGame extends AppCompatActivity {
 
         //String emailUserLoggedIn = "";
         Button joinButton = (Button)findViewById(R.id.joinButton);
-
+        String key = null;
         for(Events ev : eventlistGame){
             if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName)) && (ev.getHour().equals(hour))){//the selected event
                 UserArrayList = ev.getUsername();
+                key = ev.getId();
             }
         }
 
@@ -73,5 +74,43 @@ public class UsersInGame extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
         userView.setAdapter(adapter);
+        mRef = mDatabase.getReference().child("Users");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
+                for (String key : usersList.keySet()) {
+                    Map<String, Object> value = (HashMap<String, Object>) usersList.get(key);
+                    //if (email.equalsIgnoreCase(value.get("UserName").toString()) && password.equals(value.get("Password").toString())) {
+                    if (value.get("username").toString().equals(emailUserLoggedIn)) {
+                        age=value.get("age").toString();
+                        phone=value.get("phone").toString();
+                        name=value.get("Name").toString();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mRef = mDatabase.getReference().child("Events").child(key.toString()).child("userlist");
+
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, Object > rate = new HashMap<String, Object>();
+                rate.put("age", age);
+                rate.put("email", emailUserLoggedIn);
+                rate.put("name", name);
+                rate.put("phone", phone);
+                if(flag!=1) mRef.push().updateChildren(rate);
+            }
+        });
+
+
+
     }
 }

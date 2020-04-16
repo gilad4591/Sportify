@@ -85,9 +85,10 @@ public class DayActivity extends AppCompatActivity {
                 });
                 ArrayList<String> dd = new ArrayList<>();
                 String value = "";
-
-                ArrayList<Map<String,Object>> events = (ArrayList<Map<String,Object>>)  dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
-                for (Object key : events.toArray()) {
+                int i = 0;
+                Map<String,Object> eventsAll = (Map<String,Object>)  dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
+                Object[] keysets =  eventsAll.keySet().toArray();
+                for (Object key : eventsAll.values()) {
                     ArrayList<User> usersArrayList = new ArrayList<>();
                     Events event = new Events();
                         Map<String, Object > singleEvent = (Map<String, Object>) key;
@@ -107,10 +108,10 @@ public class DayActivity extends AppCompatActivity {
                         } else {
                             //if userlist
                             String value2 = "";
-                            ArrayList<Map<String, String>> listOfUsers = (ArrayList<Map<String, String>>) singleEvent.get("userlist");
+                            Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
 
                             //mRef= mRef.child(key);
-                            for (Object lists : listOfUsers.toArray()) {
+                            for (Object lists : listOfUsers.values()) {
                                 User user = new User();
                                 Map<String, String> singleUser = (Map<String, String>) lists;
                                 for(Object key3 : singleUser.keySet())
@@ -136,8 +137,9 @@ public class DayActivity extends AppCompatActivity {
                         }
 
                     }
-
-                    event.setId(key.toString());
+                    String keyEvent = keysets[i].toString();
+                    i++;
+                    event.setId(keyEvent);
                     eventsArrayList.add(event);
 
                 }
