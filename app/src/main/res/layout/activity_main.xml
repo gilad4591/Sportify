@@ -112,14 +112,23 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="113dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonManagePanel"
+        android:layout_width="497dp"
+        android:layout_height="281dp"
+        android:layout_marginBottom="388dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/trnr" />
+
+    <ListView
+        android:id="@+id/myActivityList"
+        android:layout_width="363dp"
+        android:layout_height="287dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/trnr" />
+        app:layout_constraintVertical_bias="0.788" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,6 +75,7 @@ public class UsersInGame extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
         userView.setAdapter(null);
         userView.setAdapter(adapter);
+
         mRef = mDatabase.getReference().child("Users");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
