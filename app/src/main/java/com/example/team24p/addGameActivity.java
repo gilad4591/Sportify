@@ -27,6 +27,7 @@ public class addGameActivity extends AppCompatActivity {
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private String date,hour,ground,username;
     private String text,age,phone,name;
+    private TextInputEditText hourText;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -38,11 +39,11 @@ public class addGameActivity extends AppCompatActivity {
         ground = getIntent().getStringExtra("markerName");
         username = getIntent().getStringExtra("userNameLoggedIn");
 
-        TextInputEditText hourText = (TextInputEditText)findViewById(R.id.hourInput);
+        hourText = (TextInputEditText)findViewById(R.id.hourInput);
         TextInputEditText dateText = (TextInputEditText)findViewById(R.id.dateInput);
         TextInputEditText groundText = (TextInputEditText)findViewById(R.id.groundInput);
 
-        hour = hourText.getText().toString().trim();
+
         dateText.setText(date);
         groundText.setText(ground);
 
@@ -82,12 +83,13 @@ public class addGameActivity extends AppCompatActivity {
             addGame.setVisibility(View.INVISIBLE);
             Toast.makeText(addGameActivity.this, "You are not logged in. \n log in before create a game" , Toast.LENGTH_SHORT).show();
         }
+
         mRef = mDatabase.getReference().child("Events");
         addGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                hour = hourText.getText().toString().trim();
                 Map<String,Object> games = new HashMap<String,Object>();
                 Map<String,Object> User = new HashMap<String,Object>();
                 Map<String,Object> Users = new HashMap<String,Object>();

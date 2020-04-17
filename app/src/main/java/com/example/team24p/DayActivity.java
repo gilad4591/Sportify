@@ -146,6 +146,8 @@ public class DayActivity extends AppCompatActivity {
 
                 eveUserlist = new ArrayList<>();
                 ArrayList<String> items = new ArrayList<>();
+                items.clear();
+
                 for(Events ev : eventsArrayList){
                     if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName))){
                         items.add(ev.getHour());

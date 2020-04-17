@@ -68,6 +68,7 @@ public class UsersInGame extends AppCompatActivity {
 
 
         ArrayList<String> items = new ArrayList<>();
+        items.clear();
         for(User us : UserArrayList){
                 items.add(us.getName());
             }

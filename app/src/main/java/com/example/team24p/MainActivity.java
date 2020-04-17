@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView welcomeTextView;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
-    private Button adminPanelButton;
+    private FloatingActionButton adminPanelButton;
     private String userNameLoggedIn = "";
     private ArrayList<String> items;
     private ListView myAct;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         items = new ArrayList<>();
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
-        adminPanelButton = (Button) findViewById(R.id.buttonManagePanel);
+        adminPanelButton = (FloatingActionButton) findViewById(R.id.buttonManagePanel);
         FloatingActionButton logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         adminPanelButton.setVisibility(View.INVISIBLE);
         logoutButton.setVisibility(View.INVISIBLE);
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stAdmin);
             }
         });
-
+        items.clear();
         if(userNameLoggedIn!=null){
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
