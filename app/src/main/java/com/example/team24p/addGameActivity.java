@@ -106,6 +106,7 @@ public class addGameActivity extends AppCompatActivity {
                 games.put("userlist",Users);
 
                 mRef.push().updateChildren(games);
+                finish();
             }
         });
 
