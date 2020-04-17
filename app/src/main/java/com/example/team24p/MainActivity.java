@@ -2,17 +2,20 @@ package com.example.team24p;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 
 public class MainActivity extends AppCompatActivity {
     static int count = 0;
     private TextView welcomeTextView;
-    private Button logoutButton;
+
     private Button adminPanelButton;
     private String userNameLoggedIn = "";
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         adminPanelButton = (Button) findViewById(R.id.buttonManagePanel);
-        logoutButton = (Button) findViewById(R.id.buttonLogout);
+        FloatingActionButton logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         adminPanelButton.setVisibility(View.INVISIBLE);
         logoutButton.setVisibility(View.INVISIBLE);
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             welcomeTextView.setText("");
         } catch (Exception e){
         }
-        Button button = (Button) findViewById(R.id.button2);
+        FloatingActionButton button = (FloatingActionButton) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stNav);
             }
         });
-            Button LoginButton = (Button) findViewById(R.id.LoginButton);
+            FloatingActionButton LoginButton = (FloatingActionButton) findViewById(R.id.LoginButton);
             if (count != 0){
                 count++;
             }
