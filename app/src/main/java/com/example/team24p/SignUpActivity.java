@@ -120,6 +120,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     userData.put("Password",password);
                     userData.put("UserName",email);
                     userData.put("isAdmin","False");
+                    userData.put("enabled","True");
                     m_up.push().setValue(userData);
                     userData.clear();
                     userData.put("Name",fullName);
