@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
                     for (String key : usersList.keySet()) {
                         Map<String,Object> value = (HashMap<String,Object>)usersList.get(key);
-                        if (email.equalsIgnoreCase(value.get("UserName").toString()) && password.equals(value.get("Password").toString())) {
+                        if (email.equalsIgnoreCase(value.get("UserName").toString()) && password.equals(value.get("Password").toString()) && value.get("enabled").toString().equals("True"))  {
                             String isAdmin = value.get("isAdmin").toString();
                             Toast.makeText(getApplicationContext(), "User login successfully", Toast.LENGTH_SHORT).show();
                             finish();
