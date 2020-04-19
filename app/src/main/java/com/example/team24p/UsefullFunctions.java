@@ -1,11 +1,14 @@
 package com.example.team24p;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.Rating;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -18,7 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -64,9 +71,32 @@ public class UsefullFunctions {
         return "tamiryakov@gmail.com";
     }
 
-//    public String changeDate(Dat d){
-//        String newDate = d.format(DateTimeFormatter.ofPattern("dd/M/yy"));
-//
-//        return newDate;
-//    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String changeDate(Date d){
+        DateFormat dateFormat = new SimpleDateFormat("dd/M/yyyy");
+        String newDate = dateFormat.format(d);
+
+        return newDate;
+    }
+
+    public boolean checkDate(String date) throws ParseException {
+        Date date1=null;
+        try {
+            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        }catch (Exception e){}
+        if (date1 != null)
+            return true;
+        return false;
+    }
+    public boolean checkTime(String time){
+        if (!time.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))
+            return false;
+        return true;
+    }
+    public boolean checkCorrectEmail(String email){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+            return false;
+        return true;
+    }
+
 }

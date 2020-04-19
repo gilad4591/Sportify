@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         myAct = (ListView)findViewById(R.id.myActivityList);
         myAct.setVisibility(View.INVISIBLE);
 
+        FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
+
         try {
             userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
             welcomeTextView.setText("");
@@ -79,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
+            menuButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stMenu = new Intent(getApplicationContext(),todayGamesActivity.class);
+                    if(userNameLoggedIn!=null)stMenu.putExtra("username",userNameLoggedIn);
+                    startActivity(stMenu);
+                }
+            });
 
             LoginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(stLogin);
                 }
             });
+
 
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
