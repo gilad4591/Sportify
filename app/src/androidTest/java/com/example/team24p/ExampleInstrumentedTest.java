@@ -21,7 +21,8 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-
+        UsefullFunctions us = new UsefullFunctions();
         assertEquals("com.example.team24p", appContext.getPackageName());
+        assertEquals("tamiryakov@gmail.com",us.checkUser("tamiryakov@gmail.com"));
     }
 }
