@@ -90,23 +90,28 @@ public class addGameActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 hour = hourText.getText().toString().trim();
-                Map<String,Object> games = new HashMap<String,Object>();
-                Map<String,Object> User = new HashMap<String,Object>();
-                Map<String,Object> Users = new HashMap<String,Object>();
+                if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
+                    hourText.setError("Please enter valid hour");
+                    hourText.requestFocus();
+                } else {
+                    Map<String, Object> games = new HashMap<String, Object>();
+                    Map<String, Object> User = new HashMap<String, Object>();
+                    Map<String, Object> Users = new HashMap<String, Object>();
 
-                User.put("age",age);
-                User.put("phone",phone);
-                User.put("name",name);
-                User.put("email",username);
-                Users.put("userlist",User);
+                    User.put("age", age);
+                    User.put("phone", phone);
+                    User.put("name", name);
+                    User.put("email", username);
+                    Users.put("userlist", User);
 
-                games.put("date",date);
-                games.put("ground",ground);
-                games.put("hour",hour);
-                games.put("userlist",Users);
+                    games.put("date", date);
+                    games.put("ground", ground);
+                    games.put("hour", hour);
+                    games.put("userlist", Users);
 
-                mRef.push().updateChildren(games);
-                finish();
+                    mRef.push().updateChildren(games);
+                    finish();
+                }
             }
         });
 
