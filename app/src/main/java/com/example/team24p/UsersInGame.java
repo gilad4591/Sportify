@@ -28,6 +28,7 @@ public class UsersInGame extends AppCompatActivity {
     private ArrayList<Events> eventlistGame;
     private ArrayList<User> UserArrayList;
     private int flag = 0;
+    private ListView userView;
     private String emailUserLoggedIn,age,phone,name;
 
     @Override
@@ -35,7 +36,7 @@ public class UsersInGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_in_game);
 
-        ListView userView = (ListView)findViewById(R.id.userListView);
+        userView = (ListView)findViewById(R.id.userListView);
         Intent i = getIntent();
         eventlistGame =  (ArrayList<Events>)i.getSerializableExtra("eventlistGame");
         emailUserLoggedIn = i.getStringExtra("userNameLoggedIn");
@@ -48,7 +49,6 @@ public class UsersInGame extends AppCompatActivity {
         String key = null;
         for(Events ev : eventlistGame){
             if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName)) && (ev.getHour().equals(hour))){//the selected event
-                UserArrayList = ev.getUsername();
                 key = ev.getId();
             }
         }
@@ -66,17 +66,6 @@ public class UsersInGame extends AppCompatActivity {
         }
 
 
-
-        ArrayList<String> items = new ArrayList<>();
-        items.clear();
-        for(User us : UserArrayList){
-                items.add(us.getName());
-            }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
-        userView.setAdapter(null);
-        userView.setAdapter(adapter);
-
         mRef = mDatabase.getReference().child("Users");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -89,6 +78,7 @@ public class UsersInGame extends AppCompatActivity {
                         phone=value.get("phone").toString();
                         name=value.get("Name").toString();
                     }
+
                 }
             }
 
@@ -109,6 +99,26 @@ public class UsersInGame extends AppCompatActivity {
                 rate.put("name", name);
                 rate.put("phone", phone);
                 if(flag!=1) mRef.push().updateChildren(rate);
+            }
+        });
+
+        final ArrayList<String> items = new ArrayList<>();
+        items.clear();
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, Object> listOfUsers = (Map<String, Object>) dataSnapshot.getValue();
+                for (Object lists : listOfUsers.values()) {
+                    Map<String, String> singleUser = (Map<String, String>) lists;
+                    items.add(singleUser.get("name").toString() + "  -  " + singleUser.get("phone").toString());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
+                userView.setAdapter(null);
+                userView.setAdapter(adapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
