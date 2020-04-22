@@ -94,22 +94,27 @@ public class addGameActivity extends AppCompatActivity {
                     hourText.setError("Please enter valid hour");
                     hourText.requestFocus();
                 } else {
+
                     Map<String, Object> games = new HashMap<String, Object>();
                     Map<String, Object> User = new HashMap<String, Object>();
                     Map<String, Object> Users = new HashMap<String, Object>();
 
-                    User.put("age", age);
-                    User.put("phone", phone);
-                    User.put("name", name);
-                    User.put("email", username);
-                    Users.put("userlist", User);
 
                     games.put("date", date);
                     games.put("ground", ground);
                     games.put("hour", hour);
                     games.put("userlist", Users);
+                    String key = mRef.push().getKey();
+                    mRef.child(key).setValue(games);
 
-                    mRef.push().updateChildren(games);
+                    mRef = mDatabase.getReference().child("Events").child(key).child("userlist");
+                    User.put("age", age);
+                    User.put("phone", phone);
+                    User.put("name", name);
+                    User.put("email", username);
+
+                    mRef.push().updateChildren(User);
+
                     finish();
                 }
             }

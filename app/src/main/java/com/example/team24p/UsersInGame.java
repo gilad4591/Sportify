@@ -44,14 +44,17 @@ public class UsersInGame extends AppCompatActivity {
         String groundName = i.getStringExtra("markerName");
         String date = i.getStringExtra("date");
 
+
         //String emailUserLoggedIn = "";
         Button joinButton = (Button)findViewById(R.id.joinButton);
         String key = null;
         for(Events ev : eventlistGame){
             if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName)) && (ev.getHour().equals(hour))){//the selected event
                 key = ev.getId();
+                UserArrayList = ev.getUsername();
             }
         }
+
 
         if((emailUserLoggedIn!=null))
         {
@@ -73,12 +76,13 @@ public class UsersInGame extends AppCompatActivity {
                 Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
                 for (String key : usersList.keySet()) {
                     Map<String, Object> value = (HashMap<String, Object>) usersList.get(key);
-                    if (value.get("username").toString().equals(emailUserLoggedIn)) {
-                        age=value.get("age").toString();
-                        phone=value.get("phone").toString();
-                        name=value.get("Name").toString();
+                    if(emailUserLoggedIn!=null) {
+                        if (value.get("username").toString().equals(emailUserLoggedIn)) {
+                            age = value.get("age").toString();
+                            phone = value.get("phone").toString();
+                            name = value.get("Name").toString();
+                        }
                     }
-
                 }
             }
 
@@ -98,29 +102,23 @@ public class UsersInGame extends AppCompatActivity {
                 rate.put("email", emailUserLoggedIn);
                 rate.put("name", name);
                 rate.put("phone", phone);
-                if(flag!=1) mRef.push().updateChildren(rate);
+                if(flag!=1){
+                    mRef.push().updateChildren(rate);
+                }
             }
         });
 
+
         final ArrayList<String> items = new ArrayList<>();
         items.clear();
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Object> listOfUsers = (Map<String, Object>) dataSnapshot.getValue();
-                for (Object lists : listOfUsers.values()) {
-                    Map<String, String> singleUser = (Map<String, String>) lists;
-                    items.add(singleUser.get("name").toString() + "  -  " + singleUser.get("phone").toString());
+
+                for (User us : UserArrayList) {
+
+                    items.add(us.getName() + "  -  " + us.getPhoneNumber());
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
                 userView.setAdapter(null);
                 userView.setAdapter(adapter);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
 
