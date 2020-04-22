@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         items = new ArrayList<>();
+        items.clear();
+
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         adminPanelButton = (FloatingActionButton) findViewById(R.id.buttonManagePanel);
         FloatingActionButton logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         logoutButton.setVisibility(View.INVISIBLE);
         myAct = (ListView)findViewById(R.id.myActivityList);
         myAct.setVisibility(View.INVISIBLE);
+        myAct.setAdapter(null);
 
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
 
@@ -61,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+
                 Intent stNav = new Intent(getApplicationContext(), MapsActivity.class);
                 stNav.putExtra("userNameLoggedIn",userNameLoggedIn);
                 startActivity(stNav);
@@ -84,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
             menuButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
                     Intent stMenu = new Intent(getApplicationContext(),todayGamesActivity.class);
                     if(userNameLoggedIn!=null)stMenu.putExtra("username",userNameLoggedIn);
                     startActivity(stMenu);

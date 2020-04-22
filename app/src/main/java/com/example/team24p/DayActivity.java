@@ -55,7 +55,9 @@ public class DayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
+
         mMainList = (ListView) findViewById(R.id.listEv);
+        mMainList.setAdapter(null);
         String year = getIntent().getStringExtra("year");
         String month = getIntent().getStringExtra("month");
         String dayOfMonth = getIntent().getStringExtra("dayOfMonth");
@@ -164,6 +166,10 @@ public class DayActivity extends AppCompatActivity {
                 mMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+
                         Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                         appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
                         appInfo.putExtra("eventlistGame",(Serializable)eventsArrayList);

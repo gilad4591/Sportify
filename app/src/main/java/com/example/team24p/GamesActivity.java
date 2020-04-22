@@ -51,6 +51,10 @@ public class GamesActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
+                Intent in = getIntent();
+                finish();
+                startActivity(in);
+
                 Intent intent = new Intent(GamesActivity.this,DayActivity.class);
                 String day,months,years;
                 day = String.valueOf(dayOfMonth);

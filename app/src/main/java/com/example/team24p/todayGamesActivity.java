@@ -41,6 +41,7 @@ public class todayGamesActivity extends AppCompatActivity {
         myAct = (ListView)findViewById(R.id.gamesToday);
         items = new ArrayList<>();
         items.clear();
+        myAct.setAdapter(null);
         mRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -115,6 +116,9 @@ public class todayGamesActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) myAct.getItemAtPosition(position);
                 String x[] = str.split(" - ",3);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
                 Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                 appInfo.putExtra("userNameLoggedIn",username);
                 appInfo.putExtra("eventlistGame",(Serializable)eventsArrayList);

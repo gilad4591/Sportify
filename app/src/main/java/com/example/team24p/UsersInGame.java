@@ -38,6 +38,7 @@ public class UsersInGame extends AppCompatActivity {
 
         userView = (ListView)findViewById(R.id.userListView);
         Intent i = getIntent();
+        userView.setAdapter(null);
         eventlistGame =  (ArrayList<Events>)i.getSerializableExtra("eventlistGame");
         emailUserLoggedIn = i.getStringExtra("userNameLoggedIn");
         String hour = i.getStringExtra("hour");

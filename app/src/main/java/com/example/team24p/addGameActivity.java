@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -88,6 +89,10 @@ public class addGameActivity extends AppCompatActivity {
         addGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
 
                 hour = hourText.getText().toString().trim();
                 if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
