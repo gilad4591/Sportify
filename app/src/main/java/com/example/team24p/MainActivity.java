@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent stAdmin = new Intent(getApplicationContext(), AdminActivity.class);
+                stAdmin.putExtra("userNameLoggedIn",userNameLoggedIn);
                 startActivity(stAdmin);
             }
         });
