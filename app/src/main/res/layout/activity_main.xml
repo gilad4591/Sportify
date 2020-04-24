@@ -102,7 +102,7 @@
         app:srcCompat="@android:drawable/ic_lock_power_off" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/editDetailsText"
         android:layout_width="497dp"
         android:layout_height="281dp"
         android:layout_marginBottom="388dp"
@@ -136,5 +136,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="#FFFFFF"
         app:srcCompat="@android:drawable/ic_lock_lock" />
+
+    <EditText
+        android:id="@+id/editPrivateText"
+        android:layout_width="83dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="56dp"
+        android:ems="10"
+        android:selectAllOnFocus="false"
+        android:text="עריכת פרטים אישיים"
+        android:textAlignment="center"
+        android:textSize="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintStart_toStartOf="@+id/logoutButton"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

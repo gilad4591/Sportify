@@ -85,9 +85,10 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         if (v == applyButton){
             applyChanges();
-            Intent stAdminActivity = new Intent (getApplicationContext(),AdminActivity.class);
-            stAdminActivity.putExtra("userNameLoggedIn",userNameLoggedIn);
-            startActivity(stAdminActivity);
+            Intent stMainActivity = new Intent (getApplicationContext(),MainActivity.class);
+            stMainActivity.putExtra("userNameLoggedIn",userNameLoggedIn);
+            stMainActivity.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
+            startActivity(stMainActivity);
         }
     }
 

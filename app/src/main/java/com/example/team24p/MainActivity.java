@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     static int count = 0;
     private TextView welcomeTextView;
+    private TextView editPrivateText;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private FloatingActionButton adminPanelButton;
@@ -45,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         items.clear();
 
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
+        editPrivateText = (TextView)findViewById(R.id.editPrivateText);
+        editPrivateText.setFocusable(false);
+        editPrivateText.setClickable(true);
+        editPrivateText.setVisibility(View.INVISIBLE);
         adminPanelButton = (FloatingActionButton) findViewById(R.id.buttonManagePanel);
         FloatingActionButton logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         adminPanelButton.setVisibility(View.INVISIBLE);
@@ -82,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 logoutButton.setVisibility(View.VISIBLE);
                 myAct.setVisibility(View.VISIBLE);
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
+                editPrivateText.setVisibility(View.VISIBLE);
                 //if user admin make visible button admin
                 if (getIntent().getStringExtra("isAdmin").equals("True")){
                     adminPanelButton.setVisibility(View.VISIBLE);
@@ -121,6 +129,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+        editPrivateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stSelfEditDetails = new Intent(getApplicationContext(), EditUserDetailsActivity.class);
+                stSelfEditDetails.putExtra("userNameLoggedIn",userNameLoggedIn);
+                stSelfEditDetails.putExtra("userToEdit",userNameLoggedIn);
+                stSelfEditDetails.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
+                startActivity(stSelfEditDetails);
+            }
+        });
         adminPanelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
