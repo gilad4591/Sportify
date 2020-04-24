@@ -115,7 +115,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     progressDialog.setMessage("Registering User...");
                     progressDialog.show();
-//                  DatabaseReference m_up_child = m_up.child(id);
                     Map<String, String> userData = new HashMap<String, String>();
                     userData.put("Password",password);
                     userData.put("UserName",email);

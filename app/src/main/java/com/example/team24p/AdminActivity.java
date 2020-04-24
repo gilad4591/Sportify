@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +27,7 @@ public class AdminActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRefUsersDetails = mDatabase.getReference().child("Users");
     //private DatabaseReference mRefUsersAndPassword = mDatabase.getReference().child("UsersAndPassword");
+    String userNameLoggedIn="";
 
 
     @Override
@@ -32,6 +36,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         items = new ArrayList<>();
         items.clear();
+        userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
 
         usersListView = (ListView)findViewById(R.id.userListView);
         mRefUsersDetails.addValueEventListener(new ValueEventListener() {
@@ -51,9 +56,6 @@ public class AdminActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
                 usersListView.setAdapter(null);
                 usersListView.setAdapter(adapter);
-
-
-
             }
 
             @Override
@@ -61,5 +63,22 @@ public class AdminActivity extends AppCompatActivity {
 
             }
         });
+
+        usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?>adapter, View v, int position, long id) {
+                String user = adapter.getItemAtPosition(position).toString();
+                System.out.println(user); //just to check that click do something
+
+                Intent stuserAdmin = new Intent(getApplicationContext(), userAdminActivity.class);
+                stuserAdmin.putExtra("UserNameLoggedIn",userNameLoggedIn);
+                stuserAdmin.putExtra("userToEdit",user);
+                startActivity(stuserAdmin);
+
+
+            }
+        });
+
+
     }
 }
