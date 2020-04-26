@@ -61,11 +61,14 @@ public class MainActivity extends AppCompatActivity {
         myAct.setAdapter(null);
 
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
+        welcomeTextView.setText("");
 
         try {
             userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
-            welcomeTextView.setText("");
-        } catch (Exception e){
+            if (getIntent().getStringExtra("isAdmin").equals("True")){
+                adminPanelButton.setVisibility(View.VISIBLE);
+
+        }} catch (Exception e){
         }
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
