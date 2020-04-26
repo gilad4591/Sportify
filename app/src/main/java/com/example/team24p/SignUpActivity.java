@@ -133,8 +133,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     intent.putExtra("userNameLoggedIn", email);
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
 
                 }
             }

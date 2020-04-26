@@ -26,7 +26,6 @@ public class AdminActivity extends AppCompatActivity {
     private ArrayList<String> items;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRefUsersDetails = mDatabase.getReference().child("Users");
-    //private DatabaseReference mRefUsersAndPassword = mDatabase.getReference().child("UsersAndPassword");
     String userNameLoggedIn="";
 
 

@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
+            if (getIntent().getStringExtra("isAdmin").equals("True")){
+                adminPanelButton.setVisibility(View.VISIBLE);
+            }
             welcomeTextView.setText("");
         } catch (Exception e){
         }
@@ -91,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
                 editPrivateText.setVisibility(View.VISIBLE);
                 //if user admin make visible button admin
-                if (getIntent().getStringExtra("isAdmin").equals("True")){
-                    adminPanelButton.setVisibility(View.VISIBLE);
-                }
 
             }
             menuButton.setOnClickListener(new View.OnClickListener() {
