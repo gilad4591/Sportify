@@ -80,7 +80,7 @@ public class addGameActivity extends AppCompatActivity {
 
         }
         Button addGame = (Button)findViewById(R.id.gameAddcButton);
-        if(username==null){
+        if(username==null || username == ""){
             addGame.setVisibility(View.INVISIBLE);
             Toast.makeText(addGameActivity.this, "You are not logged in. \n log in before create a game" , Toast.LENGTH_SHORT).show();
         }

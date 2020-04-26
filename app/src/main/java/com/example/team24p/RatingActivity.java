@@ -101,11 +101,13 @@ public class RatingActivity extends AppCompatActivity {
                         else Toast.makeText(RatingActivity.this, "You are not logged in. \n log in before rate" , Toast.LENGTH_SHORT).show();
                     }
                 });
-                double avg = sum/count;
+                double avg = 0;
+                avg = sum/count;
 
                 TextView avgTextView = (TextView)findViewById(R.id.avgRating);
 
                 DecimalFormat ff = new DecimalFormat("#0.00");
+
                 avgTextView.setText(ff.format(avg)+"/"+5);
             }
 
