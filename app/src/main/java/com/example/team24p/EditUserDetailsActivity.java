@@ -26,6 +26,7 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
     EditText nameEditText,idEditText,ageEditText,adressEditText,phoneEditText;
     TextView userNameTextView;
     String userToEdit ="";
+    static int flag = 0;
     String userNameLoggedIn="";
     String keyToChange;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -83,12 +84,15 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
+
         if (v == applyButton){
             applyChanges();
-            Intent stMainActivity = new Intent (getApplicationContext(),MainActivity.class);
-            stMainActivity.putExtra("userNameLoggedIn",userNameLoggedIn);
-            stMainActivity.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
-            startActivity(stMainActivity);
+            if (flag == 1) {
+                Intent stMainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                stMainActivity.putExtra("userNameLoggedIn", userNameLoggedIn);
+                stMainActivity.putExtra("isAdmin", getIntent().getStringExtra("isAdmin"));
+                startActivity(stMainActivity);
+            }
         }
     }
 
@@ -99,26 +103,32 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
         final String phone = phoneEditText.getText().toString().trim();
         final String age = ageEditText.getText().toString().trim();
 
+        EditUserDetailsActivity.flag = 0;
+
         if (!fullName.matches("^[a-zA-Z]+ [ a-zA-Z]+$")){
             nameEditText.setError("Please enter valid name");
             nameEditText.requestFocus();
         }
-        if (adress.isEmpty()){
+        else if (adress.isEmpty()){
             adressEditText.setError("Address cannot be empty");
             adressEditText.requestFocus();
         }
-        if (!id.matches("^[0-9]{9}$")){
+        else if (!id.matches("^[0-9]{9}$")){
             idEditText.setError("Please enter valid id");
             idEditText.requestFocus();
         }
-        if (!phone.matches("^05[0-9]{8}$")){
+        else if (!phone.matches("^05[0-9]{8}$")){
             phoneEditText.setError("Please enter valid phone number");
             phoneEditText.requestFocus();
         }
-        if (!age.matches("^[1-9][0-9]{1,2}$")){
+        else if (!age.matches("^[1-9][0-9]{1,2}$")){
             ageEditText.setError("Please enter valid age");
             ageEditText.requestFocus();
+
         }
+        else
+            EditUserDetailsActivity.flag = 1;
+
 
         final Map<String, String> userData = new HashMap<String, String>();
         userData.put("Name",fullName);
@@ -129,6 +139,7 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
         userData.put("age",age);
         DatabaseReference refChildKey = mRefUsersDetails.child(keyToChange);
         refChildKey.setValue(userData);
+        if (flag == 1)
         Toast.makeText(getApplicationContext(), "User details changed successfully", Toast.LENGTH_SHORT).show();
 
     }

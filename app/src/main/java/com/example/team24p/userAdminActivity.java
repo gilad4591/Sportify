@@ -16,6 +16,7 @@ public class userAdminActivity extends AppCompatActivity {
     String userNameLoggedIn="";
     String userToEdit = "";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
