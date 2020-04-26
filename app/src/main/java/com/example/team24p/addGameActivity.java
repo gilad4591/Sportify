@@ -90,9 +90,6 @@ public class addGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
 
                 hour = hourText.getText().toString().trim();
                 if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {

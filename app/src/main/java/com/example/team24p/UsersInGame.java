@@ -106,6 +106,7 @@ public class UsersInGame extends AppCompatActivity {
                 if(flag!=1){
                     mRef.push().updateChildren(rate);
                 }
+                finish();
             }
         });
 
