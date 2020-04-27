@@ -80,7 +80,7 @@ public class addGameActivity extends AppCompatActivity {
 
         }
         Button addGame = (Button)findViewById(R.id.gameAddcButton);
-        if(username==null){
+        if(username==null || username == ""){
             addGame.setVisibility(View.INVISIBLE);
             Toast.makeText(addGameActivity.this, "You are not logged in. \n log in before create a game" , Toast.LENGTH_SHORT).show();
         }
@@ -90,9 +90,6 @@ public class addGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
 
                 hour = hourText.getText().toString().trim();
                 if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {

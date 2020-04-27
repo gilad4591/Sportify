@@ -81,12 +81,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Double lat = 0.0;
-                Double lon = 0.0;
+
                 ArrayList<Map<String, String>> locations = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 ArrayList<LatLng> latLngList = new ArrayList<LatLng>();
                 ArrayList<String> names = new ArrayList<>();
-                for (Map<String, String> entry : locations) {
+                for (Map<String, String> entry : locations)
+                {
+                    Double lat = 0.0;
+                    Double lon = 0.0;
                     for (String key : entry.keySet()) {
                         String value = entry.get(key);
                         if (key.equals("lat")){
@@ -99,7 +101,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             names.add(value);
                         }
                     }
-                    latLngList.add(new LatLng(lat, lon));
+                    if(lat!=0.0)latLngList.add(new LatLng(lat, lon));
                 }
                 int i =0;
                 for (LatLng latLng : latLngList) {
