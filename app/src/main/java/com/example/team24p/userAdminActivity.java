@@ -34,6 +34,7 @@ public class userAdminActivity extends AppCompatActivity {
                 Intent stEditUser = new Intent (getApplicationContext(),EditUserDetailsActivity.class);
                 stEditUser.putExtra("userNameLoggedIn",userNameLoggedIn);
                 stEditUser.putExtra("userToEdit",userToEdit);
+                stEditUser.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
                 startActivity(stEditUser);
 
 

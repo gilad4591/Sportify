@@ -61,13 +61,12 @@ public class MainActivity extends AppCompatActivity {
         myAct.setAdapter(null);
 
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
-
+        welcomeTextView.setText("");
         try {
             userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
             if (getIntent().getStringExtra("isAdmin").equals("True")){
                 adminPanelButton.setVisibility(View.VISIBLE);
             }
-            welcomeTextView.setText("");
         } catch (Exception e){
         }
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.button2);
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
                 editPrivateText.setVisibility(View.VISIBLE);
                 //if user admin make visible button admin
-
             }
             menuButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -144,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent stAdmin = new Intent(getApplicationContext(), AdminActivity.class);
                 stAdmin.putExtra("userNameLoggedIn",userNameLoggedIn);
+                stAdmin.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
                 startActivity(stAdmin);
             }
         });

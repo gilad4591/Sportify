@@ -35,7 +35,6 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         items = new ArrayList<>();
         items.clear();
-        userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
 
         usersListView = (ListView)findViewById(R.id.userListView);
         mRefUsersDetails.addValueEventListener(new ValueEventListener() {
@@ -70,8 +69,9 @@ public class AdminActivity extends AppCompatActivity {
                 System.out.println(user); //just to check that click do something
 
                 Intent stuserAdmin = new Intent(getApplicationContext(), userAdminActivity.class);
-                stuserAdmin.putExtra("UserNameLoggedIn",userNameLoggedIn);
+                stuserAdmin.putExtra("userNameLoggedIn",getIntent().getStringExtra("userNameLoggedIn"));
                 stuserAdmin.putExtra("userToEdit",user);
+                stuserAdmin.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
                 startActivity(stuserAdmin);
 
 

@@ -131,6 +131,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     m_users.push().setValue(userData);
                     Intent intent = new Intent(SignUpActivity.this , MainActivity.class);
                     intent.putExtra("userNameLoggedIn", email);
+                    intent.putExtra("isAdmin","False");
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
                     finish();
