@@ -46,6 +46,19 @@ public class GamesActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton button2 = (ImageButton) findViewById(R.id.defectsButton);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stRate = new Intent(getApplicationContext(), defectReportActivity.class);
+                stRate.putExtra("userNameLoggedIn", userNameLoggedIn);
+                stRate.putExtra("markerName", markerName);
+                startActivity(stRate);
+            }
+        });
+
+
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
             @Override
