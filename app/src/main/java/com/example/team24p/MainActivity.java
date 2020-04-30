@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private FloatingActionButton adminPanelButton;
+    private FloatingActionButton messageBut;
     private String userNameLoggedIn = "";
     private ArrayList<String> items;
     private ListView myAct;
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         items = new ArrayList<>();
         items.clear();
-
+        messageBut = (FloatingActionButton) findViewById(R.id.messageButton);
+        messageBut.setVisibility(View.INVISIBLE);
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         editPrivateText = (TextView)findViewById(R.id.editPrivateText);
         editPrivateText.setFocusable(false);
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 myAct.setVisibility(View.VISIBLE);
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
                 editPrivateText.setVisibility(View.VISIBLE);
+                messageBut.setVisibility(View.VISIBLE);
                 //if user admin make visible button admin
             }
             menuButton.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +190,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
+        messageBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stMess = new Intent(MainActivity.this,messageActivity.class);
+                stMess.putExtra(userNameLoggedIn,"userNameLoggedIn");
+                startActivity(stMess);
+            }
+        });
 
     }
 }

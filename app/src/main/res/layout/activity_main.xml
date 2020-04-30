@@ -105,7 +105,7 @@
         android:id="@+id/editDetailsText"
         android:layout_width="497dp"
         android:layout_height="281dp"
-        android:layout_marginBottom="388dp"
+        android:layout_marginBottom="380dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,26 +113,26 @@
 
     <ListView
         android:id="@+id/myActivityList"
-        android:layout_width="363dp"
-        android:layout_height="287dp"
+        android:layout_width="387dp"
+        android:layout_height="261dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788" />
+        app:layout_constraintVertical_bias="0.775" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonManagePanel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="604dp"
         android:backgroundTint="#2A9738"
         android:clickable="true"
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="#FFFFFF"
         app:srcCompat="@android:drawable/ic_lock_lock" />
@@ -151,5 +151,15 @@
         app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="@+id/logoutButton"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/messageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:backgroundTint="#195E22"
+        app:srcCompat="@drawable/fui_ic_mail_white_24dp"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="659dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
