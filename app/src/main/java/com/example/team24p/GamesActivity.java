@@ -50,10 +50,10 @@ public class GamesActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent stRate = new Intent(getApplicationContext(), defectReportActivity.class);
-                stRate.putExtra("userNameLoggedIn", userNameLoggedIn);
-                stRate.putExtra("markerName", markerName);
-                startActivity(stRate);
+                Intent stDef = new Intent(getApplicationContext(), defectReportActivity.class);
+                stDef.putExtra("userNameLoggedIn", userNameLoggedIn);
+                stDef.putExtra("markerName", markerName);
+                startActivity(stDef);
             }
         });
 
