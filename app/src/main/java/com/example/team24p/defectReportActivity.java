@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -44,9 +45,10 @@ public class defectReportActivity extends AppCompatActivity {
         rep.setVisibility(View.INVISIBLE);
 
         groundS = getIntent().getStringExtra("markerName");
-        hourS = String.valueOf(LocalDateTime.now().getHour()) + ":" + String.valueOf(LocalDateTime.now().getMinute());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/M/yyyy");
         LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("HH:mm");
+        hourS = dtf2.format(now);
         dateS = dtf.format(now);
 
         TextView hour = (TextView)findViewById(R.id.hourTextDef);
@@ -101,6 +103,13 @@ public class defectReportActivity extends AppCompatActivity {
                     def.put("hour", hourS);
                     def.put("userReports", email);
                     mRef.push().updateChildren(def);
+                    Intent intent = new Intent(defectReportActivity.this,GamesActivity.class);
+                    intent.putExtra("userNameLoggedIn",email);
+                    intent.putExtra("markerName",groundS);
+                    startActivity(intent);
+
+                    Toast.makeText(defectReportActivity.this,"The report was sent to the admins" , Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         });
