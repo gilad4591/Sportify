@@ -26,7 +26,7 @@ public class defectReportActivity extends AppCompatActivity {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef;
-    private String email = getIntent().getStringExtra("userNameLoggedIn");;
+    private String email ;
     private String nameS;
     private String groundS;
     private String hourS;
@@ -38,6 +38,7 @@ public class defectReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_defect_report);
+        email = getIntent().getStringExtra("userNameLoggedIn");
 
         Button rep = (Button)findViewById(R.id.repButton);
         rep.setVisibility(View.INVISIBLE);
@@ -68,7 +69,7 @@ public class defectReportActivity extends AppCompatActivity {
                     Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
                     for (String key : usersList.keySet()) {
                         Map<String, Object> value = (HashMap<String, Object>) usersList.get(key);
-                        if (email.equalsIgnoreCase(value.get("UserName").toString())) {
+                        if (email.equals(value.get("username").toString())) {
                             nameS = value.get("Name").toString();
                         }
                     }
