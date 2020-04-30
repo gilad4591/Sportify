@@ -50,9 +50,9 @@ public class todayGamesActivity extends AppCompatActivity {
                 Map<String, Object> eventsAll = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                 int i = 1;
                 Object[] keysets =  eventsAll.keySet().toArray();
-                for (Object key : eventsAll.values()) {
-                    ArrayList<User> usersArrayList = new ArrayList<>();
-                    Events event = new Events();
+                for (Object lists : listOfUsers.values()) {
+                    Map<String, String> singleUser = (Map<String, String>) lists;
+                    
                     Map<String, Object> singleEvent = (Map<String, Object>) key;
                     for (Object key2 : singleEvent.keySet()) {
                         if((key2.toString().equals("userlist"))&&(singleEvent.get("date").toString() .compareTo(d)>=0)){
