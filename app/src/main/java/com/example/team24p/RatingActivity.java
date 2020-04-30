@@ -34,7 +34,7 @@ public class RatingActivity extends AppCompatActivity {
     private Button backButton;
     private int flag;
     private double sum=0.0;
-    private int count=0;
+    private int counter=0;
 
 
 
@@ -53,14 +53,14 @@ public class RatingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 sum=0;
-                count=0;
+                counter=0;
                 Map<String, Object > ratings = (HashMap<String, Object>)  dataSnapshot.getValue();
                     for (String key : ratings.keySet()) {
                         Map<String, Object > value = (HashMap<String, Object>)ratings.get(key);
 
                             if (value.get("username").toString().equals(UserName) && value.get("ground").toString().equals(MarkerName)) flag = 1; // user already voted
                         if(value.get("ground").toString().equals(MarkerName)) {
-                            count++;
+                            counter++;
                             sum += Double.parseDouble(value.get("rating").toString());
                         }
                     }
@@ -102,7 +102,7 @@ public class RatingActivity extends AppCompatActivity {
                     }
                 });
                 double avg = 0;
-                avg = sum/count;
+                avg = sum/counter;
 
                 TextView avgTextView = (TextView)findViewById(R.id.avgRating);
 
