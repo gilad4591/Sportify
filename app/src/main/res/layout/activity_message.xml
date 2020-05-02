@@ -7,36 +7,64 @@
     tools:context=".messageActivity">
 
     <ListView
+        android:id="@+id/friendsListView"
         android:layout_width="416dp"
         android:layout_height="330dp"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="97dp" />
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="4dp"
         android:text="my friends"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="68dp" />
+        app:layout_constraintBottom_toTopOf="@+id/friendsListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="432dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginBottom="1dp"
         android:text="pending"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="436dp" />
+        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
+        android:id="@+id/pendingListView"
         android:layout_width="409dp"
         android:layout_height="269dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="461dp" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
         android:layout_width="301dp"
         android:layout_height="57dp"
         android:layout_marginStart="8dp"
@@ -49,14 +77,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchFriends"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="hint" />
+            android:hint="example@comany.com" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

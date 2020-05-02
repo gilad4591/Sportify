@@ -28,7 +28,7 @@ public class RatingActivity extends AppCompatActivity {
     private String MarkerName;
     private String UserName;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mRef = mDatabase.getReference().child("rating");;
+    private DatabaseReference mRef = mDatabase.getReference().child("rating");
     private Button button;
     private RatingBar ratingBar;
     private Button backButton;

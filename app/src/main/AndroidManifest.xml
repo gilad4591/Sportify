@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".messageActivity"></activity>
+        <activity android:name=".addFriendActivity"></activity>
+        <activity android:name=".messageActivity" />
         <activity android:name=".EditUserDetailsActivity" />
         <activity android:name=".userAdminActivity" />
         <activity android:name=".defectReportActivity" />

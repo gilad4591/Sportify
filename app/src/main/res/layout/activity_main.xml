@@ -156,10 +156,13 @@
         android:id="@+id/messageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         app:backgroundTint="#195E22"
-        app:srcCompat="@drawable/fui_ic_mail_white_24dp"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="659dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toEndOf="@+id/menuButton"
+        app:srcCompat="@drawable/fui_ic_mail_white_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
