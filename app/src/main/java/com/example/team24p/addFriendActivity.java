@@ -31,7 +31,7 @@ public class addFriendActivity extends AppCompatActivity {
     private String searchLine;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef;
-    private ArrayList<User>userArrayList;
+    public final ArrayList<User>userArrayList = new ArrayList<>();
     private ListView userListSearched;
 
     @Override
@@ -40,7 +40,7 @@ public class addFriendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_friend);
         userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
         searchLine = getIntent().getStringExtra("searchLine");
-        userArrayList = new ArrayList<>();
+
         mRef= mDatabase.getReference().child("Users");
         userListSearched = (ListView)findViewById(R.id.SearchedList);
 
@@ -57,6 +57,9 @@ public class addFriendActivity extends AppCompatActivity {
                     }
 
                 }
+
+                userListSearched.setAdapter(null);
+                userListSearched.setAdapter(new ListResources(addFriendActivity.this));
             }
 
             @Override
@@ -65,14 +68,16 @@ public class addFriendActivity extends AppCompatActivity {
             }
         });
 
-        userListSearched.setAdapter(null);
-        userListSearched.setAdapter(new ListResources(addFriendActivity.this));
+
 
     }
     class ListResources extends BaseAdapter {
         ArrayList<User>mydata;
         User temp;
+        int flag;
         Context context;
+        String selectedKey1,selectedKey2;
+
         ListResources(Context context){
             this.context = context;
             mydata=userArrayList;
@@ -100,18 +105,72 @@ public class addFriendActivity extends AppCompatActivity {
             final TextView pending = (TextView)row.findViewById(R.id.pendingText);
             final FloatingActionButton accBut = (FloatingActionButton)row.findViewById(R.id.addFriendBut);
             temp = mydata.get(position);
+            mRef = mDatabase.getReference().child("Friends");
+
             accBut.setVisibility(View.VISIBLE);
             pending.setVisibility(View.INVISIBLE);
             TextView userTextViewList = (TextView)row.findViewById(R.id.userTextViewAdd);
             userTextViewList.setText(temp.getUserName());
-
-            accBut.setOnClickListener(new View.OnClickListener() {
+            flag = 0;
+            mRef.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onClick(View v) {
-                    pending.setVisibility(View.VISIBLE);
-                    accBut.setVisibility(View.INVISIBLE);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Map<String, Object> friendsTable = (HashMap<String, Object>) dataSnapshot.getValue();
+                    for (String key : friendsTable.keySet()) {
+                        Map<String, Object> value = (HashMap<String, Object>) friendsTable.get(key);
+                        if (value.get("username").toString().equals(temp.getUserName())) {
+                            Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
+                            for (String key2 : friendlist.keySet()) {
+                                Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
+
+                                if (value2.get("username").equals(userNameLoggedIn) && value2.get("enabled").toString() == "true") {
+                                    accBut.setVisibility(View.INVISIBLE);
+                                    pending.setVisibility(View.INVISIBLE);
+                                }
+                                temp.setId(key);
+                            }
+                            flag=1;
+                        }
+                    }
+                    accBut.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(flag!=1){
+                                Map<String, Object> user = new HashMap<>();
+                                Map<String, Object> newFriend = new HashMap<>();
+                                Map<String, Object> friendlist = new HashMap<>();
+                                newFriend.put("enabled",true);
+                                newFriend.put("confirmed",false);
+                                newFriend.put("username",userNameLoggedIn);
+                                String key = mRef.push().getKey();
+
+                                user.put(key,newFriend);
+                                friendlist.put("friendlist",user);
+                                friendlist.put("username",temp.getUserName());
+
+                                mRef.child(key).setValue(friendlist);
+                            }
+                            else {
+                                Map<String, Object> newFriend = new HashMap<>();
+                                newFriend.put("enabled",true);
+                                newFriend.put("confirmed",false);
+                                newFriend.put("username",userNameLoggedIn);
+                                String key = mRef.push().getKey();
+                                mRef.child(temp.getId()).child("friendlist").child(key).setValue(newFriend);
+                            }
+
+
+
+
+                        }
+                    });
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
             });
+
 
             return row;
 
