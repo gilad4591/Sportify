@@ -23,9 +23,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private FloatingActionButton adminPanelButton;
+    private FloatingActionButton messageBut;
     private String userNameLoggedIn = "";
     private ArrayList<String> items;
     private ListView myAct;
@@ -46,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         items = new ArrayList<>();
         items.clear();
-
+        messageBut = (FloatingActionButton) findViewById(R.id.messageButton);
+        messageBut.setVisibility(View.INVISIBLE);
         welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
         editPrivateText = (TextView)findViewById(R.id.editPrivateText);
         editPrivateText.setFocusable(false);
@@ -92,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 myAct.setVisibility(View.VISIBLE);
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
                 editPrivateText.setVisibility(View.VISIBLE);
+                messageBut.setVisibility(View.VISIBLE);
                 //if user admin make visible button admin
             }
             menuButton.setOnClickListener(new View.OnClickListener() {
@@ -152,12 +159,18 @@ public class MainActivity extends AppCompatActivity {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String d = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/M/yy"));
+                    String d = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/M/yyyy"));
+                    Date d1,d2;
+                    DateFormat dtf = new SimpleDateFormat("dd/M/yyyy");
+                    d1 = dtf.parse(d,new ParsePosition(0));
+
+
                     Map<String, Object> eventsAll = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                     for (Object key : eventsAll.values()) {
                         Map<String, Object> singleEvent = (Map<String, Object>) key;
                         for (Object key2 : singleEvent.keySet()) {
-                            if((key2.toString().equals("userlist"))&&(singleEvent.get("date").toString() .compareTo(d)>=0)){
+                            d2 = dtf.parse(singleEvent.get("date").toString(),new ParsePosition(0));
+                            if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)>=0)) {
                                 Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
 
                                 for (Object lists : listOfUsers.values()) {
@@ -187,7 +200,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
+        messageBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stMess = new Intent(MainActivity.this,messageActivity.class);
+                stMess.putExtra("userNameLoggedIn",userNameLoggedIn);
+                startActivity(stMess);
+            }
+        });
 
     }
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,9 +20,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class todayGamesActivity extends AppCompatActivity {
@@ -42,20 +47,27 @@ public class todayGamesActivity extends AppCompatActivity {
         items = new ArrayList<>();
         items.clear();
         myAct.setAdapter(null);
+
+
         mRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String d = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/M/yy"));
+                String d = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/M/yyyy"));
+                Date d1,d2;
+                DateFormat dtf = new SimpleDateFormat("dd/M/yyyy");
+                d1 = dtf.parse(d,new ParsePosition(0));
+
                 Map<String, Object> eventsAll = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
-                int i = 1;
+                int i = 0;
                 Object[] keysets =  eventsAll.keySet().toArray();
                 for (Object key : eventsAll.values()) {
                     ArrayList<User> usersArrayList = new ArrayList<>();
                     Events event = new Events();
                     Map<String, Object> singleEvent = (Map<String, Object>) key;
                     for (Object key2 : singleEvent.keySet()) {
-                        if((key2.toString().equals("userlist"))&&(singleEvent.get("date").toString() .compareTo(d)>=0)){
+                        d2 = dtf.parse(singleEvent.get("date").toString(),new ParsePosition(0));
+                        if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)>=0)){
                             Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
                             String x = singleEvent.get("date").toString() + " - " +
                                     singleEvent.get("ground").toString() + " - " +
