@@ -8,8 +8,17 @@
 
     <ListView
         android:id="@+id/gamesToday"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        android:layout_width="31dp"
+        android:layout_height="67dp"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="82dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Todays Games:" />
+    </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
