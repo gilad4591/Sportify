@@ -108,7 +108,7 @@ public class messageActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent stChat = new Intent(messageActivity.this,chatActivity.class);
-                stChat.putExtra("userSelected",view.toString());
+                stChat.putExtra("userSelected",(String)confirmedList.getItemAtPosition(position));
                 stChat.putExtra("userNameLoggedIn",userNameLoggedIn);
                 startActivity(stChat);
             }

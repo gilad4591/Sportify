@@ -91,7 +91,8 @@ public class chatActivity extends AppCompatActivity {
         final Map<String, String> userData = new HashMap<String, String>();
         userData.put("sender",userNameLoggedIn);
         userData.put("text",msg);
-        DatabaseReference refChildKey = mRef.child(selctedKey).child("messageList");
+        String key = mRef.push().getKey();
+        DatabaseReference refChildKey = mRef.child(selctedKey).child("messageList").child(key);
         refChildKey.setValue(userData);
 
     }
