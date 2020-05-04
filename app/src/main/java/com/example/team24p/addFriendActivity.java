@@ -74,7 +74,7 @@ public class addFriendActivity extends AppCompatActivity {
     class ListResources extends BaseAdapter {
         ArrayList<User>mydata;
         User temp;
-        int flag;
+        int flag,flag2;
         Context context;
         String selectedKey1,selectedKey2;
 
@@ -112,13 +112,15 @@ public class addFriendActivity extends AppCompatActivity {
             TextView userTextViewList = (TextView)row.findViewById(R.id.userTextViewAdd);
             userTextViewList.setText(temp.getUserName());
             flag = 0;
+            flag2=0;
+
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Map<String, Object> friendsTable = (HashMap<String, Object>) dataSnapshot.getValue();
                     for (String key : friendsTable.keySet()) {
                         Map<String, Object> value = (HashMap<String, Object>) friendsTable.get(key);
-                        if (value.get("username").toString().equals(temp.getUserName())) {
+                        if (value.get("username").toString().equals(temp.getUserName())) { // if user name equal the friend added
                             Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
                             for (String key2 : friendlist.keySet()) {
                                 Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
@@ -131,11 +133,24 @@ public class addFriendActivity extends AppCompatActivity {
                             }
                             flag=1;
                         }
+                        else if(value.get("username").toString().equals(userNameLoggedIn)){ //if username in friends equal the connected one
+                            Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
+                            for (String key2 : friendlist.keySet()) {
+                                Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
+
+                                if (value2.get("username").equals(temp.getUserName()) && value2.get("enabled").toString() == "true") {
+                                    accBut.setVisibility(View.INVISIBLE);
+                                    pending.setVisibility(View.INVISIBLE);
+                                }
+                                temp.setAdress(key);
+                            }
+                            flag2=1;
+                        }
                     }
                     accBut.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(flag!=1){
+                            if(flag!=1){ //if there is no such user in friends table (first friend) of the added
                                 Map<String, Object> user = new HashMap<>();
                                 Map<String, Object> newFriend = new HashMap<>();
                                 Map<String, Object> friendlist = new HashMap<>();
@@ -150,7 +165,7 @@ public class addFriendActivity extends AppCompatActivity {
 
                                 mRef.child(key).setValue(friendlist);
                             }
-                            else {
+                            else { //have friends already and just need to add more
                                 Map<String, Object> newFriend = new HashMap<>();
                                 newFriend.put("enabled",true);
                                 newFriend.put("confirmed",false);
@@ -159,6 +174,29 @@ public class addFriendActivity extends AppCompatActivity {
                                 mRef.child(temp.getId()).child("friendlist").child(key).setValue(newFriend);
                             }
 
+                            if(flag2!=1){ //if there is no such user of the added one in friends table of me
+                                Map<String, Object> user = new HashMap<>();
+                                Map<String, Object> newFriend = new HashMap<>();
+                                Map<String, Object> friendlist = new HashMap<>();
+                                newFriend.put("enabled",false);
+                                newFriend.put("confirmed",false);
+                                newFriend.put("username",temp.getUserName());
+                                String key = mRef.push().getKey();
+
+                                user.put(key,newFriend);
+                                friendlist.put("friendlist",user);
+                                friendlist.put("username",userNameLoggedIn);
+
+                                mRef.child(key).setValue(friendlist);
+                            }
+                            else{ //he got friends and need to add one
+                                Map<String, Object> newFriend = new HashMap<>();
+                                newFriend.put("enabled",false);
+                                newFriend.put("confirmed",false);
+                                newFriend.put("username",temp.getUserName());
+                                String key = mRef.push().getKey();
+                                mRef.child(temp.getAdress()).child("friendlist").child(key).setValue(newFriend);
+                            }
 
 
 

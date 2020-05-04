@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
@@ -103,6 +104,15 @@ public class messageActivity extends AppCompatActivity {
             }
         });
 
+        confirmedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent stChat = new Intent(messageActivity.this,chatActivity.class);
+                stChat.putExtra("userSelected",view.toString());
+                stChat.putExtra("userNameLoggedIn",userNameLoggedIn);
+                startActivity(stChat);
+            }
+        });
         
     }
 
@@ -156,6 +166,19 @@ public class messageActivity extends AppCompatActivity {
 
                                         if (value2.get("username").equals(temp) && value2.get("enabled").toString() == "true") {
                                             value2.put("confirmed",true);
+                                            DatabaseReference refChildKey = mRef.child(key).child("friendlist").child(key2);
+                                            refChildKey.setValue(value2);
+                                        }
+                                    }
+                                }
+                                if(value.get("username").toString().equals(temp)){
+                                    Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
+                                    for (String key2 : friendlist.keySet()) {
+                                        Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
+
+                                        if (value2.get("username").equals(userNameLoggedIn) && value2.get("enabled").toString() == "false") {
+                                            value2.put("confirmed",true);
+                                            value2.put("enabled",true);
                                             DatabaseReference refChildKey = mRef.child(key).child("friendlist").child(key2);
                                             refChildKey.setValue(value2);
                                         }
