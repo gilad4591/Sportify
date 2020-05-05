@@ -1,13 +1,16 @@
 package com.example.team24p;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.scaledrone.lib.Scaledrone;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -40,8 +44,10 @@ public class chatActivity extends AppCompatActivity {
         userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
         userSelected = getIntent().getStringExtra("userSelected");
         messageAdapter = new MessageAdapter(this);
-        messagesView = (ListView) findViewById(R.id.messages_view);
+        messagesView = (ListView) findViewById(R.id.messages_view);         
+        messagesView.setAdapter(null);
         messagesView.setAdapter(messageAdapter);
+
 
         data = new MemberData(userSelected, getRandomColor());
 
@@ -73,27 +79,26 @@ public class chatActivity extends AppCompatActivity {
 
     }
 
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void sendMessage(View view){
         final String msg = editText.getText().toString();
         if (msg.length() > 0) {
             editText.getText().clear();
-        }
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-
-                Message message = new Message(msg,data,true);
-                messageAdapter.add(message);
-                // scroll the ListView to the last added element
-                messagesView.setSelection(messagesView.getCount() - 1);
-            }
-        });
+        
+        onMessage(msg,true);
         final Map<String, String> userData = new HashMap<String, String>();
+        String time = LocalDateTime.now().toString();
         userData.put("sender",userNameLoggedIn);
         userData.put("text",msg);
+        userData.put("timeStamp",time);
         String key = mRef.push().getKey();
         DatabaseReference refChildKey = mRef.child(selctedKey).child("messageList").child(key);
         refChildKey.setValue(userData);
+        messageAdapter.notifyDataSetChanged();
+          }
 
     }
     public void onMessage(final String msg, final boolean belg){
