@@ -57,7 +57,7 @@ public class chatActivity extends AppCompatActivity {
                 Map<String, Object> messageTable = (HashMap<String, Object>) dataSnapshot.getValue();
                 for (String key : messageTable.keySet()) {
                     Map<String, Object> value = (HashMap<String, Object>) messageTable.get(key);
-                    if (value.get("user1").toString().equals(userNameLoggedIn)||value.get("user2").toString().equals(userNameLoggedIn)) {
+                    if ((value.get("user1").toString().equals(userNameLoggedIn)&&value.get("user2").toString().equals(userSelected))||((value.get("user1").toString().equals(userSelected)&&value.get("user2").toString().equals(userNameLoggedIn)))){
                         selctedKey = key;
                         Map<String, Object> messageList = (HashMap<String, Object>) value.get("messageList");
                         for (String key2 : messageList.keySet()) {
@@ -85,21 +85,46 @@ public class chatActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void sendMessage(View view){
         final String msg = editText.getText().toString();
-        if (msg.length() > 0) {
-            editText.getText().clear();
-        
-        onMessage(msg,true);
         final Map<String, String> userData = new HashMap<String, String>();
+        final Map<String, String> userData2 = new HashMap<String, String>();
         String time = LocalDateTime.now().toString();
-        userData.put("sender",userNameLoggedIn);
-        userData.put("text",msg);
-        userData.put("timeStamp",time);
-        String key = mRef.push().getKey();
-        DatabaseReference refChildKey = mRef.child(selctedKey).child("messageList").child(key);
-        refChildKey.setValue(userData);
-        messageAdapter.notifyDataSetChanged();
-          }
+        if(selctedKey!=null) {
+            if (msg.length() > 0) {
+                editText.getText().clear();
 
+                //onMessage(msg,true);
+
+                userData.put("sender", userNameLoggedIn);
+                userData.put("text", msg);
+                userData.put("timeStamp", time);
+                String key = mRef.push().getKey();
+                DatabaseReference refChildKey = mRef.child(selctedKey).child("messageList").child(key);
+                refChildKey.setValue(userData);
+                messageAdapter.notifyDataSetChanged();
+            }
+        }
+        else{
+            if (msg.length() > 0) {
+                editText.getText().clear();
+
+                //onMessage(msg,true);
+                userData.put("sender", userNameLoggedIn);
+                userData.put("text", msg);
+                userData.put("timeStamp", time);
+                userData2.put("user1",userNameLoggedIn);
+                userData2.put("user2",userSelected);
+
+                String key = mRef.push().getKey();
+                String key2 = mRef.push().getKey();
+
+                DatabaseReference refChildKey2 = mRef.child(key);
+                refChildKey2.setValue(userData2);
+                DatabaseReference refChildKey = mRef.child(key).child("messageList").child(key2);
+                refChildKey.setValue(userData);
+
+                messageAdapter.notifyDataSetChanged();
+            }
+        }
     }
     public void onMessage(final String msg, final boolean belg){
         runOnUiThread(new Runnable() {
