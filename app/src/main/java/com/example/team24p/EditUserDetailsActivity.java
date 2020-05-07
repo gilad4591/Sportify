@@ -69,17 +69,11 @@ public class EditUserDetailsActivity extends AppCompatActivity implements View.O
 
                 }
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-
-
-
     }
 
     @Override
