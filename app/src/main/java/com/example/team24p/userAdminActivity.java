@@ -26,6 +26,7 @@ public class userAdminActivity extends AppCompatActivity {
     private DatabaseReference refToDelete = mDatabase.getReference().child("UsersAndPasswords");
     private DatabaseReference refChangeToDisable;
     Button deleteUserButton;
+    Button editAccessButton;
     Button editUserButton;
     String userNameLoggedIn="";
     String userToEdit = "";
@@ -39,6 +40,7 @@ public class userAdminActivity extends AppCompatActivity {
         userToEditTextView = (TextView)findViewById(R.id.userToEditTextView);
         deleteUserButton = (Button)findViewById(R.id.deleteUserButton);
         editUserButton = (Button)findViewById(R.id.editUserDetailsButton);
+        editAccessButton = (Button)findViewById(R.id.buttonEditAccess);
         userToEdit = getIntent().getStringExtra("userToEdit");
         userToEditTextView.setText(userToEdit);
 
@@ -97,6 +99,17 @@ public class userAdminActivity extends AppCompatActivity {
                 startActivity(stEditUser);
 
 
+            }
+        });
+
+        editAccessButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent stEditUserAccess = new Intent (getApplicationContext(),editUserAccessActivity.class);
+                stEditUserAccess.putExtra("userNameLoggedIn",userNameLoggedIn);
+                stEditUserAccess.putExtra("userToEdit",userToEdit);
+                stEditUserAccess.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
+                startActivity(stEditUserAccess);
             }
         });
 
