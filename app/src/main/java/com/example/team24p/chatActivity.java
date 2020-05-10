@@ -1,20 +1,24 @@
 package com.example.team24p;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.scaledrone.lib.Scaledrone;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -27,9 +31,10 @@ public class chatActivity extends AppCompatActivity {
     private DatabaseReference mRef;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
-    private String userNameLoggedIn,userSelected;
+    private String userNameLoggedIn, userSelected;
     public MemberData data;
     public String selctedKey;
+    public ArrayList<Message> messageArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,61 +46,90 @@ public class chatActivity extends AppCompatActivity {
         userSelected = getIntent().getStringExtra("userSelected");
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
+        messagesView.setAdapter(null);
         messagesView.setAdapter(messageAdapter);
-
         data = new MemberData(userSelected, getRandomColor());
+        selctedKey = "hg3g4kj3h123k";
 
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, Object> messageTable = (HashMap<String, Object>) dataSnapshot.getValue();
                 for (String key : messageTable.keySet()) {
                     Map<String, Object> value = (HashMap<String, Object>) messageTable.get(key);
-                    if (value.get("user1").toString().equals(userNameLoggedIn)||value.get("user2").toString().equals(userNameLoggedIn)) {
+                    if ((value.get("user1").toString().equals(userNameLoggedIn) && value.get("user2").toString().equals(userSelected)) || (value.get("user1").toString().equals(userSelected) && value.get("user2").toString().equals(userNameLoggedIn))) {
                         selctedKey = key;
-                        Map<String, Object> messageList = (HashMap<String, Object>) value.get("messageList");
-                        for (String key2 : messageList.keySet()) {
-                            Map<String, Object> value2 = (HashMap<String, Object>) messageList.get(key2);
-
-                            if (value2.get("sender").equals(userNameLoggedIn)) {
-                                onMessage(value2.get("text").toString(),true);
-                            }
-                            else onMessage(value2.get("text").toString(),false);
-                        }
                     }
                 }
+
+                mRef.child(selctedKey).child("messageList").addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        final Map<String, String> value = (HashMap) dataSnapshot.getValue();
+                        String text = value.get("text");
+                        boolean belg = userNameLoggedIn.equals(value.get("sender"));
+                        onMessage(text,belg);
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
+
     }
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void sendMessage(View view){
         final String msg = editText.getText().toString();
         if (msg.length() > 0) {
             editText.getText().clear();
-        }
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-                Message message = new Message(msg,data,true);
-                messageAdapter.add(message);
-                // scroll the ListView to the last added element
-                messagesView.setSelection(messagesView.getCount() - 1);
-            }
-        });
+       // onMessage(msg,true);
         final Map<String, String> userData = new HashMap<String, String>();
         userData.put("sender",userNameLoggedIn);
         userData.put("text",msg);
+        userData.put("timeStamp", String.valueOf(System.currentTimeMillis()));
         String key = mRef.push().getKey();
-        DatabaseReference refChildKey = mRef.child(selctedKey).child("messageList").child(key);
-        refChildKey.setValue(userData);
-
+        if(selctedKey==null) {
+            selctedKey = mRef.push().getKey();
+            final Map<String, String> userData2 = new HashMap<String, String>();
+            userData2.put("user1",userNameLoggedIn);
+            userData2.put("user2",userSelected);
+            DatabaseReference refChildKey = mRef.child(selctedKey);
+            refChildKey.setValue(userData2);
+        }
+        DatabaseReference refChildKey2 = mRef.child(selctedKey).child("messageList").child(key);
+        refChildKey2.setValue(userData);
+        }
     }
+
     public void onMessage(final String msg, final boolean belg){
         runOnUiThread(new Runnable() {
             @Override
