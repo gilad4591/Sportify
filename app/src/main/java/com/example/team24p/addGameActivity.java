@@ -106,6 +106,7 @@ public class addGameActivity extends AppCompatActivity {
                     games.put("ground", ground);
                     games.put("hour", hour);
                     games.put("userlist", Users);
+                    games.put("maxParticipants",text);
                     String key = mRef.push().getKey();
                     mRef.child(key).setValue(games);
 

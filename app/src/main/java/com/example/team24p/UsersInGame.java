@@ -29,7 +29,7 @@ public class UsersInGame extends AppCompatActivity {
     private ArrayList<User> UserArrayList;
     private int flag = 0;
     private ListView userView;
-    private String emailUserLoggedIn,age,phone,name;
+    private String emailUserLoggedIn,age,phone,name,maxP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class UsersInGame extends AppCompatActivity {
             if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName)) && (ev.getHour().equals(hour))){//the selected event
                 key = ev.getId();
                 UserArrayList = ev.getUsername();
+                maxP = ev.getMaxP();
             }
         }
 
@@ -63,6 +64,10 @@ public class UsersInGame extends AppCompatActivity {
                 if(emailUserLoggedIn.equals(us.getUserName()))flag=1;
             }
             if(flag==1)joinButton.setVisibility(View.INVISIBLE);
+            else if(Integer.parseInt(maxP)>=UserArrayList.size()){
+                joinButton.setVisibility(View.INVISIBLE);
+                Toast.makeText(UsersInGame.this, "The number of participants reached the max limit" , Toast.LENGTH_SHORT).show();
+            }
         }
         else {
             joinButton.setVisibility(View.INVISIBLE);

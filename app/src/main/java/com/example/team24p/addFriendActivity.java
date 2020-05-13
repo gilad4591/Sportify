@@ -51,7 +51,7 @@ public class addFriendActivity extends AppCompatActivity {
                 for (String key : userTable.keySet()) {
                     Map<String, Object> value = (HashMap<String, Object>) userTable.get(key);
                     User user = new User();
-                    if (value.get("username").toString().contains(searchLine)) {
+                    if (value.get("username").toString().contains(searchLine)&&!value.get("username").equals(userNameLoggedIn)) {
                         user.setUserName(value.get("username").toString());
                         userArrayList.add(user);
                     }
@@ -138,7 +138,7 @@ public class addFriendActivity extends AppCompatActivity {
                             for (String key2 : friendlist.keySet()) {
                                 Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
 
-                                if (value2.get("username").equals(temp.getUserName()) && value2.get("enabled").toString() == "true") {
+                                if ((value2.get("username").equals(temp.getUserName()) && value2.get("enabled").toString() == "true")) {
                                     accBut.setVisibility(View.INVISIBLE);
                                     pending.setVisibility(View.INVISIBLE);
                                 }

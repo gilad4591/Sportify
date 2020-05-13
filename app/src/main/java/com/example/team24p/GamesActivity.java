@@ -121,12 +121,12 @@ public class GamesActivity extends AppCompatActivity {
                 Map<String, Object > defects = (HashMap<String, Object>)  dataSnapshot.getValue();
                 String x="";
                 int flag69=0;
-                Object[] keysets =  defects.keySet().toArray();
+                final Object[] keysets =  defects.keySet().toArray();
                 for (Object key : defects.values()) {
                     Map<String, Object> singleDefect = (Map<String, Object>) key;
                   //  for (Object key2 : singleDefect.keySet()) {
                         if((singleDefect.get("ground").toString().equals(markerName))&&(singleDefect.get("fixed").toString().equals("false"))){
-                             x = "Description of the Defect: " +
+                             x = "Description: " +
                                      singleDefect.get("description").toString() + " - " +
                                     singleDefect.get("ground").toString() + " - " +
                                     "Opened: " + singleDefect.get("date").toString() + " " + singleDefect.get("hour").toString();
@@ -146,6 +146,21 @@ public class GamesActivity extends AppCompatActivity {
                 myAct.setAdapter(adapter);
 
 
+                myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String str = (String) myAct.getItemAtPosition(position);
+                        if(str!="There is no Active Defects on This Ground right Now :-)") {
+                            Intent intent = getIntent();
+                            finish();
+                            startActivity(intent);
+                            Intent appInfo = new Intent(getApplicationContext(), defectDetailsActivity.class);
+                            appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
+                            appInfo.putExtra("defectKey", keysets[position].toString());
+
+                            startActivity(appInfo);
+                        }
+                    }
+                });
             }
 
 
@@ -155,21 +170,8 @@ public class GamesActivity extends AppCompatActivity {
 
             }
         });
-        myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String str = (String) myAct.getItemAtPosition(position);
-                String x[] = str.split(" - ",3);
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-                Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
-               // appInfo.putExtra("userNameLoggedIn",username);
-                appInfo.putExtra("defects",(Serializable)items);
 
 
-                startActivity(appInfo);
-            }
-        });
 
     }
 

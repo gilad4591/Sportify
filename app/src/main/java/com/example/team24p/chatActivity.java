@@ -44,6 +44,7 @@ public class chatActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.editText);
         userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
         userSelected = getIntent().getStringExtra("userSelected");
+        userSelected = userSelected.split("@",1)[0];
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(null);

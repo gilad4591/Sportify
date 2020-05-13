@@ -107,7 +107,13 @@ public class DayActivity extends AppCompatActivity {
                             value = singleEvent.get("hour").toString();
                             System.out.println(key + ":" + value);
                             event.setHour(value);
-                        } else {
+                        }
+                        else if ("maxParticipants".equals(key2)){
+                            value = singleEvent.get("maxParticipants").toString();
+                            System.out.println(key + ":" + value);
+                            event.setMaxp(value);
+                        }
+                        else {
                             //if userlist
                             String value2 = "";
                             Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
