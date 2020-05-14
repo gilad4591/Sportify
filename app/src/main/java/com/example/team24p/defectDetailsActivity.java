@@ -39,39 +39,41 @@ public class defectDetailsActivity extends AppCompatActivity {
         userdef = (TextView)findViewById(R.id.userRep);
         grounddef = (TextView)findViewById(R.id.groundDef);
         final Button fixB = (Button)findViewById(R.id.fixedBut);
-        if(userNameLoggedIn==null)fixB.setVisibility(View.INVISIBLE);
+        if(userNameLoggedIn==null){
+            fixB.setVisibility(View.INVISIBLE);
+        }
+        else {
 
 
-
-        mRef.orderByChild("UserName").equalTo(userNameLoggedIn).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Object> users = (HashMap<String, Object>) dataSnapshot.getValue();
-                for (String key : users.keySet()) {
-                    Map<String, Object> user = (HashMap<String, Object>) users.get(key);
-                    if (user.get("isAdmin").toString().equals("False"))
-                        fixB.setVisibility(View.INVISIBLE);
-                    getDefectDetails(defectKey);
+            mRef.orderByChild("UserName").equalTo(userNameLoggedIn).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Map<String, Object> users = (HashMap<String, Object>) dataSnapshot.getValue();
+                    for (String key : users.keySet()) {
+                        Map<String, Object> user = (HashMap<String, Object>) users.get(key);
+                        if (user.get("isAdmin").toString().equals("False"))
+                            fixB.setVisibility(View.INVISIBLE);
+                        getDefectDetails(defectKey);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
-        fixB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mRef = mDatabase.getReference().child("Defects").child(defectKey).child("fixed");
-                mRef.setValue(true);
-                finish();
-            }
-        });
-
+            fixB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mRef = mDatabase.getReference().child("Defects").child(defectKey).child("fixed");
+                    mRef.setValue(true);
+                    finish();
+                }
+            });
 
 
+        }
     }
     public void getDefectDetails(String defKey){
         mRef = mDatabase.getReference().child("Defects").child(defKey);

@@ -8,12 +8,16 @@
 
     <ListView
         android:id="@+id/gamesToday"
-        android:layout_width="match_parent"
-        android:layout_height="651dp"
+        android:layout_width="399dp"
+        android:layout_height="629dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="38dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="37dp"
         tools:layout_editor_absoluteX="95dp"
         tools:layout_editor_absoluteY="82dp"></ListView>
 
@@ -22,9 +26,11 @@
         android:layout_width="122dp"
         android:layout_height="31dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="143dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="695dp"
         android:text="משחקי היום"
