@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +38,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
         items = new ArrayList<>();
         items.clear();
+        final TextInputEditText searchInput = (TextInputEditText)findViewById(R.id.searchUsers);
 
         usersListView = (ListView)findViewById(R.id.userListView);
         mRefUsersDetails.addValueEventListener(new ValueEventListener() {
@@ -47,10 +51,11 @@ public class AdminActivity extends AppCompatActivity {
                     for (Object key2 : singleUser.keySet()) {
                         if ((key2.toString().equals("username"))) {
                             String username = singleUser.get("username").toString();
-                            items.add(username);
+                                items.add(username);
                         }
                     }
                 }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
                 usersListView.setAdapter(null);
                 usersListView.setAdapter(adapter);
@@ -58,6 +63,25 @@ public class AdminActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                for(int j=0;j<items.size();j++){
+                    if(items.get(j).contains(searchInput.getText().toString().trim()))items.remove(j);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });

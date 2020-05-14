@@ -61,6 +61,7 @@ public class todayGamesActivity extends AppCompatActivity {
                 Map<String, Object> eventsAll = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                 int i = 0;
                 Object[] keysets =  eventsAll.keySet().toArray();
+                ArrayList <String> keyRelevant = new ArrayList<>();
                 for (Object key : eventsAll.values()) {
                     ArrayList<User> usersArrayList = new ArrayList<>();
                     Events event = new Events();
@@ -91,8 +92,8 @@ public class todayGamesActivity extends AppCompatActivity {
                                     } else if ("email".equals(key3.toString())) {
                                         value2 = singleUser.get("email").toString();
                                         user.setUserName(value2);
-
                                     }
+
 
                                 usersArrayList.add(user);
                             }
@@ -100,16 +101,15 @@ public class todayGamesActivity extends AppCompatActivity {
                             event.setHour(singleEvent.get("hour").toString());
                             event.setGround(singleEvent.get("ground").toString());
                             event.setDate(singleEvent.get("date").toString());
+                            event.setMaxp(singleEvent.get("maxParticipants").toString());
+                            event.setId(keysets[i].toString());
                             event.setUsername(usersArrayList);
-                            String keyEvent = keysets[i].toString();
-                            i++;
-                            event.setId(keyEvent);
                             eventsArrayList.add(event);
                         }
 
 
                     }
-
+                    i++;
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);

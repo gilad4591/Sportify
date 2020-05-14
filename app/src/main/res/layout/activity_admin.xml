@@ -8,14 +8,30 @@
 
     <ListView
         android:id="@+id/userListView"
-        android:layout_width="376dp"
-        android:layout_height="668dp"
+        android:layout_width="373dp"
+        android:layout_height="632dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.788" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/userListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchUsers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="username@comany.com" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,7 +64,7 @@ public class UsersInGame extends AppCompatActivity {
                 if(emailUserLoggedIn.equals(us.getUserName()))flag=1;
             }
             if(flag==1)joinButton.setVisibility(View.INVISIBLE);
-            else if(Integer.parseInt(maxP)>=UserArrayList.size()){
+            else if(Integer.parseInt(maxP)<=UserArrayList.size()){
                 joinButton.setVisibility(View.INVISIBLE);
                 Toast.makeText(UsersInGame.this, "The number of participants reached the max limit" , Toast.LENGTH_SHORT).show();
             }
@@ -98,7 +98,7 @@ public class UsersInGame extends AppCompatActivity {
             }
         });
 
-        mRef = mDatabase.getReference().child("Events").child(key.toString()).child("userlist");
+        mRef = mDatabase.getReference().child("Events").child(key).child("userlist");
 
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -118,54 +118,55 @@ public class GamesActivity extends AppCompatActivity {
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Map<String, Object > defects = (HashMap<String, Object>)  dataSnapshot.getValue();
-                String x="";
-                int flag69=0;
-                final ArrayList<String> keys=new ArrayList<>();;
-                final Object[] keysets =  defects.keySet().toArray();
-                int i=0;
+                Map<String, Object> defects = (HashMap<String, Object>) dataSnapshot.getValue();
+                String x = "";
+                int flag69 = 0;
+                final ArrayList<String> keys = new ArrayList<>();
+                ;
+                final Object[] keysets = defects.keySet().toArray();
+                int i = 0;
                 for (Object key : defects.values()) {
                     Map<String, Object> singleDefect = (Map<String, Object>) key;
-                  //  for (Object key2 : singleDefect.keySet()) {
-                        if((singleDefect.get("ground").toString().equals(markerName))&&(singleDefect.get("fixed").toString().equals("false"))){
-                             x = "Description: " +
-                                     singleDefect.get("description").toString() + " - " +
-                                    singleDefect.get("ground").toString() + " - " +
-                                    "Opened: " + singleDefect.get("date").toString() + " " + singleDefect.get("hour").toString();
-                            items.add(x);
-                           keys.add(keysets[i].toString());
-                            flag69=1;
+                    //  for (Object key2 : singleDefect.keySet()) {
+                    if ((singleDefect.get("ground").toString().equals(markerName)) && (singleDefect.get("fixed").toString().equals("false"))) {
+                        x = "Description: " +
+                                singleDefect.get("description").toString() + " - " +
+                                singleDefect.get("ground").toString() + " - " +
+                                "Opened: " + singleDefect.get("date").toString() + " " + singleDefect.get("hour").toString();
+                        items.add(x);
+                        keys.add(keysets[i].toString());
+                        flag69 = 1;
                     }
                     i++;
 
-               //for }
+                    //for }
 
                 }
-                if (flag69==0){
-                    x="There is No Active Defects on This Ground right Now :-)";
-                    items.add(x);}
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
+                if (flag69 == 0) {
+                    x = "There is No Active Defects on This Ground right Now :-)";
+                    items.add(x);
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);
                 myAct.setAdapter(null);
                 myAct.setAdapter(adapter);
 
-
-                myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String str = (String) myAct.getItemAtPosition(position);
-                        if(str!="There is no Active Defects on This Ground right Now :-)") {
+                if (flag69 != 0) {
+                    myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String str = (String) myAct.getItemAtPosition(position);
                             Intent intent = getIntent();
                             finish();
                             startActivity(intent);
                             Intent appInfo = new Intent(getApplicationContext(), defectDetailsActivity.class);
-                            appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
+                            appInfo.putExtra("userNameLoggedIn", userNameLoggedIn);
                             appInfo.putExtra("defectKey", keys.get(position));
 
                             startActivity(appInfo);
                         }
-                    }
-                });
-            }
 
+                    });
+                }
+            }
 
 
             @Override
