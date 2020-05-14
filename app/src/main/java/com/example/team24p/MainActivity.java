@@ -34,7 +34,7 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
-    static int counter = 0;
+    static int count = 0;
     private TextView welcomeTextView;
     private TextView editPrivateText;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
             FloatingActionButton LoginButton = (FloatingActionButton) findViewById(R.id.LoginButton);
-            if (counter != 0){
-                counter++;
+            if (count != 0){
+                count++;
             }
             if (userNameLoggedIn != null){
                 LoginButton.setVisibility(View.INVISIBLE);

@@ -121,7 +121,9 @@ public class GamesActivity extends AppCompatActivity {
                 Map<String, Object > defects = (HashMap<String, Object>)  dataSnapshot.getValue();
                 String x="";
                 int flag69=0;
+                final ArrayList<String> keys=new ArrayList<>();;
                 final Object[] keysets =  defects.keySet().toArray();
+                int i=0;
                 for (Object key : defects.values()) {
                     Map<String, Object> singleDefect = (Map<String, Object>) key;
                   //  for (Object key2 : singleDefect.keySet()) {
@@ -131,9 +133,10 @@ public class GamesActivity extends AppCompatActivity {
                                     singleDefect.get("ground").toString() + " - " +
                                     "Opened: " + singleDefect.get("date").toString() + " " + singleDefect.get("hour").toString();
                             items.add(x);
+                           keys.add(keysets[i].toString());
                             flag69=1;
                     }
-
+                    i++;
 
                //for }
 
@@ -155,7 +158,7 @@ public class GamesActivity extends AppCompatActivity {
                             startActivity(intent);
                             Intent appInfo = new Intent(getApplicationContext(), defectDetailsActivity.class);
                             appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
-                            appInfo.putExtra("defectKey", keysets[position].toString());
+                            appInfo.putExtra("defectKey", keys.get(position));
 
                             startActivity(appInfo);
                         }

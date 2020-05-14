@@ -80,7 +80,7 @@ public class RatingActivity extends AppCompatActivity {
                             switch(r){
                                 case 1: message="מתנצלים לשמוע!";
                                     break;
-                                case 2: message = "נפעל ע''מ שיפור השירות!";
+                                case 2: message = "נפעל לשיפור השירות!";
                                     break;
                                 case 3: message = "תודה על תגובתך!";
                                     break;

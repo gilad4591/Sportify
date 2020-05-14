@@ -38,7 +38,7 @@ public class defectDetailsActivity extends AppCompatActivity {
         hourdef = (TextView)findViewById(R.id.hourDef);
         userdef = (TextView)findViewById(R.id.userRep);
         grounddef = (TextView)findViewById(R.id.groundDef);
-        Button fixB = (Button)findViewById(R.id.fixedBut);
+        final Button fixB = (Button)findViewById(R.id.fixedBut);
         if(userNameLoggedIn==null)fixB.setVisibility(View.INVISIBLE);
 
 
@@ -46,8 +46,13 @@ public class defectDetailsActivity extends AppCompatActivity {
         mRef.orderByChild("UserName").equalTo(userNameLoggedIn).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                getDefectDetails(defectKey);
-
+                Map<String, Object> users = (HashMap<String, Object>) dataSnapshot.getValue();
+                for (String key : users.keySet()) {
+                    Map<String, Object> user = (HashMap<String, Object>) users.get(key);
+                    if (user.get("isAdmin").toString().equals("False"))
+                        fixB.setVisibility(View.INVISIBLE);
+                    getDefectDetails(defectKey);
+                }
             }
 
             @Override
