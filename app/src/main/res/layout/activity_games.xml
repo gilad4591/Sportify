@@ -35,8 +35,8 @@
 
     <ImageButton
         android:id="@+id/rateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="39dp"
+        android:layout_height="34dp"
         android:layout_marginStart="31dp"
         android:layout_marginEnd="324dp"
         android:layout_marginBottom="16dp"
@@ -69,6 +69,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="31dp"
         android:text="Active Defects On This Ground:"
+        android:textStyle="bold"
         android:textColor="@drawable/common_google_signin_btn_icon_dark"
         android:textSize="19sp"
         app:layout_constraintBottom_toTopOf="@+id/groundDefect"
@@ -77,22 +78,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cGames"
         app:layout_constraintVertical_bias="0.266" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="281dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="54dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="9dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="choose day to open game"
-        app:layout_constraintBottom_toTopOf="@+id/cGames"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView17"
@@ -119,6 +104,7 @@
         android:layout_marginStart="31dp"
         android:layout_marginEnd="28dp"
         android:text="Rate this ground"
+        android:textStyle="bold"
         android:textColor="@color/fui_bgGitHub"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/rateButton"
@@ -127,6 +113,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/defectsButton"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginBottom="27dp"
+        android:textStyle="bold"
+
+        android:text=" choose day to open game"
+
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toTopOf="@+id/cGames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
