@@ -50,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser(){
+        boolean flag = true;
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
         String validate = editTextValidatePassword.getText().toString().trim();
@@ -62,89 +63,94 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (!fullName.matches("^[a-zA-Z]+ [ a-zA-Z]+$")){
             editTextFullName.setError("Please enter valid name");
             editTextFullName.requestFocus();
+            flag = false;
         }
         if (adress.isEmpty()){
             editTextAddress.setError("Address cannot be empty");
             editTextAddress.requestFocus();
+            flag = false;
         }
         if (!id.matches("^[0-9]{9}$")){
             editTextId.setError("Please enter valid id");
             editTextId.requestFocus();
+            flag = false;
         }
         if (!phone.matches("^05[0-9]{8}$")){
             editTextPhoneNumber.setError("Please enter valid phone number");
             editTextPhoneNumber.requestFocus();
+            flag = false;
         }
         if (!age.matches("^[1-9][0-9]{1,2}$")){
             editTextAge.setError("Please enter valid age");
             editTextAge.requestFocus();
+            flag = false;
         }
         if (email.isEmpty()){
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
-            return;
+            flag = false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             editTextEmail.setError("Please enter a valid email");
             editTextEmail.requestFocus();
-            return;
+            flag = false;
         }
         if (password.isEmpty()){
             editTextPassword.setError("Password is required");
             editTextPassword.requestFocus();
-            return;
+            flag = false;
         }
         if (password.length() < 6){
             editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
-            return;
+            flag = false;
         }
         if (!validate.equals(password)){
             editTextValidatePassword.setError("Password and validate not the same");
             editTextValidatePassword.requestFocus();
-            return;
+            flag = false;
         }
-        m_up.orderByChild("UserName").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-                    editTextEmail.setError("Email is already signed up");
-                    editTextEmail.requestFocus();
+        if (flag) {
+            m_up.orderByChild("UserName").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        editTextEmail.setError("Email is already signed up");
+                        editTextEmail.requestFocus();
+                    } else {
+                        progressDialog.setMessage("Registering User...");
+                        progressDialog.show();
+                        Map<String, String> userData = new HashMap<String, String>();
+                        userData.put("Password", password);
+                        userData.put("UserName", email);
+                        userData.put("isAdmin", "False");
+                        userData.put("enabled", "True");
+                        m_up.push().setValue(userData);
+                        userData.clear();
+                        userData.put("Name", fullName);
+                        userData.put("address", adress);
+                        userData.put("age", age);
+                        userData.put("id", id);
+                        userData.put("phone", phone);
+                        userData.put("username", email);
+                        m_users.push().setValue(userData);
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        intent.putExtra("userNameLoggedIn", email);
+                        intent.putExtra("isAdmin", "False");
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(intent);
+
+                    }
                 }
-                else
-                {
-                    progressDialog.setMessage("Registering User...");
-                    progressDialog.show();
-                    Map<String, String> userData = new HashMap<String, String>();
-                    userData.put("Password",password);
-                    userData.put("UserName",email);
-                    userData.put("isAdmin","False");
-                    userData.put("enabled","True");
-                    m_up.push().setValue(userData);
-                    userData.clear();
-                    userData.put("Name",fullName);
-                    userData.put("address",adress);
-                    userData.put("age",age);
-                    userData.put("id",id);
-                    userData.put("phone",phone);
-                    userData.put("username",email);
-                    m_users.push().setValue(userData);
-                    Intent intent = new Intent(SignUpActivity.this , MainActivity.class);
-                    intent.putExtra("userNameLoggedIn", email);
-                    intent.putExtra("isAdmin","False");
-                    progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(intent);
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+            });
+        }
 
 
     }
