@@ -137,7 +137,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109"
+        app:layout_constraintVertical_bias="0.122"
         app:rippleColor="#FFFFFF"
         app:srcCompat="@android:drawable/ic_lock_lock" />
 
@@ -169,6 +169,93 @@
         app:layout_constraintStart_toEndOf="@+id/menuButton"
         app:srcCompat="@drawable/fui_ic_mail_white_24dp" />
 
+    <TextView
+        android:id="@+id/firstText"
+        android:layout_width="390dp"
+        android:layout_height="328dp"
+        android:background="@drawable/border"
+        android:text="ברוכים הבאים ל Sportify \nאפליקציה אשר מהווה רשת חברתית למשחקי ספורט \n כאן תוכלו ליצור אירועים חדשים של המשחקים שלכם \n תוכלו להצטרף למשחקים קיימים לראות את המשחק הקרוב ביותר אליכם וגם ליצור קשרים עם חברים באפליקציה.\n התחברו תחילה על מנת להשתמש באפליקציה"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorHighlight="#020202"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.238" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/helpBut"
+        android:layout_width="40dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="60dp"
+        android:background="@android:drawable/ic_menu_help"
+        android:clickable="true"
+        android:foreground="@android:drawable/ic_menu_help"
+        app:backgroundTint="#6593ED"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+    <View
+        android:id="@+id/helpView"
+        android:layout_width="312dp"
+        android:layout_height="625dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <TextView
+        android:id="@+id/logtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="92dp"
+        android:text="התחבר"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/maptext" />
+
+    <TextView
+        android:id="@+id/todayTex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:text="משחקי היום"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logtext"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/maptext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:text="מפה"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/logouttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="התנתק"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mestext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הודעות"
+        app:layout_constraintBottom_toBottomOf="@+id/logtext"
+        app:layout_constraintEnd_toEndOf="@+id/logtext"
+        app:layout_constraintHorizontal_bias="0.988"
+        app:layout_constraintStart_toEndOf="@+id/todayTex" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

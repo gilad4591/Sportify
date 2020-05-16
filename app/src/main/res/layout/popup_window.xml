@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="600dp"
+    android:layout_height="600dp"
+    android:background="@drawable/popup">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/closeBut"
+        android:layout_width="22dp"
+        android:layout_height="20dp"
+        android:clickable="true"
+        android:foreground="@android:drawable/ic_menu_close_clear_cancel"
+        app:backgroundTint="#CF0A0A" />
+    <TableRow>
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:text="@string/n_n_sportify_n"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+
+
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:text="@string/signhelp"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:text="@string/maphelp"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:text="@string/joinhelp"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:text="@string/chathelp"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:text="@string/credits"
+            android:textAlignment="textStart"
+            android:textStyle="bold" />
+    </TableRow>
+</TableLayout>
