@@ -49,7 +49,7 @@ public class addGameActivity extends AppCompatActivity {
         groundText.setText(ground);
 
 
-        Spinner numOfParticipants = findViewById(R.id.maxPart);
+        final Spinner numOfParticipants = findViewById(R.id.maxPart);
         String [] items = new String[]{"1","2","3","4","5","6","7","8","9","10+"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,items);
         numOfParticipants.setAdapter(adapter);
@@ -100,7 +100,7 @@ public class addGameActivity extends AppCompatActivity {
                     Map<String, Object> games = new HashMap<String, Object>();
                     Map<String, Object> User = new HashMap<String, Object>();
                     Map<String, Object> Users = new HashMap<String, Object>();
-
+                    text = numOfParticipants.getSelectedItem().toString();
 
                     games.put("date", date);
                     games.put("ground", ground);
