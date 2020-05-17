@@ -68,7 +68,7 @@ public class todayGamesActivity extends AppCompatActivity {
                     Map<String, Object> singleEvent = (Map<String, Object>) key;
                     for (Object key2 : singleEvent.keySet()) {
                         d2 = dtf.parse(singleEvent.get("date").toString(),new ParsePosition(0));
-                        if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)>=0)){
+                        if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)==0)){
                             Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
                             String x = singleEvent.get("date").toString() + " - " +
                                     singleEvent.get("ground").toString() + " - " +

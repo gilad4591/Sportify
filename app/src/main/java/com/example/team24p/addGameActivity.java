@@ -117,7 +117,7 @@ public class addGameActivity extends AppCompatActivity {
                     User.put("email", username);
 
                     mRef.push().updateChildren(User);
-
+                    Toast.makeText(addGameActivity.this, "The game schedule successfully" , Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -130,4 +130,5 @@ public class addGameActivity extends AppCompatActivity {
 
 
     }
+
 }

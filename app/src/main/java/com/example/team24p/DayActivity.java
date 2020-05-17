@@ -50,6 +50,8 @@ public class DayActivity extends AppCompatActivity {
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private String userNameLoggedIn,markerName;
     private ArrayList<User> eveUserlist;
+
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,8 @@ public class DayActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        finish();
+
                         Intent stAdd = new Intent(getApplicationContext(), addGameActivity.class);
                         stAdd.putExtra("date" ,date);
                         stAdd.putExtra("markerName" ,markerName);
@@ -194,7 +198,6 @@ public class DayActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
