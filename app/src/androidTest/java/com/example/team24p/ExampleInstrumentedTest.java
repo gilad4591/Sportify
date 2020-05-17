@@ -34,5 +34,8 @@ public class ExampleInstrumentedTest {
         assertEquals(true, us.checkDate("24/10/2020"));
         assertEquals(true,us.checkTime("18:00"));
         assertEquals(true,us.checkCorrectEmail("gilad4591@gmail.com"));
+        assertNotEquals("#FFFFFF",us.getRandomColor());
+        assertEquals("date",us.defectExist("-M69lKbMD2BL5t46QTuU"));
+        assertEquals("Events",us.eventExist());
     }
 }

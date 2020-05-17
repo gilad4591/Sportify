@@ -50,7 +50,6 @@ public class chatActivity extends AppCompatActivity {
         messagesView.setAdapter(null);
         messagesView.setAdapter(messageAdapter);
         data = new MemberData(userSelected, getRandomColor());
-        selctedKey = "hg3g4kj3h123k";
 
         mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -61,6 +60,14 @@ public class chatActivity extends AppCompatActivity {
                     if ((value.get("user1").toString().equals(userNameLoggedIn) && value.get("user2").toString().equals(userSelected)) || (value.get("user1").toString().equals(userSelected) && value.get("user2").toString().equals(userNameLoggedIn))) {
                         selctedKey = key;
                     }
+                }
+                if(selctedKey==null) {
+                    selctedKey = mRef.push().getKey();
+                    final Map<String, String> userData2 = new HashMap<String, String>();
+                    userData2.put("user1",userNameLoggedIn);
+                    userData2.put("user2",userSelected);
+                    DatabaseReference refChildKey = mRef.child(selctedKey);
+                    refChildKey.setValue(userData2);
                 }
 
                 mRef.child(selctedKey).child("messageList").addChildEventListener(new ChildEventListener() {
@@ -118,14 +125,7 @@ public class chatActivity extends AppCompatActivity {
         userData.put("text",msg);
         userData.put("timeStamp", String.valueOf(System.currentTimeMillis()));
         String key = mRef.push().getKey();
-        if(selctedKey==null) {
-            selctedKey = mRef.push().getKey();
-            final Map<String, String> userData2 = new HashMap<String, String>();
-            userData2.put("user1",userNameLoggedIn);
-            userData2.put("user2",userSelected);
-            DatabaseReference refChildKey = mRef.child(selctedKey);
-            refChildKey.setValue(userData2);
-        }
+
         DatabaseReference refChildKey2 = mRef.child(selctedKey).child("messageList").child(key);
         refChildKey2.setValue(userData);
         }

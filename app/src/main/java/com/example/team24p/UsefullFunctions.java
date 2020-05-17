@@ -2,18 +2,9 @@ package com.example.team24p;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.media.Rating;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,24 +13,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-
+import java.util.Random;
 
 
 public class UsefullFunctions {
     private static int flag=0;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef = mDatabase.getReference();
+    static boolean date;
 
     public UsefullFunctions() {
     }
@@ -97,6 +83,22 @@ public class UsefullFunctions {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
             return false;
         return true;
+    }
+    public String getRandomColor() {
+        Random r = new Random();
+        StringBuffer sb = new StringBuffer("#");
+        while(sb.length() < 7){
+            sb.append(Integer.toHexString(r.nextInt()));
+        }
+        return sb.toString().substring(0, 7);
+    }
+    public String defectExist(String key){
+        mRef = mDatabase.getReference().child("Defects").child(key).child("date");
+        return mRef.getKey();
+    }
+    public String eventExist(){
+        mRef = mDatabase.getReference().child("Events");
+        return mRef.getKey();
     }
 
 }
