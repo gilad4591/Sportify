@@ -100,5 +100,13 @@ public class UsefullFunctions {
         mRef = mDatabase.getReference().child("Events");
         return mRef.getKey();
     }
+    public String usersExist(){
+        mRef = mDatabase.getReference().child("Users");
+        return mRef.getKey();
+    }
+    public String ratingExist(){
+        mRef = mDatabase.getReference().child("rating");
+        return mRef.getKey();
+    }
 
 }

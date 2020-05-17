@@ -37,5 +37,8 @@ public class ExampleInstrumentedTest {
         assertNotEquals("#FFFFFF",us.getRandomColor());
         assertEquals("date",us.defectExist("-M69lKbMD2BL5t46QTuU"));
         assertEquals("Events",us.eventExist());
+        assertEquals("Users",us.usersExist());
+        assertEquals("rating",us.ratingExist());
+
     }
 }
