@@ -250,64 +250,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-            mRef = mDatabase.getReference().child("messages");
-            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
-                    for(Object key: messages.keySet()) {
-                        Map<String, Object> singleMes = (HashMap<String, Object>) messages.get(key);
-                        if (singleMes.get("user1").toString().equals(userNameLoggedIn) || (singleMes.get("user2").toString().equals(userNameLoggedIn))) {
-                            mRef=mRef.child(key.toString()).child("messageList");
-                            mRef.addChildEventListener(new ChildEventListener() {
-                                @Override
-                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                                    Map<String, String> newMs = (HashMap<String, String>) dataSnapshot.getValue();
-                                    String user = newMs.get("sender");
-                                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this)
-                                            .setSmallIcon(R.mipmap.ic_launcher)
-                                            .setContentTitle("יש לך הודעה חדשה")
-                                            .setContentText("קיבלת הודעה חדשה מאת")
-                                            .setStyle(new NotificationCompat.BigTextStyle()
-                                                    .bigText(user))
-                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
-                                    String  id= String.valueOf(System.currentTimeMillis());
-
-                                    notificationManager.notify(id2, builder.build());
-                                }
-
-                                @Override
-                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                                }
-
-                                @Override
-                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                                }
-
-                                @Override
-                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                }
-                            });
-                        }
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
 
             messageBut.setOnClickListener(new View.OnClickListener() {
                 @Override
