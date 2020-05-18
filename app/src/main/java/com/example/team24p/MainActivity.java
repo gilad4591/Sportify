@@ -1,12 +1,17 @@
 package com.example.team24p;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -22,7 +27,9 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -38,10 +46,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String CHANNEL_ID = "h3rh3";
     static int count = 0;
     private TextView welcomeTextView;
     private TextView editPrivateText;
@@ -192,23 +202,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         items.clear();
-        if(userNameLoggedIn!=null){
+        if(userNameLoggedIn!=null) {
             mRef.addValueEventListener(new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String d = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/M/yyyy"));
-                    Date d1,d2;
+                    Date d1, d2;
                     DateFormat dtf = new SimpleDateFormat("dd/M/yyyy");
-                    d1 = dtf.parse(d,new ParsePosition(0));
+                    d1 = dtf.parse(d, new ParsePosition(0));
 
 
                     Map<String, Object> eventsAll = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                     for (Object key : eventsAll.values()) {
                         Map<String, Object> singleEvent = (Map<String, Object>) key;
                         for (Object key2 : singleEvent.keySet()) {
-                            d2 = dtf.parse(singleEvent.get("date").toString(),new ParsePosition(0));
-                            if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)>=0)) {
+                            d2 = dtf.parse(singleEvent.get("date").toString(), new ParsePosition(0));
+                            if ((key2.toString().equals("userlist")) && (d2.compareTo(d1) >= 0)) {
                                 Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
 
                                 for (Object lists : listOfUsers.values()) {
@@ -228,25 +238,86 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);
                     myAct.setAdapter(null);
                     myAct.setAdapter(adapter);
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
-        }
-        messageBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent stMess = new Intent(MainActivity.this,messageActivity.class);
-                stMess.putExtra("userNameLoggedIn",userNameLoggedIn);
-                startActivity(stMess);
-            }
-        });
 
+
+            mRef = mDatabase.getReference().child("messages");
+            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
+                    for(Object key: messages.keySet()) {
+                        Map<String, Object> singleMes = (HashMap<String, Object>) messages.get(key);
+                        if (singleMes.get("user1").toString().equals(userNameLoggedIn) || (singleMes.get("user2").toString().equals(userNameLoggedIn))) {
+                            mRef=mRef.child(key.toString()).child("messageList");
+                            mRef.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    Map<String, String> newMs = (HashMap<String, String>) dataSnapshot.getValue();
+                                    String user = newMs.get("sender");
+                                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this)
+                                            .setSmallIcon(R.mipmap.ic_launcher)
+                                            .setContentTitle("יש לך הודעה חדשה")
+                                            .setContentText("קיבלת הודעה חדשה מאת")
+                                            .setStyle(new NotificationCompat.BigTextStyle()
+                                                    .bigText(user))
+                                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                                    String  id= String.valueOf(System.currentTimeMillis());
+
+                                    notificationManager.notify(id2, builder.build());
+                                }
+
+                                @Override
+                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            messageBut.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent stMess = new Intent(MainActivity.this, messageActivity.class);
+                    stMess.putExtra("userNameLoggedIn", userNameLoggedIn);
+                    startActivity(stMess);
+                }
+            });
+        }
     }
     public void onButtonShowPopupWindowClick(View view) {
 
@@ -274,5 +345,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.app_name);
+            String description = getString(R.string.app_name);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
