@@ -143,7 +143,7 @@ public class GamesActivity extends AppCompatActivity {
 
                 }
                 if (flag69 == 0) {
-                    x = "There is No Active Defects on This Ground right Now :-)";
+                    x = "There Is No Active Defects On This Ground Right Now :-)";
                     items.add(x);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);
