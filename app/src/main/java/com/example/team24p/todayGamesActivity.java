@@ -129,7 +129,7 @@ public class todayGamesActivity extends AppCompatActivity {
                 if (str != "אין כרגע משחקים להיום") {
                     String x[] = str.split(" - ", 3);
                     Intent intnt = getIntent();
-                    finish();
+                    finish();\
                     startActivity(intnt);
                     Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                     appInfo.putExtra("userNameLoggedIn", username);
