@@ -10,12 +10,11 @@
         android:id="@+id/EditTextEmail"
         android:layout_width="391dp"
         android:layout_height="48dp"
-        android:layout_marginTop="121dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginTop="76dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordTextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,26 +22,24 @@
         android:id="@+id/EditTextPassword"
         android:layout_width="392dp"
         android:layout_height="46dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="63dp"
+        android:layout_marginTop="12dp"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/EditTextEmail" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="116dp"
         android:layout_height="42dp"
-        android:layout_marginTop="71dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="76dp"
         android:text="Login"
-        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/EditTextPassword" />
 
     <Button
         android:id="@+id/signUpButton"
@@ -52,5 +49,6 @@
         android:text="Dont have a user? \n Sign up!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
