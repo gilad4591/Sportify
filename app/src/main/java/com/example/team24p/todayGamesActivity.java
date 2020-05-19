@@ -111,7 +111,7 @@ public class todayGamesActivity extends AppCompatActivity {
                     }
                     i++;
                 }
-
+                if(items.isEmpty())items.add("אין כרגע משחקים להיום");
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
                 myAct.setAdapter(null);
                 myAct.setAdapter(adapter);}
@@ -123,22 +123,23 @@ public class todayGamesActivity extends AppCompatActivity {
 
             }
         });
-
         myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) myAct.getItemAtPosition(position);
-                String x[] = str.split(" - ",3);
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-                Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
-                appInfo.putExtra("userNameLoggedIn",username);
-                appInfo.putExtra("eventlistGame",(Serializable)eventsArrayList);
-                appInfo.putExtra("hour", x[2] );
-                appInfo.putExtra("markerName",x[1]);
-                appInfo.putExtra("date",x[0]);
+                if (str != "אין כרגע משחקים להיום") {
+                    String x[] = str.split(" - ", 3);
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                    Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
+                    appInfo.putExtra("userNameLoggedIn", username);
+                    appInfo.putExtra("eventlistGame", (Serializable) eventsArrayList);
+                    appInfo.putExtra("hour", x[2]);
+                    appInfo.putExtra("markerName", x[1]);
+                    appInfo.putExtra("date", x[0]);
 
-                startActivity(appInfo);
+                    startActivity(appInfo);
+                }
             }
         });
 

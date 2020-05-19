@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         sharedPref= getSharedPreferences("mypref", MODE_PRIVATE);
         userNameLoggedIn = sharedPref.getString("name", null);
 
+
         items.clear();
         messageBut = (FloatingActionButton) findViewById(R.id.messageButton);
         firstText = (TextView)findViewById(R.id.firstText);
@@ -115,14 +116,16 @@ public class MainActivity extends AppCompatActivity {
         logoutButton.setVisibility(View.INVISIBLE);
         myAct = (ListView)findViewById(R.id.myActivityList);
         myAct.setVisibility(View.INVISIBLE);
+        String isAdmin = sharedPref.getString("isAdmin", "False");
         myAct.setAdapter(null);
 
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
         welcomeTextView.setText("");
         try {
-            if(userNameLoggedIn==null)
-                   userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
-            if (getIntent().getStringExtra("isAdmin").equals("True")){
+            if(userNameLoggedIn==null) {
+                userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
+            }
+            if (isAdmin.equals("True")){
                 adminPanelButton.setVisibility(View.VISIBLE);
             }
         } catch (Exception e){
@@ -253,6 +256,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    if(items.isEmpty())items.add("עדיין לא הצטרפת לאף משחק");
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);
                     myAct.setAdapter(null);
                     myAct.setAdapter(adapter);
