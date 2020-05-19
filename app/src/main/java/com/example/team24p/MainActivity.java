@@ -249,6 +249,52 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+//           mRef = mDatabase.getReference().child("messages");
+//            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
+//                    for(Object key: messages.keySet()) {
+//                        Map<String, Object> singleMes = (HashMap<String, Object>) messages.get(key);
+//                        if (singleMes.get("user1").toString().equals(userNameLoggedIn) || (singleMes.get("user2").toString().equals(userNameLoggedIn))) {
+//                            mRef=mRef.child(key.toString()).child("messageList");
+//                            mRef.addChildEventListener(new ChildEventListener() {
+//                                @Override
+//                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                                    Map<String, String> newMs = (HashMap<String, String>) dataSnapshot.getValue();
+//                                    String user = newMs.get("sender");
+//                                    notification(user);
+//                                }
+//                                @Override
+//                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                                }
+//                            });
+//                        }
+//
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
 
 
 
@@ -289,19 +335,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void createNotificationChannel() {
+
+
+    private void notification(String user) {
+        String id = createNotificationChannel();
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, id)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("new message")
+                .setContentText("you got new message from" + user)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(MainActivity.this);
+
+        notificationManagerCompat.notify(100,builder.build());
+
+    }
+    private String createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
+        String id = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.app_name);
-            String description = getString(R.string.app_name);
+            String name = "messageChannel";
+            id = String.valueOf(System.currentTimeMillis());
+            String description = "This is notification for new messages";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            NotificationChannel channel = new NotificationChannel(id, name, importance);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+        return id;
     }
+
 }

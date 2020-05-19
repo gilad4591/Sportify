@@ -2,9 +2,14 @@ package com.example.team24p;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +58,8 @@ public class messageActivity extends AppCompatActivity {
         userNotConfirmed = new ArrayList<>();
 
 
+
+
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,6 +100,10 @@ public class messageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String s = lineToSearch.getText().toString().trim();
                 if(s!=null){
+                    Intent inte = getIntent();
+                    finish();
+                    startActivity(inte);
+
                     Intent intent = new Intent(messageActivity.this,addFriendActivity.class);
                     intent.putExtra("searchLine",s);
                     intent.putExtra("userNameLoggedIn",userNameLoggedIn);
@@ -115,6 +126,7 @@ public class messageActivity extends AppCompatActivity {
         });
         
     }
+
 
 
     class ListResources extends BaseAdapter{
