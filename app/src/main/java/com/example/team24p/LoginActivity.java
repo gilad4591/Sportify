@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             succeded = 1;
                             //put your value
                             editor.putString("name", email);
+                            editor.putString("isAdmin",isAdmin);
                             //commits your edits
                             editor.apply();
                             Intent intent = new Intent(LoginActivity.this , MainActivity.class);
