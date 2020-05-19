@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -37,6 +38,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+
+
         editTextPassword = (EditText) findViewById(R.id.EditTextPassword);
         editTextEmail =(EditText) findViewById(R.id.EditTextEmail);
         buttonSignIn = (Button) findViewById(R.id.loginButton);
@@ -75,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int succeded = 0;
+                SharedPreferences.Editor editor = getSharedPreferences("mypref",MODE_PRIVATE).edit();
                 Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
                     for (String key : usersList.keySet()) {
                         Map<String,Object> value = (HashMap<String,Object>)usersList.get(key);
@@ -83,6 +87,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(getApplicationContext(), "User login successfully", Toast.LENGTH_SHORT).show();
                             finish();
                             succeded = 1;
+                            //put your value
+                            editor.putString("name", email);
+                            //commits your edits
+                            editor.apply();
                             Intent intent = new Intent(LoginActivity.this , MainActivity.class);
                             intent.putExtra("userNameLoggedIn", email);
                             intent.putExtra("isAdmin",isAdmin);

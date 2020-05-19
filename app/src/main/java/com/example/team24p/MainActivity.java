@@ -14,8 +14,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -51,7 +53,6 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String CHANNEL_ID = "h3rh3";
     static int count = 0;
     private TextView welcomeTextView;
     private TextView editPrivateText;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton adminPanelButton;
     private FloatingActionButton messageBut;
     private FloatingActionButton helpBut;
-    private String userNameLoggedIn = "";
+    private String userNameLoggedIn;
     private ArrayList<String> items;
     private View help;
     private ListView myAct;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mesText;
     private TextView logoutText;
     private TextView loginText;
+    private SharedPreferences sharedPref;
 
 
     @Override
@@ -75,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         items = new ArrayList<>();
+
+        sharedPref= getSharedPreferences("mypref", MODE_PRIVATE);
+        userNameLoggedIn = sharedPref.getString("name", null);
+
         items.clear();
         messageBut = (FloatingActionButton) findViewById(R.id.messageButton);
         firstText = (TextView)findViewById(R.id.firstText);
@@ -102,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
         adminPanelButton = (FloatingActionButton) findViewById(R.id.buttonManagePanel);
         FloatingActionButton logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         adminPanelButton.setVisibility(View.INVISIBLE);
@@ -113,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
         welcomeTextView.setText("");
         try {
-            userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
+            if(userNameLoggedIn==null)
+                   userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
             if (getIntent().getStringExtra("isAdmin").equals("True")){
                 adminPanelButton.setVisibility(View.VISIBLE);
             }
@@ -147,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
                 editPrivateText.setVisibility(View.VISIBLE);
                 messageBut.setVisibility(View.VISIBLE);
-                //if user admin make visible button admin
+
             }
             menuButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -174,6 +182,11 @@ public class MainActivity extends AppCompatActivity {
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences sharedPref= getSharedPreferences("mypref",0);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.remove("name");//its remove name field from your SharedPreferences
+                    editor.commit(); //Don't forgot to commit  SharedPreferences.
+
                     Intent intent = getIntent();
                     intent.removeExtra("isAdmin");
                     intent.removeExtra("userNameLoggedIn");
@@ -203,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
         });
         items.clear();
         if(userNameLoggedIn!=null) {
+
             mRef.addValueEventListener(new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
@@ -306,6 +320,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(stMess);
                 }
             });
+
+
+
         }
     }
     public void onButtonShowPopupWindowClick(View view) {

@@ -153,6 +153,7 @@ public class GamesActivity extends AppCompatActivity {
                 if (flag69 != 0) {
                     myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                             String str = (String) myAct.getItemAtPosition(position);
                             Intent intent = getIntent();
                             finish();

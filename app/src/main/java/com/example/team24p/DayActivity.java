@@ -79,7 +79,9 @@ public class DayActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent = getIntent();
                         finish();
+                        startActivity(intent);
 
                         Intent stAdd = new Intent(getApplicationContext(), addGameActivity.class);
                         stAdd.putExtra("date" ,date);
