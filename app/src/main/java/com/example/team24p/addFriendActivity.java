@@ -146,6 +146,8 @@ public class addFriendActivity extends AppCompatActivity {
                                     pending.setVisibility(View.INVISIBLE);
                                 }
                                 temp.setAdress(key);
+                                //temp.setAdress(enables);
+
                             }
                             flag2=1;
                         }
