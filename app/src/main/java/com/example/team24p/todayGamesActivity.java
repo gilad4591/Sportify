@@ -128,9 +128,9 @@ public class todayGamesActivity extends AppCompatActivity {
                 String str = (String) myAct.getItemAtPosition(position);
                 if (str != "אין כרגע משחקים להיום") {
                     String x[] = str.split(" - ", 3);
-                    Intent inten = getIntent();
+                    Intent intent = getIntent();
                     finish();
-                    startActivity(inten);
+                    startActivity(intent);
                     Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                     appInfo.putExtra("userNameLoggedIn", username);
                     appInfo.putExtra("eventlistGame", (Serializable) eventsArrayList);
