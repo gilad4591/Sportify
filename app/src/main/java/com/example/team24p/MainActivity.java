@@ -184,7 +184,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     SharedPreferences sharedPref= getSharedPreferences("mypref",0);
                     SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.remove("name");//its remove name field from your SharedPreferences
+                    editor.remove("name");
+                    editor.remove("isAdmin");//its remove name field from your SharedPreferences
                     editor.commit(); //Don't forgot to commit  SharedPreferences.
 
                     Intent intent = getIntent();
