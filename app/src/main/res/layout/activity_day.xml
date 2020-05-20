@@ -31,8 +31,11 @@
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="181dp"
-        android:layout_height="43dp"
-        android:text="press + to add game" />
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:text="  press + to add game"
+        android:textColor="@color/design_default_color_primary"
+        android:textSize="31sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
