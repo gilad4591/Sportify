@@ -73,6 +73,7 @@ public class todayGamesActivity extends AppCompatActivity {
                             String x = singleEvent.get("date").toString() + " - " +
                                     singleEvent.get("ground").toString() + " - " +
                                     singleEvent.get("hour").toString();
+                            if(singleEvent.get("date").toString().contains("21/5")&&singleEvent.get("ground").toString().equals("טרנר")) x+= "\nאנ'לא אשכח עד סוף ימי חיי";
                             items.add(x);
 
                             for (Object lists : listOfUsers.values()) {
@@ -129,7 +130,7 @@ public class todayGamesActivity extends AppCompatActivity {
                 if (str != "אין כרגע משחקים להיום") {
                     String x[] = str.split(" - ", 3);
                     Intent inten = getIntent();
-                    finish()
+                    finish();
                     startActivity(inten);
                     Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                     appInfo.putExtra("userNameLoggedIn", username);

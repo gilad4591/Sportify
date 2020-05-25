@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class addGameActivity extends AppCompatActivity {
     private String date,hour,ground,username;
     private String text,age,phone,name;
     private TextInputEditText hourText;
+    private ImageView mIvToggleBasket;
+    private ImageView mIvToggletennis;
+    private ImageView mIvToggleSoccer;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -43,6 +47,30 @@ public class addGameActivity extends AppCompatActivity {
         hourText = (TextInputEditText)findViewById(R.id.hourInput);
         TextInputEditText dateText = (TextInputEditText)findViewById(R.id.dateInput);
         TextInputEditText groundText = (TextInputEditText)findViewById(R.id.groundInput);
+
+
+//        mIvToggleBasket = (ImageView) findViewById(R.id.iv_toggle);
+//        mIvToggleBasket.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mIvToggleBasket.setActivated(!mIvToggleBasket.isActivated());
+//            }
+//        });
+
+//        mIvToggletennis = (ImageView) findViewById(R.id.iv_toggle2);
+//        mIvToggletennis.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mIvToggletennis.setActivated(!mIvToggletennis.isActivated());
+//            }
+//        });
+//        mIvToggleSoccer = (ImageView) findViewById(R.id.iv_toggle3);
+//        mIvToggleSoccer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mIvToggleSoccer.setActivated(!mIvToggleSoccer.isActivated());
+//            }
+//        });
 
 
         dateText.setText(date);
