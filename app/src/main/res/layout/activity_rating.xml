@@ -60,8 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/avgRating"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="126dp"
+        android:layout_marginTop="297dp"
         android:layout_marginEnd="147dp"
         android:layout_marginBottom="45dp"
         android:text="דירוג נוכחי"
@@ -78,4 +80,17 @@
         android:layout_marginEnd="165dp"
         android:layout_marginBottom="-144dp"
         android:text="חזרה למפה" />
+
+    <TextView
+        android:id="@+id/numOfRate"
+        android:layout_width="127dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="479dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="233dp" />
 </RelativeLayout>

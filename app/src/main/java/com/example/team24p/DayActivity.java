@@ -119,6 +119,11 @@ public class DayActivity extends AppCompatActivity {
                             System.out.println(key + ":" + value);
                             event.setMaxp(value);
                         }
+                        else if ("type".equals(key2)){
+                            value = singleEvent.get("type").toString();
+                            System.out.println(key + ":" + value);
+                            event.setType(value);
+                        }
                         else {
                             //if userlist
                             String value2 = "";

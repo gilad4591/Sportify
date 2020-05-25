@@ -103,6 +103,7 @@ public class todayGamesActivity extends AppCompatActivity {
                             event.setGround(singleEvent.get("ground").toString());
                             event.setDate(singleEvent.get("date").toString());
                             event.setMaxp(singleEvent.get("maxParticipants").toString());
+                            event.setType(singleEvent.get("type").toString());
                             event.setId(keysets[i].toString());
                             event.setUsername(usersArrayList);
                             eventsArrayList.add(event);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,7 +30,8 @@ public class UsersInGame extends AppCompatActivity {
     private ArrayList<User> UserArrayList;
     private int flag = 0;
     private ListView userView;
-    private String emailUserLoggedIn,age,phone,name,maxP;
+    private String emailUserLoggedIn,age,phone,name,maxP,type;
+    private ImageView basket,tennis,soccer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class UsersInGame extends AppCompatActivity {
         String groundName = i.getStringExtra("markerName");
         String date = i.getStringExtra("date");
 
+        basket = (ImageView)findViewById(R.id.basketball);
+        tennis = (ImageView)findViewById(R.id.tennis);
+        soccer = (ImageView)findViewById(R.id.soccer);
 
         //String emailUserLoggedIn = "";
         Button joinButton = (Button)findViewById(R.id.joinButton);
@@ -54,6 +59,14 @@ public class UsersInGame extends AppCompatActivity {
                 key = ev.getId();
                 UserArrayList = ev.getUsername();
                 maxP = ev.getMaxP();
+                type = ev.getType();
+                if(type=="כדורגל")soccer.setVisibility(View.VISIBLE);
+                if(type=="כדורסל")basket.setVisibility(View.VISIBLE);
+                if(type=="משולב"){
+                    soccer.setVisibility(View.VISIBLE);
+                    basket.setVisibility(View.VISIBLE);
+                }
+                if(type=="טניס")tennis.setVisibility(View.VISIBLE);
             }
         }
 

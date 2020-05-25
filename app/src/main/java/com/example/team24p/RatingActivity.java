@@ -32,6 +32,7 @@ public class RatingActivity extends AppCompatActivity {
     private Button button;
     private RatingBar ratingBar;
     private Button backButton;
+    private TextView numOfRate;
     private int flag;
     private double sum=0.0;
     private int count=0;
@@ -46,6 +47,7 @@ public class RatingActivity extends AppCompatActivity {
         UserName =  getIntent().getStringExtra("userNameLoggedIn");
         ratingBar = findViewById(R.id.ratingBar);
         backButton = findViewById(R.id.buttonBack);
+        numOfRate = findViewById(R.id.numOfRate);
         final TextView rateUs = (TextView)findViewById(R.id.rateUs);
         flag = 0;
 
@@ -105,7 +107,7 @@ public class RatingActivity extends AppCompatActivity {
                 avg = sum/count;
 
                 TextView avgTextView = (TextView)findViewById(R.id.avgRating);
-
+                numOfRate.setText( "כמות מדרגים: " + count);
                 DecimalFormat ff = new DecimalFormat("#0.00");
 
                 avgTextView.setText(ff.format(avg)+"/"+5);

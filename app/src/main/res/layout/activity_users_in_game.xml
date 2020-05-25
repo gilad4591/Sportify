@@ -32,4 +32,49 @@
         android:text="הצטרף"
         tools:layout_editor_absoluteX="159dp"
         tools:layout_editor_absoluteY="583dp" />
+
+    <ImageView
+        android:id="@+id/tennis"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="649dp"
+        android:visibility="invisible"
+        android:src="@drawable/tennis" />
+
+    <ImageView
+        android:id="@+id/soccer"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="293dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="38dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="649dp"
+        android:src="@drawable/soccer" />
+
+    <ImageView
+        android:id="@+id/basketball"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="166dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="165dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="649dp"
+        android:src="@drawable/basketball" />
 </RelativeLayout>

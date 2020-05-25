@@ -10,6 +10,7 @@ public class Events implements Serializable {
     String Hour;
     String id;
     String maxP;
+    String type;
     ArrayList<User> users = new ArrayList<>();
 
     public Events(){
@@ -18,14 +19,16 @@ public class Events implements Serializable {
         this.date = "";
         this.Hour = "";
         this.maxP = "";
+        this.type = "";
     }
 
-    public Events(String ground, String users, String date,String Hour,String id,String maxP) {
+    public Events(String ground, String users, String date,String Hour,String id,String maxP,String type) {
         this.ground = ground;
         this.date = date;
         this.Hour = Hour;
         this.id = id;
         this.maxP = maxP;
+        this.type = type;
     }
 
     public void setId(String id) {
@@ -82,5 +85,13 @@ public class Events implements Serializable {
 
     public String getMaxP() {
         return maxP;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

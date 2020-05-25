@@ -34,8 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:text="  press + to add game"
-        android:textColor="@color/design_default_color_primary"
-        android:textSize="31sp"
+        android:textColor="@color/design_default_color_secondary_variant"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

@@ -26,13 +26,16 @@ import java.util.Map;
 
 public class addGameActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mRef = mDatabase.getReference().child("Events");
+    private DatabaseReference mRef;
     private String date,hour,ground,username;
     private String text,age,phone,name;
     private TextInputEditText hourText;
-    private ImageView mIvToggleBasket;
-    private ImageView mIvToggletennis;
-    private ImageView mIvToggleSoccer;
+    private ImageView basketOff;
+    private ImageView tennisOff;
+    private ImageView soccerOff;
+    private ImageView basketOn;
+    private ImageView tennisOn;
+    private ImageView soccerOn;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -48,30 +51,45 @@ public class addGameActivity extends AppCompatActivity {
         TextInputEditText dateText = (TextInputEditText)findViewById(R.id.dateInput);
         TextInputEditText groundText = (TextInputEditText)findViewById(R.id.groundInput);
 
+        basketOff = findViewById(R.id.basket_off);
+        basketOn = findViewById(R.id.basket_on);
+        tennisOff = findViewById(R.id.tennis_off);
+        tennisOn = findViewById(R.id.tennis_on);
+        soccerOff = findViewById(R.id.soccer_off);
+        soccerOn = findViewById(R.id.soccer_on);
 
-//        mIvToggleBasket = (ImageView) findViewById(R.id.iv_toggle);
-//        mIvToggleBasket.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mIvToggleBasket.setActivated(!mIvToggleBasket.isActivated());
-//            }
-//        });
+        basketOn.setVisibility(View.INVISIBLE);
+        basketOff.setVisibility(View.INVISIBLE);
+        tennisOff.setVisibility(View.INVISIBLE);
+        tennisOn.setVisibility(View.INVISIBLE);
+        soccerOff.setVisibility(View.INVISIBLE);
+        soccerOn.setVisibility(View.INVISIBLE);
 
-//        mIvToggletennis = (ImageView) findViewById(R.id.iv_toggle2);
-//        mIvToggletennis.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mIvToggletennis.setActivated(!mIvToggletennis.isActivated());
-//            }
-//        });
-//        mIvToggleSoccer = (ImageView) findViewById(R.id.iv_toggle3);
-//        mIvToggleSoccer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mIvToggleSoccer.setActivated(!mIvToggleSoccer.isActivated());
-//            }
-//        });
+        mRef = mDatabase.getReference().child("locations");
+        mRef.orderByChild("Name").equalTo(ground).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<Object, Object > location = (HashMap<Object, Object>)  dataSnapshot.getValue();
+                for(Object key: location.keySet()) {
+                    Map<String, String > key2 = (HashMap<String, String>) location.get(key);
+                    if (key2.get("Type").equals("כדורגל")) soccerOn.setVisibility(View.VISIBLE);
+                    else if (key2.get("Type").equals("כדורסל"))
+                        basketOn.setVisibility(View.VISIBLE);
+                    else if (key2.get("Type").equals("משולב")) {
+                        soccerOn.setVisibility(View.VISIBLE);
+                        basketOn.setVisibility(View.VISIBLE);
+                    } else if (key2.get("Type").equals("טניס"))
+                        tennisOn.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        mRef = mDatabase.getReference().child("Events");
 
         dateText.setText(date);
         groundText.setText(ground);
@@ -129,10 +147,18 @@ public class addGameActivity extends AppCompatActivity {
                     Map<String, Object> User = new HashMap<String, Object>();
                     Map<String, Object> Users = new HashMap<String, Object>();
                     text = numOfParticipants.getSelectedItem().toString();
+                    String type="כדורגל";
+                    if(soccerOff.getVisibility()==View.VISIBLE) type="כדורגל";
+                    if(basketOff.getVisibility()==View.VISIBLE) type="כדורסל";
+                    if(tennisOff.getVisibility()==View.VISIBLE) type="טניס";
+                    if(basketOff.getVisibility()==View.VISIBLE && soccerOff.getVisibility()==View.VISIBLE) type="משולב";
+
+
 
                     games.put("date", date);
                     games.put("ground", ground);
                     games.put("hour", hour);
+                    games.put("type",type);
                     games.put("userlist", Users);
                     games.put("maxParticipants",text);
                     String key = mRef.push().getKey();
@@ -159,4 +185,36 @@ public class addGameActivity extends AppCompatActivity {
 
     }
 
+    public void click_basket(View view) {
+        if(basketOn.getVisibility()==View.VISIBLE){
+            basketOff.setVisibility(View.VISIBLE);
+            basketOn.setVisibility(View.INVISIBLE);
+        }
+        else {
+            basketOn.setVisibility(View.VISIBLE);
+            basketOff.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void click_soccer(View view) {
+        if(soccerOn.getVisibility()==View.VISIBLE){
+            soccerOff.setVisibility(View.VISIBLE);
+            soccerOn.setVisibility(View.INVISIBLE);
+        }
+        else {
+            soccerOn.setVisibility(View.VISIBLE);
+            soccerOff.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void click_tennis(View view) {
+        if(tennisOn.getVisibility()==View.VISIBLE){
+            tennisOff.setVisibility(View.VISIBLE);
+            tennisOn.setVisibility(View.INVISIBLE);
+        }
+        else {
+            tennisOn.setVisibility(View.VISIBLE);
+            tennisOff.setVisibility(View.INVISIBLE);
+        }
+    }
 }
