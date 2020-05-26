@@ -128,7 +128,7 @@ public class addGameActivity extends AppCompatActivity {
         Button addGame = (Button)findViewById(R.id.gameAddcButton);
         if(username==null || username == ""){
             addGame.setVisibility(View.INVISIBLE);
-            Toast.makeText(addGameActivity.this, "You are not logged in. \n log in before create a game" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(addGameActivity.this, "אינך מחובר, התחבר על מנת ליצור משחק" , Toast.LENGTH_SHORT).show();
         }
 
         mRef = mDatabase.getReference().child("Events");
@@ -139,19 +139,23 @@ public class addGameActivity extends AppCompatActivity {
 
                 hour = hourText.getText().toString().trim();
                 if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
-                    hourText.setError("Please enter valid hour");
+                    hourText.setError("נא להזין שעה תקינה");
                     hourText.requestFocus();
-                } else {
+                }
+                else if(soccerOff.getVisibility()==View.INVISIBLE && basketOff.getVisibility()==View.INVISIBLE && tennisOff.getVisibility()==View.INVISIBLE)
+                {
+                    Toast.makeText(addGameActivity.this, "נא לבחור סוג משחק לפני יצירתו" , Toast.LENGTH_SHORT).show();
+                }
+                else {
 
                     Map<String, Object> games = new HashMap<String, Object>();
                     Map<String, Object> User = new HashMap<String, Object>();
                     Map<String, Object> Users = new HashMap<String, Object>();
                     text = numOfParticipants.getSelectedItem().toString();
-                    String type="כדורגל";
+                    String type="";
                     if(soccerOff.getVisibility()==View.VISIBLE) type="כדורגל";
                     if(basketOff.getVisibility()==View.VISIBLE) type="כדורסל";
                     if(tennisOff.getVisibility()==View.VISIBLE) type="טניס";
-                    if(basketOff.getVisibility()==View.VISIBLE && soccerOff.getVisibility()==View.VISIBLE) type="משולב";
 
 
 
@@ -194,6 +198,13 @@ public class addGameActivity extends AppCompatActivity {
             basketOn.setVisibility(View.VISIBLE);
             basketOff.setVisibility(View.INVISIBLE);
         }
+
+        if(basketOff.getVisibility()==View.VISIBLE){
+            tennisOff.setVisibility(View.INVISIBLE);
+            tennisOn.setVisibility(View.VISIBLE);
+            soccerOff.setVisibility(View.INVISIBLE);
+            soccerOn.setVisibility(View.VISIBLE);
+        }
     }
 
     public void click_soccer(View view) {
@@ -205,6 +216,12 @@ public class addGameActivity extends AppCompatActivity {
             soccerOn.setVisibility(View.VISIBLE);
             soccerOff.setVisibility(View.INVISIBLE);
         }
+        if(soccerOff.getVisibility()==View.VISIBLE){
+            tennisOff.setVisibility(View.INVISIBLE);
+            tennisOn.setVisibility(View.VISIBLE);
+            basketOff.setVisibility(View.INVISIBLE);
+            basketOn.setVisibility(View.VISIBLE);
+        }
     }
 
     public void click_tennis(View view) {
@@ -215,6 +232,12 @@ public class addGameActivity extends AppCompatActivity {
         else {
             tennisOn.setVisibility(View.VISIBLE);
             tennisOff.setVisibility(View.INVISIBLE);
+        }
+        if(tennisOff.getVisibility()==View.VISIBLE){
+            basketOff.setVisibility(View.INVISIBLE);
+            basketOn.setVisibility(View.VISIBLE);
+            soccerOff.setVisibility(View.INVISIBLE);
+            soccerOn.setVisibility(View.VISIBLE);
         }
     }
 }

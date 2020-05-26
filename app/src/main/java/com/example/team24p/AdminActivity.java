@@ -9,10 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -59,6 +61,7 @@ public class AdminActivity extends AppCompatActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,items);
                 usersListView.setAdapter(null);
                 usersListView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -75,8 +78,37 @@ public class AdminActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                for(int j=0;j<items.size();j++){
-                    if(items.get(j).contains(searchInput.getText().toString().trim()))items.remove(j);
+                String text=searchInput.getText().toString();
+                int textLength = searchInput.length();
+                ArrayList<String> searchResults = new ArrayList<String>();
+                searchResults.clear();
+                ArrayAdapter<String> adapter = null;
+                for(int i=0;i<items.size();i++)
+                {
+                    String name=items.get(i);
+                    if(textLength<=name.length()){
+                        //compare the String in EditText with Names in the ArrayList
+                        if(text.equalsIgnoreCase(name.substring(0,textLength))){
+                            searchResults.add(items.get(i));
+                            
+                            adapter= new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,searchResults);
+
+                        }
+
+                    }
+
+
+                }
+                if(searchResults.isEmpty()){
+                    Toast toast= Toast.makeText(getApplicationContext(),
+                            "No Items Matched", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                }
+                else {
+                    usersListView.setAdapter(null);
+                    usersListView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
             }
 

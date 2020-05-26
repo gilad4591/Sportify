@@ -63,10 +63,6 @@ public class UsersInGame extends AppCompatActivity {
                 type = ev.getType();
                 if(type.equals("כדורגל"))soccer.setVisibility(View.VISIBLE);
                 if(type.equals("כדורסל"))basket.setVisibility(View.VISIBLE);
-                if(type.equals("משולב")){
-                    soccer.setVisibility(View.VISIBLE);
-                    basket.setVisibility(View.VISIBLE);
-                }
                 if(type.equals("טניס"))tennis.setVisibility(View.VISIBLE);
             }
         }
@@ -80,12 +76,12 @@ public class UsersInGame extends AppCompatActivity {
             if(flag==1)joinButton.setVisibility(View.INVISIBLE);
             else if(Integer.parseInt(maxP)<=UserArrayList.size()){
                 joinButton.setVisibility(View.INVISIBLE);
-                Toast.makeText(UsersInGame.this, "The number of participants reached the max limit" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(UsersInGame.this, "לא ניתן להצטרף כרגע, מספר המשתתפים שהצטרפו למשחק הינו מקסימלי" , Toast.LENGTH_SHORT).show();
             }
         }
         else {
             joinButton.setVisibility(View.INVISIBLE);
-            Toast.makeText(UsersInGame.this, "You are not logged in. \n log in before join game" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(UsersInGame.this, "אינך מחובר \n נא להתחבר על מנת להצטרף למשחק" , Toast.LENGTH_SHORT).show();
         }
 
 
