@@ -200,10 +200,14 @@ public class addGameActivity extends AppCompatActivity {
         }
 
         if(basketOff.getVisibility()==View.VISIBLE){
-            tennisOff.setVisibility(View.INVISIBLE);
-            tennisOn.setVisibility(View.VISIBLE);
-            soccerOff.setVisibility(View.INVISIBLE);
-            soccerOn.setVisibility(View.VISIBLE);
+            if(tennisOff.getVisibility()==View.VISIBLE){
+                tennisOff.setVisibility(View.INVISIBLE);
+                tennisOn.setVisibility(View.VISIBLE);
+            }
+            else if(soccerOff.getVisibility()==View.VISIBLE) {
+                soccerOff.setVisibility(View.INVISIBLE);
+                soccerOn.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -217,10 +221,14 @@ public class addGameActivity extends AppCompatActivity {
             soccerOff.setVisibility(View.INVISIBLE);
         }
         if(soccerOff.getVisibility()==View.VISIBLE){
-            tennisOff.setVisibility(View.INVISIBLE);
-            tennisOn.setVisibility(View.VISIBLE);
-            basketOff.setVisibility(View.INVISIBLE);
-            basketOn.setVisibility(View.VISIBLE);
+            if(basketOff.getVisibility()==View.VISIBLE){
+                basketOff.setVisibility(View.INVISIBLE);
+                basketOn.setVisibility(View.VISIBLE);
+            }
+            else if(tennisOff.getVisibility()==View.VISIBLE) {
+                tennisOff.setVisibility(View.INVISIBLE);
+                tennisOn.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -234,10 +242,14 @@ public class addGameActivity extends AppCompatActivity {
             tennisOff.setVisibility(View.INVISIBLE);
         }
         if(tennisOff.getVisibility()==View.VISIBLE){
-            basketOff.setVisibility(View.INVISIBLE);
-            basketOn.setVisibility(View.VISIBLE);
-            soccerOff.setVisibility(View.INVISIBLE);
-            soccerOn.setVisibility(View.VISIBLE);
+            if(basketOff.getVisibility()==View.VISIBLE){
+                basketOff.setVisibility(View.INVISIBLE);
+                basketOn.setVisibility(View.VISIBLE);
+            }
+            else if(soccerOff.getVisibility()==View.VISIBLE) {
+                soccerOff.setVisibility(View.INVISIBLE);
+                soccerOn.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
