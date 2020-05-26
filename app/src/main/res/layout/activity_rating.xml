@@ -75,6 +75,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/avgRating"
         android:layout_alignParentStart="true"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="158dp"
         android:layout_marginEnd="165dp"

@@ -118,6 +118,8 @@
     <Button
         android:id="@+id/gameAddcButton"
         android:layout_width="111dp"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         android:layout_height="62dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
