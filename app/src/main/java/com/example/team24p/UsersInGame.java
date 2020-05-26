@@ -51,6 +51,7 @@ public class UsersInGame extends AppCompatActivity {
         tennis = (ImageView)findViewById(R.id.tennis);
         soccer = (ImageView)findViewById(R.id.soccer);
 
+
         //String emailUserLoggedIn = "";
         Button joinButton = (Button)findViewById(R.id.joinButton);
         String key = null;
@@ -60,13 +61,13 @@ public class UsersInGame extends AppCompatActivity {
                 UserArrayList = ev.getUsername();
                 maxP = ev.getMaxP();
                 type = ev.getType();
-                if(type=="כדורגל")soccer.setVisibility(View.VISIBLE);
-                if(type=="כדורסל")basket.setVisibility(View.VISIBLE);
-                if(type=="משולב"){
+                if(type.equals("כדורגל"))soccer.setVisibility(View.VISIBLE);
+                if(type.equals("כדורסל"))basket.setVisibility(View.VISIBLE);
+                if(type.equals("משולב")){
                     soccer.setVisibility(View.VISIBLE);
                     basket.setVisibility(View.VISIBLE);
                 }
-                if(type=="טניס")tennis.setVisibility(View.VISIBLE);
+                if(type.equals("טניס"))tennis.setVisibility(View.VISIBLE);
             }
         }
 
