@@ -102,6 +102,8 @@
         android:layout_marginTop="85dp"
         android:layout_marginBottom="25dp"
         android:text="Register"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/SignInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,10 +112,12 @@
 
     <Button
         android:id="@+id/SignInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="49dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         android:text="Already have a user? \n sign in!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

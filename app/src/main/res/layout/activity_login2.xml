@@ -35,6 +35,8 @@
         android:layout_width="116dp"
         android:layout_height="42dp"
         android:layout_marginTop="76dp"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -46,9 +48,12 @@
         android:layout_width="163dp"
         android:layout_height="54dp"
         android:layout_marginBottom="308dp"
+        android:background="@drawable/buttonshape"
         android:text="Dont have a user? \n Sign up!"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintVertical_bias="0.264" />
 </androidx.constraintlayout.widget.ConstraintLayout>
