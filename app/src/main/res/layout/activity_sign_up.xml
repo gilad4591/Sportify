@@ -8,9 +8,11 @@
 
     <EditText
         android:id="@+id/EmailTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,9 +20,11 @@
 
     <EditText
         android:id="@+id/ValidatePasswordEditText"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Validate Password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,10 +33,12 @@
 
     <EditText
         android:id="@+id/PasswordTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="72dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/signUpButton"
@@ -43,9 +49,11 @@
 
     <EditText
         android:id="@+id/IdTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="64dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="ID"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +62,11 @@
 
     <EditText
         android:id="@+id/PhoneTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Phone number"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,9 +75,11 @@
 
     <EditText
         android:id="@+id/AddressTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Address"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,9 +88,11 @@
 
     <EditText
         android:id="@+id/NameTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Full Name"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,9 +100,11 @@
 
     <EditText
         android:id="@+id/AgeTextView"
-        android:layout_width="409dp"
+        android:layout_width="405dp"
         android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/roundedshapeedittext"
         android:hint="Age"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +118,8 @@
         android:layout_marginTop="85dp"
         android:layout_marginBottom="25dp"
         android:text="Register"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/SignInButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,10 +128,12 @@
 
     <Button
         android:id="@+id/SignInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="187dp"
+        android:layout_height="49dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         android:text="Already have a user? \n sign in!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

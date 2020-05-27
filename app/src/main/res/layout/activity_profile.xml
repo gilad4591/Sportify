@@ -21,6 +21,8 @@
     <Button
         android:id="@+id/buttonLogout"
         android:layout_width="144dp"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"
         android:layout_height="46dp"
         android:layout_marginTop="52dp"
         android:text="Logout"
