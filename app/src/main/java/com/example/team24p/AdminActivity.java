@@ -81,6 +81,7 @@ public class AdminActivity extends AppCompatActivity {
                 String text=searchInput.getText().toString();
                 int textLength = searchInput.length();
                 ArrayList<String> searchResults = new ArrayList<String>();
+                ArrayList<String> empty = new ArrayList<String>();
                 searchResults.clear();
                 ArrayAdapter<String> adapter = null;
                 for(int i=0;i<items.size();i++)
@@ -104,12 +105,14 @@ public class AdminActivity extends AppCompatActivity {
                             "No Items Matched", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
+
+                    adapter= new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,empty);
                 }
-                else {
+
                     usersListView.setAdapter(null);
                     usersListView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                }
+
             }
 
             @Override

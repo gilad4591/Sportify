@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,12 +33,13 @@ public class UsersInGame extends AppCompatActivity {
     private ListView userView;
     private String emailUserLoggedIn,age,phone,name,maxP,type;
     private ImageView basket,tennis,soccer;
+    private TextView numOfus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users_in_game);
-
+        numOfus = (TextView)findViewById(R.id.numOfUs);
         userView = (ListView)findViewById(R.id.userListView);
         Intent i = getIntent();
         userView.setAdapter(null);
@@ -66,7 +68,7 @@ public class UsersInGame extends AppCompatActivity {
                 if(type.equals("טניס"))tennis.setVisibility(View.VISIBLE);
             }
         }
-
+        numOfus.setText(UserArrayList.size() + "/" + maxP);
 
         if((emailUserLoggedIn!=null))
         {
