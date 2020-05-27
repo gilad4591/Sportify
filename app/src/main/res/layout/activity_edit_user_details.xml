@@ -61,9 +61,10 @@
         android:id="@+id/nameEditText"
         android:layout_width="329dp"
         android:layout_height="45dp"
-        android:background="@drawable/roundedshapeedittext"
         android:layout_marginTop="25dp"
+        android:background="@drawable/roundedshapeedittext"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameTextView" />
 
@@ -71,9 +72,10 @@
         android:id="@+id/phoneEditText"
         android:layout_width="329dp"
         android:layout_height="45dp"
-        android:background="@drawable/roundedshapeedittext"
         android:layout_marginTop="25dp"
+        android:background="@drawable/roundedshapeedittext"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
@@ -81,9 +83,10 @@
         android:id="@+id/idEditText"
         android:layout_width="329dp"
         android:layout_height="45dp"
-        android:background="@drawable/roundedshapeedittext"
         android:layout_marginTop="25dp"
+        android:background="@drawable/roundedshapeedittext"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adressEditText" />
 
@@ -91,9 +94,10 @@
         android:id="@+id/ageEditText"
         android:layout_width="329dp"
         android:layout_height="45dp"
-        android:background="@drawable/roundedshapeedittext"
         android:layout_marginTop="25dp"
+        android:background="@drawable/roundedshapeedittext"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idEditText" />
 
@@ -101,9 +105,10 @@
         android:id="@+id/adressEditText"
         android:layout_width="329dp"
         android:layout_height="45dp"
-        android:background="@drawable/roundedshapeedittext"
         android:layout_marginTop="25dp"
+        android:background="@drawable/roundedshapeedittext"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneEditText" />
 
