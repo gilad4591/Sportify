@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/declineButton"
         app:layout_constraintHorizontal_bias="0.875"
-        app:layout_constraintStart_toEndOf="@+id/userTextViewAdd" />
+        app:layout_constraintStart_toEndOf="@+id/usernameText" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/declineButton"
@@ -37,13 +37,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/userTextViewAdd"
+        android:id="@+id/usernameText"
         android:layout_width="278dp"
         android:layout_height="25dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="673dp"
         android:text="TextView"
+        android:textAlignment="textStart"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

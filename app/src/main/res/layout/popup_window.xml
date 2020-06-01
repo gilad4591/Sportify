@@ -7,7 +7,7 @@
     android:background="@drawable/popup">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/closeBut"
+        android:id="@+id/closeBut2"
         android:layout_width="22dp"
         android:layout_height="20dp"
         android:clickable="true"

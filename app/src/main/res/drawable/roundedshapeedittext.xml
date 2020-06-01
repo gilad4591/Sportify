@@ -8,4 +8,14 @@
         android:bottomLeftRadius="15dp"
         android:topLeftRadius="15dp"
         android:topRightRadius="15dp"/>
+    <style android:name="shadoweffect">
+        <item android:name="android:paddingLeft">4px</item>
+        <item android:name="android:paddingBottom">4px</item>
+        <item android:name="android:textColor">#FFFFFF</item>
+        <item android:name="android:textSize">25sp</item>
+        <item android:name="android:shadowColor">#FFFFF</item>
+        <item android:name="android:shadowDx">0</item>
+        <item android:name="android:shadowDy">0</item>
+        <item android:name="android:shadowRadius">3</item>
+    </style>
 </shape>

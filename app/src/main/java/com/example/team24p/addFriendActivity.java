@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -112,7 +109,7 @@ public class addFriendActivity extends AppCompatActivity {
 
             accBut.setVisibility(View.VISIBLE);
             pending.setVisibility(View.INVISIBLE);
-            TextView userTextViewList = (TextView)row.findViewById(R.id.userTextViewAdd);
+            TextView userTextViewList = (TextView)row.findViewById(R.id.usernameText);
             userTextViewList.setText(temp.getUserName());
             flag = 0;
             flag2=0;

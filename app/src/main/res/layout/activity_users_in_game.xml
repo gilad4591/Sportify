@@ -120,4 +120,47 @@
         android:layout_marginTop="619dp"
         android:layout_marginEnd="193dp"
         android:layout_marginBottom="93dp" />
+
+    <TextView
+        android:id="@+id/inviteText"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/inviteButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="305dp"
+        android:layout_marginBottom="38dp"
+        android:text="הזמן חברים" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/inviteButton"
+        android:layout_width="42dp"
+        android:layout_height="43dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="623dp"
+        android:layout_marginEnd="323dp"
+        android:layout_marginBottom="65dp"
+        android:clickable="true"
+        android:foreground="@android:drawable/ic_input_add"
+        app:backgroundTint="#FFFFFF" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="27dp" />
 </RelativeLayout>

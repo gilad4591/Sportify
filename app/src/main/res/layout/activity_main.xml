@@ -23,13 +23,27 @@
         android:id="@+id/myActivityList"
         android:layout_width="349dp"
         android:layout_height="215dp"
+        android:layout_marginBottom="32dp"
+        android:background="#FFFFFF"
+        android:cacheColorHint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/myPendingGames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.933" />
+
+    <ListView
+        android:id="@+id/myPendingGames"
+        android:layout_width="387dp"
+        android:layout_height="142dp"
         android:background="#FFFFFF"
         android:cacheColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintVertical_bias="0.81" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -272,6 +286,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
         app:layout_constraintVertical_bias="1.0" />
+
+
+    <TextView
+        android:id="@+id/PendingGamesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="416dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#000000"
+        android:foregroundGravity="fill_horizontal|top|left|center_vertical|clip_horizontal|center|right|center_horizontal"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="25"
+        android:text="הזמנות למשחקים"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/myPendingGames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/helpView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/myGamesText"
+        android:layout_width="123dp"
+        android:layout_height="26dp"
+        android:background="#000000"
+        android:shadowColor="#040000"
+        android:text="המשחקים שלי"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/PendingGamesText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.447" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

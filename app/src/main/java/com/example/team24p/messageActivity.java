@@ -2,14 +2,9 @@ package com.example.team24p;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -157,7 +152,7 @@ public class messageActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater =getLayoutInflater();
             View row = inflater.inflate(R.layout.listrow,parent,false);
-            TextView usText = (TextView)row.findViewById(R.id.userTextViewAdd);
+            TextView usText = (TextView)row.findViewById(R.id.usernameText);
             FloatingActionButton accBut = (FloatingActionButton)row.findViewById(R.id.acceptButton);
             FloatingActionButton decBut = (FloatingActionButton)row.findViewById(R.id.declineButton);
 
