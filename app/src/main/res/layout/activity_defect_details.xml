@@ -14,8 +14,8 @@
         android:layout_marginEnd="163dp"
         android:layout_marginBottom="116dp"
         android:background="@drawable/buttonshape"
+        android:text="תוקן."
         android:textColor="#FFFFFF"
-        android:text="תוקן"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
