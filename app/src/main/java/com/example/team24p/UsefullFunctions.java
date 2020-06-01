@@ -23,38 +23,9 @@ import java.util.Random;
 
 public class UsefullFunctions {
     private static int flag=0;
-    private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference mRef = mDatabase.getReference();
     static boolean date;
 
     public UsefullFunctions() {
-    }
-
-    public String checkUser(final String username){
-        if(username!=null) {
-            mRef = mDatabase.getReference().child("Users");
-            mRef.addValueEventListener(new ValueEventListener() {
-
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
-                    for (String key : usersList.keySet()) {
-                        Map<String, Object> value = (HashMap<String, Object>) usersList.get(key);
-                        if (value.get("username").toString().equals(username)) {
-                            UsefullFunctions.flag=1;
-                        }
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-
-
-            });
-        }
-        if (flag==1) return username;
-        return "tamiryakov@gmail.com";
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -80,9 +51,9 @@ public class UsefullFunctions {
         return true;
     }
     public boolean checkCorrectEmail(String email){
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            return false;
-        return true;
+        if (email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"))
+            return true;
+        return false;
     }
     public String getRandomColor() {
         Random r = new Random();
@@ -92,21 +63,4 @@ public class UsefullFunctions {
         }
         return sb.toString().substring(0, 7);
     }
-    public String defectExist(String key){
-        mRef = mDatabase.getReference().child("Defects").child(key).child("date");
-        return mRef.getKey();
-    }
-    public String eventExist(){
-        mRef = mDatabase.getReference().child("Events");
-        return mRef.getKey();
-    }
-    public String usersExist(){
-        mRef = mDatabase.getReference().child("Users");
-        return mRef.getKey();
-    }
-    public String ratingExist(){
-        mRef = mDatabase.getReference().child("rating");
-        return mRef.getKey();
-    }
-
 }
