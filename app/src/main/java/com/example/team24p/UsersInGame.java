@@ -46,6 +46,7 @@ public class UsersInGame extends AppCompatActivity {
     private ImageView basket,tennis,soccer;
     private TextView numOfus;
     private FloatingActionButton inviteBut;
+    private TextView inviteText;
     public View inviteWindow;
     public Map<Integer, Boolean> booleanArray;
 
@@ -55,6 +56,7 @@ public class UsersInGame extends AppCompatActivity {
         setContentView(R.layout.activity_users_in_game);
         numOfus = (TextView)findViewById(R.id.numOfUs);
         inviteBut = (FloatingActionButton)findViewById(R.id.inviteButton);
+        inviteText = (TextView)findViewById(R.id.inviteText);
         userView = (ListView)findViewById(R.id.userListView);
         Intent i = getIntent();
         userView.setAdapter(null);
@@ -66,7 +68,8 @@ public class UsersInGame extends AppCompatActivity {
         hour = i.getStringExtra("hour");
         groundName = i.getStringExtra("markerName");
         date = i.getStringExtra("date");
-
+        inviteBut.setVisibility(View.INVISIBLE);
+        inviteText.setVisibility(View.INVISIBLE);
         basket = (ImageView)findViewById(R.id.basketball);
         tennis = (ImageView)findViewById(R.id.tennis);
         soccer = (ImageView)findViewById(R.id.soccer);
@@ -94,6 +97,8 @@ public class UsersInGame extends AppCompatActivity {
         }
         if((emailUserLoggedIn!=null))
         {
+            inviteBut.setVisibility(View.VISIBLE);
+            inviteText.setVisibility(View.VISIBLE);
             if(UserArrayList!=null)
             for(User us:UserArrayList){//if exist in game already
                 if(emailUserLoggedIn.equals(us.getUserName()))flag=1;
@@ -101,6 +106,8 @@ public class UsersInGame extends AppCompatActivity {
             if(flag==1)joinButton.setVisibility(View.INVISIBLE);
             else if(Integer.parseInt(maxP)<=UserArrayList.size()){
                 joinButton.setVisibility(View.INVISIBLE);
+                inviteBut.setVisibility(View.INVISIBLE);
+                inviteText.setVisibility(View.INVISIBLE);
                 Toast.makeText(UsersInGame.this, "לא ניתן להצטרף כרגע, מספר המשתתפים שהצטרפו למשחק הינו מקסימלי" , Toast.LENGTH_SHORT).show();
             }
         }
