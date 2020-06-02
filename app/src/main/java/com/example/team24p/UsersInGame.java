@@ -165,17 +165,20 @@ public class UsersInGame extends AppCompatActivity {
         inviteBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRef = mRef.getDatabase().getReference().child("Users");
-                mRef.addValueEventListener(new ValueEventListener() {
+                mRef = mRef.getDatabase().getReference().child("Friends");
+                mRef.orderByChild("username").equalTo(emailUserLoggedIn).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Map<String, Object> allUsers = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
-                        for (Object key : allUsers.values()) {
-                            Map<String, Object> singleUser = (Map<String, Object>) key;
-                                if(!singleUser.get("username").toString().equals(emailUserLoggedIn))
-                                listPeople.add(singleUser.get("username").toString());
-
+                        String singleKey = allUsers.keySet().toString().substring(1,allUsers.keySet().toString().length()-1);
+                        Map<String, Object> singleUser = (Map<String, Object>) allUsers.get(singleKey);
+                        Map<String, String> friendlist = (Map<String, String>) singleUser.get("friendlist");
+                        for(Object key:friendlist.values()) {
+                            Map<String, Object> singlefriend = (Map<String, Object>) key;
+                            if (singlefriend.get("enabled").equals(true) && singlefriend.get("confirmed").equals(true))
+                                listPeople.add(singlefriend.get("username").toString());
                         }
+
                         onButtonShowPopupWindowClick(inviteWindow);
                     }
 
@@ -208,16 +211,23 @@ public class UsersInGame extends AppCompatActivity {
 
         // dismiss the popup window when touched
         FloatingActionButton cb = popupView.findViewById(R.id.closeBut3);
+        final ListView peopleList = (ListView)popupView.findViewById(R.id.inviteList);
+        final TextView friendtext = (TextView) popupView.findViewById(R.id.friendtext);
+        friendtext.setVisibility(View.INVISIBLE);
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                listPeople.clear();
+                peopleList.setAdapter(null);
+                peopleList.clearChoices();
+
             }
         });
-        final ListView peopleList = (ListView)popupView.findViewById(R.id.inviteList);
+
         peopleList.setAdapter(null);
         peopleList.setAdapter(new UsersInGame.ListResources(popupView));
-
+        if(listPeople.size()==0)friendtext.setVisibility(View.VISIBLE);
         Button invitePeople = (Button)popupView.findViewById(R.id.invitePeople);
         if(emailUserLoggedIn!=null) {
             invitePeople.setOnClickListener(new View.OnClickListener() {
@@ -225,24 +235,29 @@ public class UsersInGame extends AppCompatActivity {
                 public void onClick(View v) {
                     for (int i = 0; i < peopleList.getAdapter().getCount(); i++) {
                         boolean ch = false;
-                        if(booleanArray.get(i)!=null)
-                             ch = booleanArray.get(i);
-                        if (ch) {
-                            mRef = mRef.getDatabase().getReference().child("Invites");
-                            Map<String, Object> User = new HashMap<String, Object>();
-                            User.put("guest", peopleList.getItemAtPosition(i));
-                            User.put("Inviter", emailUserLoggedIn);
-                            User.put("enabled", "True");
-                            User.put("Text",date + " - " + groundName + " - " + hour);
-                            String key = mRef.push().getKey();
-                            mRef.push().updateChildren(User);
-                            User.clear();
+                        if(booleanArray.get(i)!=null) {
+                            ch = booleanArray.get(i);
+                            if (ch) {
+                                mRef = mRef.getDatabase().getReference().child("Invites");
+                                Map<String, Object> User = new HashMap<String, Object>();
+                                User.put("guest", peopleList.getItemAtPosition(i));
+                                User.put("Inviter", emailUserLoggedIn);
+                                User.put("enabled", "True");
+                                User.put("Text", date + " - " + groundName + " - " + hour);
+                                String key = mRef.push().getKey();
+                                mRef.push().updateChildren(User);
+                                User.clear();
+                            }
                         }
                     }
                     Toast.makeText(UsersInGame.this, "Invitation sent successfully" , Toast.LENGTH_SHORT).show();
+                    listPeople.clear();
+                    peopleList.setAdapter(null);
+                    peopleList.clearChoices();
                     popupWindow.dismiss();
                 }
             });
+
         }
 
 
