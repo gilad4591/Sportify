@@ -40,7 +40,7 @@ public class ExampleUnitTest {
     }
     @Test
     public void testTimeIncorrect4(){
-        assertEquals(false,us.checkTime("1.00"));
+        assertEquals(false,us.checkTime("10.00"));
     }
     @Test
     public void testRandomColor(){
