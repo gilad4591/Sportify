@@ -72,6 +72,7 @@ public class messageActivity extends AppCompatActivity {
                                 userNotConfirmed.add(value2.get("username").toString());
                             }
                         }
+                        break;
                     }
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,userConfirmed);

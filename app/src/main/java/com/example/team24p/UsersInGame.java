@@ -104,7 +104,7 @@ public class UsersInGame extends AppCompatActivity {
                 if(emailUserLoggedIn.equals(us.getUserName()))flag=1;
             }
             if(flag==1)joinButton.setVisibility(View.INVISIBLE);
-            else if(Integer.parseInt(maxP)<=UserArrayList.size()){
+            if(Integer.parseInt(maxP)<=UserArrayList.size()){
                 joinButton.setVisibility(View.INVISIBLE);
                 inviteBut.setVisibility(View.INVISIBLE);
                 inviteText.setVisibility(View.INVISIBLE);
