@@ -129,10 +129,10 @@ public class GamesActivity extends AppCompatActivity {
                     Map<String, Object> singleDefect = (Map<String, Object>) key;
                     //  for (Object key2 : singleDefect.keySet()) {
                     if ((singleDefect.get("ground").toString().equals(markerName)) && (singleDefect.get("fixed").toString().equals("false"))) {
-                        x = "Description: " +
-                                singleDefect.get("description").toString() + " - " +
+                        x = "תיאור: " +
+                                singleDefect.get("description").toString() + " - " + "\n" +
                                 singleDefect.get("ground").toString() + " - " +
-                                "Opened: " + singleDefect.get("date").toString() + " " + singleDefect.get("hour").toString();
+                                "נפתח ב: " + singleDefect.get("date").toString() + " " + singleDefect.get("hour").toString();
                         items.add(x);
                         keys.add(keysets[i].toString());
                         flag69 = 1;
@@ -143,7 +143,7 @@ public class GamesActivity extends AppCompatActivity {
 
                 }
                 if (flag69 == 0) {
-                    x = "There Is No Active Defects On This Ground Right Now :-)";
+                    x = "אין ליקויים במגרש כרגע :)";
                     items.add(x);
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);

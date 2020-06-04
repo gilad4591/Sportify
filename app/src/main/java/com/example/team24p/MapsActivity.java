@@ -117,7 +117,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Bitmap smallMarker = null;
 
                     MarkerOptions marker = new MarkerOptions().position(latLng)
-                            .title("מגרש:" + names.get(i) + "- לחץ כאן כדי לפתוח משחק חדש!");
+                            .title(names.get(i)).snippet("לחץ כאן כדי לפתוח משחק חדש!");
 
                     if(types.get(i).equals("כדורסל")) {
                         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_basketball);
