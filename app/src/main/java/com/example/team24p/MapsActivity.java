@@ -9,6 +9,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -85,6 +87,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 ArrayList<Map<String, String>> locations = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 ArrayList<LatLng> latLngList = new ArrayList<LatLng>();
                 ArrayList<String> names = new ArrayList<>();
+                ArrayList<String> types = new ArrayList<>();
                 for (Map<String, String> entry : locations)
                 {
                     Double lat = 0.0;
@@ -100,14 +103,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         else if (key.equals("Name")){
                             names.add(value);
                         }
+                        else if(key.equals("Type")){
+                            types.add(value);
+                        }
                     }
                     if(lat!=0.0)latLngList.add(new LatLng(lat, lon));
                 }
                 int i =0;
                 for (LatLng latLng : latLngList) {
 
-                    mMap.addMarker(new MarkerOptions().position(latLng)
-                            .title(names.get(i)));
+                    int height = 200;
+                    int width = 100;
+                    Bitmap smallMarker = null;
+
+                    MarkerOptions marker = new MarkerOptions().position(latLng)
+                            .title("מגרש:" + names.get(i) + "- לחץ כאן כדי לפתוח משחק חדש!");
+
+                    if(types.get(i).equals("כדורסל")) {
+                        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_basketball);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        smallMarker= Bitmap.createScaledBitmap(b, width, height, false);
+                    }
+                    else if(types.get(i).equals("כדורגל")) {
+                        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_soccer);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        smallMarker= Bitmap.createScaledBitmap(b, width, height, false);
+                    }
+                    else if(types.get(i).equals("טניס")){
+
+                        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_tennis);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        smallMarker= Bitmap.createScaledBitmap(b, width, height, false);
+
+                    }
+                    else if(types.get(i).equals("משולב")) {
+                        BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_both);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        smallMarker= Bitmap.createScaledBitmap(b, width, height, false);
+                    }
+                    if(smallMarker!=null)marker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+                    mMap.addMarker(marker);
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     i++;
                 }
@@ -118,17 +153,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(MapsActivity.this, GamesActivity.class);
                 intent.putExtra("markerName", marker.getTitle());
-                intent.putExtra("userNameLoggedIn",userNameLoggedIn);
+                intent.putExtra("userNameLoggedIn", userNameLoggedIn);
                 startActivity(intent);
 
-                return false;
             }
         });
+
     }
 
     @Override
