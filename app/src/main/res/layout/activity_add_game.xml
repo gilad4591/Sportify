@@ -149,16 +149,16 @@
         android:id="@+id/basket_off"
         android:layout_width="80dp"
         android:layout_height="50dp"
+        android:layout_alignTop="@+id/maxPart"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="103dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="228dp"
         android:layout_marginBottom="211dp"
-        android:src="@drawable/basketballselected"
-        android:onClick="click_basket"/>
+        android:onClick="click_basket"
+        android:src="@drawable/basketballselected" />
 
     <ImageView
         android:id="@+id/tennis_on"
@@ -179,12 +179,12 @@
         android:id="@+id/tennis_off"
         android:layout_width="80dp"
         android:layout_height="50dp"
+        android:layout_alignTop="@+id/maxPart"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="138dp"
-        android:layout_marginTop="521dp"
+        android:layout_marginTop="123dp"
         android:layout_marginEnd="193dp"
         android:layout_marginBottom="159dp"
         android:onClick="click_basket"
@@ -204,31 +204,32 @@
         android:layout_marginBottom="210dp"
         android:src="@drawable/soccer"
         android:onClick="click_soccer"/>
+
     <ImageView
         android:id="@+id/soccer_off"
         android:layout_width="80dp"
         android:layout_height="50dp"
+        android:layout_alignTop="@+id/maxPart"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="173dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="158dp"
         android:layout_marginBottom="210dp"
-        android:src="@drawable/soccer_selected"
-        android:onClick="click_soccer"/>
+        android:onClick="click_soccer"
+        android:src="@drawable/soccer_selected" />
 
     <TextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView6"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="278dp"
-        android:layout_marginTop="488dp"
+        android:layout_marginTop="94dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="224dp"
         android:text="בחר את סוג המשחק" />
