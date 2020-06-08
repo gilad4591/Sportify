@@ -68,6 +68,8 @@ public class ExampleUnitTest {
         assertEquals(true,us.checkCorrectEmail("NAME@EMAIL.coM"));
     }
     @Test
+    public void testEmailCheck6(){}
+    @Test
     public void testCheckDate() {
         Date d = new Date();
         d.setYear(2020);
