@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -50,7 +51,7 @@ public class DayActivity extends AppCompatActivity {
     private DatabaseReference mRef = mDatabase.getReference().child("Events");
     private String userNameLoggedIn,markerName;
     private ArrayList<User> eveUserlist;
-
+    private TextView dateGameText;
 
     @Override
 
@@ -67,7 +68,8 @@ public class DayActivity extends AppCompatActivity {
         final String date = dayOfMonth + "/" + month + "/" + year;
         userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
         markerName = getIntent().getStringExtra("markerName");
-
+        dateGameText = (TextView)findViewById(R.id.dateGameText);
+        dateGameText.setText( "משחקי ה - "+date);
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
 
