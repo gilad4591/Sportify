@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.appdistribution'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'checkstyle'
 
 android {
     compileSdkVersion 29
@@ -23,27 +22,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    task checkstyle(type: Checkstyle) {
-        configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
-
-        source 'src/main/java'
-        include '*/.java'
-        exclude '*/gen/*'
-
-        ignoreFailures true
-        showViolations true
-
-        classpath = files()
-    }
-
-
-    checkstyle {
-        toolVersion "8.17"
-    }
-
-    project.afterEvaluate {
-        preBuild.dependsOn 'checkstyle'
     }
 
 }
