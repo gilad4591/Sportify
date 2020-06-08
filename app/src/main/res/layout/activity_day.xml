@@ -12,8 +12,8 @@
         android:layout_height="550dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="47dp"
-        android:layout_marginBottom="134dp">
+        android:layout_marginTop="79dp"
+        android:layout_marginBottom="102dp">
 
     </ListView>
 
@@ -23,10 +23,12 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/listEv"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="335dp"
-        android:layout_marginBottom="-111dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="657dp"
+        android:layout_marginEnd="339dp"
+        android:layout_marginBottom="-79dp"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
@@ -37,14 +39,28 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="681dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginBottom="679dp"
         android:text="כדי להוסיף משחק לחץ +"
-        android:textAlignment="viewEnd"
+        android:textAlignment="center"
         android:textColor="@color/design_default_color_secondary_variant"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dateGameText"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="81dp"
+        android:layout_marginBottom="656dp"
+        android:textAlignment="center" />
 
 </RelativeLayout>

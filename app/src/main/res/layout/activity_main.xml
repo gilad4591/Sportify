@@ -43,7 +43,13 @@
         app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.81" >
+
+        <View
+            android:id="@+id/helpView"
+            android:layout_width="312dp"
+            android:layout_height="625dp" />
+    </ListView>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -216,14 +222,6 @@
         app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
-
-    <View
-        android:id="@+id/helpView"
-        android:layout_width="312dp"
-        android:layout_height="625dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="26dp" />
 
     <TextView
         android:id="@+id/logtext"
