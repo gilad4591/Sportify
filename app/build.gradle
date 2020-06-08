@@ -27,7 +27,6 @@ android {
 
 
 }
-
 task checkstyle(type: Checkstyle) {
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 
@@ -49,7 +48,6 @@ checkstyle {
 project.afterEvaluate {
     preBuild.dependsOn 'checkstyle'
 }
-
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
