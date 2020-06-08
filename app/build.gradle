@@ -24,30 +24,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    task checkstyle(type: Checkstyle) {
-        configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 
-        source 'src/main/java'
-        include '*/.java'
-        exclude '*/gen/*'
-
-        ignoreFailures true
-        showViolations true
-
-        classpath = files()
-    }
-
-
-    checkstyle {
-        toolVersion "8.17"
-    }
-
-    project.afterEvaluate {
-        preBuild.dependsOn 'checkstyle'
-    }
 
 }
+task checkstyle(type: Checkstyle) {
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 
+    source 'src/main/java'
+    include '*/.java'
+    exclude '*/gen/*'
+
+    ignoreFailures true
+    showViolations true
+
+    classpath = files()
+}
+
+
+checkstyle {
+    toolVersion "8.17"
+}
+
+project.afterEvaluate {
+    preBuild.dependsOn 'checkstyle'
+}
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
