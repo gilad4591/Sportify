@@ -35,7 +35,7 @@
     <ListView
         android:id="@+id/myPendingGames"
         android:layout_width="387dp"
-        android:layout_height="142dp"
+        android:layout_height="143dp"
         android:background="#FFFFFF"
         android:cacheColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
