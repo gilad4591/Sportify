@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/listEv"
-        android:layout_width="700dp"
-        android:layout_height="550dp"
+        android:layout_width="701dp"
+        android:layout_height="552dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="79dp"
