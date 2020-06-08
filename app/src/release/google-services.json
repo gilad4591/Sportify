@@ -1,34 +1,50 @@
 {
   "project_info": {
-    "project_number": "23308545668",
-    "firebase_url": "https://engaged-hash-273312.firebaseio.com",
-    "project_id": "engaged-hash-273312",
-    "storage_bucket": "engaged-hash-273312.appspot.com"
+    "project_number": "877855797966",
+    "firebase_url": "https://team24p.firebaseio.com",
+    "project_id": "team24p",
+    "storage_bucket": "team24p.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:23308545668:android:7c07fedf9dccb382745cd1",
+        "mobilesdk_app_id": "1:877855797966:android:3bf659725d1f598e33d69f",
         "android_client_info": {
           "package_name": "com.example.team24p"
         }
       },
       "oauth_client": [
         {
-          "client_id": "23308545668-c9ch3g9m5c91em58q95ssqdnge0kvv7f.apps.googleusercontent.com",
+          "client_id": "877855797966-h7doi3mbnluls1n2rj7gnobsar6o5545.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.team24p",
+            "certificate_hash": "1fd2cefea06ed30b4e9759db3303dade2a833ee5"
+          }
+        },
+        {
+          "client_id": "877855797966-5ordklh5i9m2hm204j9ttktiog2rjbtm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.team24p",
+            "certificate_hash": "18c1319ef8a0cd03bbcc9dad2102d70568643c16"
+          }
+        },
+        {
+          "client_id": "877855797966-od0fda9bilajnr76dqmc47nqeoqdfehq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDrKU2nTRXe_er2ihaqbef7JWwWWr-AGA"
+          "current_key": "AIzaSyD2M_WUnpHDO1PsFsv3O_fGeet-lLg2Tjw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "23308545668-c9ch3g9m5c91em58q95ssqdnge0kvv7f.apps.googleusercontent.com",
+              "client_id": "877855797966-od0fda9bilajnr76dqmc47nqeoqdfehq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
