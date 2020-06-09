@@ -67,10 +67,10 @@ public class ExampleUnitTest {
     public void testEmailCheck5(){
         assertEquals(true,us.checkCorrectEmail("NAME@EMAIL.coM"));
     }
-    @Test
-    public void testEmailCheck6(){
-        assertEquals(true,us.checkCorrectEmail("NAME"));
-    }
+//    @Test
+//    public void testEmailCheck6(){
+//        assertEquals(true,us.checkCorrectEmail("NAME"));
+//    }
     @Test
     public void testCheckDate() {
         Date d = new Date();
