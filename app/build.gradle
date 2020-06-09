@@ -30,8 +30,8 @@ task checkstyle(type: Checkstyle) {
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 
     source 'src/main/java'
-    include '*/.java'
-    exclude '*/gen/*'
+    include '**/*.java'
+    exclude '**/gen/**'
 
     ignoreFailures true
     showViolations true
