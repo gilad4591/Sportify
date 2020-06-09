@@ -34,7 +34,7 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
-    stage('Unit & Integration Tests') {
+    /*stage('Unit & Integration Tests') {
                 steps {
                     script{
                         //run a gradle test
@@ -45,6 +45,7 @@ pipeline {
 
                 }
             }
+            */
 
 //     stage ('Cloud Test Lab'){
 //       steps {
