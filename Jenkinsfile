@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout'){
       steps{
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/gilad4591/TEAM24PROJECT.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: '*/project24']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/gilad4591/TEAM24PROJECT.git']]])
       }
     }
     stage ('Prepare'){
