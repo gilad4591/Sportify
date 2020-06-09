@@ -42,6 +42,7 @@ pipeline {
                         sh './gradlew assemble connectedAndroidTest'
                         junit '*/build/test-results/testDebugUnitTest/*.xml' {
                     }
+
                 }
             }
 
