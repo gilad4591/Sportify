@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/textViewUserEmail"
         android:layout_width="258dp"
-        android:layout_height="72dp"
+        android:layout_height="73dp"
         android:layout_marginTop="31dp"
         android:layout_marginBottom="53dp"
         android:text="TextView"
