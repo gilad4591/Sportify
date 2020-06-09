@@ -25,6 +25,7 @@ import java.util.Map;
 
 public class addFriendActivity extends AppCompatActivity {
 
+
     private String userNameLoggedIn;
     private String searchLine;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
