@@ -69,7 +69,7 @@ public class userAdminActivity extends AppCompatActivity {
                                 else {
                                     Toast.makeText(getApplicationContext(), "User already deleted", Toast.LENGTH_SHORT).show();
                                 }
-                                Intent stDeleteUser = new Intent (getApplicationContext(),MainActivity.class);
+                                Intent stDeleteUser = new Intent(getApplicationContext(),MainActivity.class);
                                 stDeleteUser.putExtra("userNameLoggedIn",userNameLoggedIn);
                                 stDeleteUser.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
                                 startActivity(stDeleteUser);
@@ -89,7 +89,7 @@ public class userAdminActivity extends AppCompatActivity {
         editUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent stEditUser = new Intent (getApplicationContext(),EditUserDetailsActivity.class);
+                Intent stEditUser = new Intent(getApplicationContext(),EditUserDetailsActivity.class);
                 stEditUser.putExtra("userNameLoggedIn",userNameLoggedIn);
                 stEditUser.putExtra("userToEdit",userToEdit);
                 stEditUser.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
@@ -102,7 +102,7 @@ public class userAdminActivity extends AppCompatActivity {
         editAccessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent stEditUserAccess = new Intent (getApplicationContext(),editUserAccessActivity.class);
+                Intent stEditUserAccess = new Intent(getApplicationContext(),editUserAccessActivity.class);
                 stEditUserAccess.putExtra("userNameLoggedIn",userNameLoggedIn);
                 stEditUserAccess.putExtra("userToEdit",userToEdit);
                 stEditUserAccess.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));

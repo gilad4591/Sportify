@@ -102,7 +102,7 @@ public class RatingActivity extends AppCompatActivity {
                 avg = sum/count;
 
                 TextView avgTextView = (TextView)findViewById(R.id.avgRating);
-                numOfRate.setText( "כמות מדרגים: " + count);
+                numOfRate.setText("כמות מדרגים: " + count);
                 DecimalFormat ff = new DecimalFormat("#0.00");
 
                 avgTextView.setText(ff.format(avg)+"/"+5);

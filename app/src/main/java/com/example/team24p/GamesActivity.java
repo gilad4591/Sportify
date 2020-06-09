@@ -109,7 +109,6 @@ public class GamesActivity extends AppCompatActivity {
                 String x = "";
                 int flag69 = 0;
                 final ArrayList<String> keys = new ArrayList<>();
-                ;
                 final Object[] keysets = defects.keySet().toArray();
                 int i = 0;
                 for (Object key : defects.values()) {

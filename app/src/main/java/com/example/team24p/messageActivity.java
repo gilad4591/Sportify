@@ -117,7 +117,6 @@ public class messageActivity extends AppCompatActivity {
                 startActivity(stChat);
             }
         });
-        
     }
 
 

@@ -25,8 +25,8 @@ pipeline {
     }
     stage('Unit test') {
       steps {
-        sh './gradlew clean test --no-daemon'
-        junit '*/build/test-results/testDebugUnitTest/.xml'
+        sh './gradlew testDebugUnitTest testDebugUnitTest'
+
       }
     }
     stage('Build APK') {
@@ -38,7 +38,7 @@ pipeline {
 //        sh "gcloud auth activate-service-account --key-file /opt/service_account_key.json"
 //        sh "gcloud firebase test android run --project ${env.gcloud_project_id} --app app/build/outputs/apk/app-debug.apk --test app/build/outputs/apk/app-debug-androidTest.apk --device model=Nexus6,version=22,locale=en,orientation=portrait"
 //    }
-stage('Static Code Analysis') {
+    stage('Static Code Analysis') {
             steps {
                 script {
                     sh './gradlew checkstyle'
@@ -51,7 +51,10 @@ stage('Static Code Analysis') {
         success {
             echo 'BUILD SUCCESSFUL - NO EMAIL WILL BE SENT'
         }
-
+        always{
+              sh 'cp -r app/build/test-results $WORKSPACE/test-results'
+              junit(keepLongStdio: true, testResults: '**/test-results/**/*.xml')
+        }
         failure { //Send an email to to all teammates about broken build
             emailext(subject: '$JOB_NAME - Build# $BUILD_NUMBER - $BUILD_STATUS',
                     body: '$DEFAULT_CONTENT',

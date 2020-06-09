@@ -23,9 +23,25 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug{
+            testCoverageEnabled = true
+        }
+    }
+    testOptions {
+        unitTests.all {
+            unitTests
+        }
     }
 
 }
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
+
 task checkstyle(type: Checkstyle) {
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 

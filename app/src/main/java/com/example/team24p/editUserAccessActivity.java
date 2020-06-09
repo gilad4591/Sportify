@@ -76,7 +76,7 @@ public class editUserAccessActivity extends AppCompatActivity {
                 refChangeAccess = refToChange.child(keyToChange);
                 refChangeAccess.setValue(userData);
                 Toast.makeText(getApplicationContext(), "User's access change successfully", Toast.LENGTH_SHORT).show();
-                Intent stEditUser = new Intent (getApplicationContext(),MainActivity.class);
+                Intent stEditUser = new Intent(getApplicationContext(),MainActivity.class);
                 stEditUser.putExtra("userNameLoggedIn",userNameLoggedIn);
                 stEditUser.putExtra("userToEdit",userToEdit);
                 stEditUser.putExtra("isAdmin",getIntent().getStringExtra("isAdmin"));
