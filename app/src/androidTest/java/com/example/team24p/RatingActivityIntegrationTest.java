@@ -29,5 +29,6 @@ public class RatingActivityIntegrationTest {
         Espresso.onView(withId(R.id.buttonBack)).check(matches(isClickable()));
         Espresso.onView(withId(R.id.numOfRate)).check(matches(isDisplayed()));
         Espresso.onView(withId(R.id.rateUs)).check(matches(isDisplayed()));
+
     }
 }

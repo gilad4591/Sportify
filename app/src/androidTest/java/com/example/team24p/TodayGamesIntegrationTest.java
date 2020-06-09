@@ -28,5 +28,6 @@ public class TodayGamesIntegrationTest {
         Espresso.onView(withId(R.id.todayGamesTv)).check(matches(isDisplayed()));
         Espresso.onView(withId(R.id.gamesToday)).check(matches(isClickable()));
         Espresso.onView(withId(R.id.gamesToday)).check(matches(isDisplayed()));
+
     }
 }

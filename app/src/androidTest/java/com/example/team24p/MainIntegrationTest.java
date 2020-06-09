@@ -31,5 +31,6 @@ public class MainIntegrationTest {
         Espresso.onView(withId(R.id.menuButton)).check(matches(isClickable()));
         Espresso.onView(withId(R.id.button2)).check(matches(isClickable()));
         Espresso.onView(withId(R.id.messageButton)).check(matches(isDisplayed()));
+
     }
 }

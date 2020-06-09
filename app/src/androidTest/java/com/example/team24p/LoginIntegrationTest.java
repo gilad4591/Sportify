@@ -41,5 +41,6 @@ public class LoginIntegrationTest {
         Espresso.onView(withId(R.id.EditTextEmail)).perform(typeText("a@a.a"));
         Espresso.onView(withId(R.id.EditTextPassword)).perform(typeText("123456"));
         Espresso.onView(withId(R.id.loginButton)).perform(click());
+
     }
 }

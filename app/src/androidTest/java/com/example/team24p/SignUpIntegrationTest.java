@@ -29,5 +29,6 @@ public class SignUpIntegrationTest {
         Espresso.onView(withId(R.id.PasswordTextView)).check(matches(withHint("Password")));
         Espresso.onView(withId(R.id.PhoneTextView)).perform(typeText("0524567411"));
         Espresso.onView(withId(R.id.NameTextView)).perform(typeText("Gilad Cohen"));
+
     }
 }
