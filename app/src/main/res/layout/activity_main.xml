@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/editDetailsText"
         android:layout_width="503dp"
-        android:layout_height="565dp"
+        android:layout_height="566dp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
