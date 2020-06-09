@@ -19,14 +19,15 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(JUnit4.class)
-public class TodayGamesIntegrationTest {
+public class RatingActivityIntegrationTest {
     @Rule
-    public ActivityTestRule<todayGamesActivity> today = new ActivityTestRule<>(todayGamesActivity.class);
+    public ActivityTestRule<RatingActivity> rating = new ActivityTestRule<>(RatingActivity.class);
 
     @Test
-    public void TodayCheck(){
-        Espresso.onView(withId(R.id.todayGamesTv)).check(matches(isDisplayed()));
-        Espresso.onView(withId(R.id.gamesToday)).check(matches(isClickable()));
-        Espresso.onView(withId(R.id.gamesToday)).check(matches(isDisplayed()));
+    public void RatingCheck(){
+        Espresso.onView(withId(R.id.ratingBar)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.buttonBack)).check(matches(isClickable()));
+        Espresso.onView(withId(R.id.numOfRate)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.rateUs)).check(matches(isDisplayed()));
     }
 }
