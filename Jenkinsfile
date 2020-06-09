@@ -36,11 +36,11 @@ pipeline {
     }
     stage('Unit & Integration Tests') {
                 steps {
-                    script
+                    script{
                         //run a gradle test
                         sh './gradlew clean test --no-daemon'
                         sh './gradlew assemble connectedAndroidTest'
-                        junit '*/build/test-results/testDebugUnitTest/*.xml' {
+                        junit '*/build/test-results/testDebugUnitTest/*.xml'
                     }
 
                 }
