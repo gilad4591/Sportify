@@ -91,7 +91,6 @@ public class AdminActivity extends AppCompatActivity {
                         //compare the String in EditText with Names in the ArrayList
                         if(text.equalsIgnoreCase(name.substring(0,textLength))){
                             searchResults.add(items.get(i));
-                            
                             adapter= new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,searchResults);
 
                         }
