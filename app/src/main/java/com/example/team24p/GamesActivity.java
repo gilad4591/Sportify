@@ -37,9 +37,6 @@ public class GamesActivity extends AppCompatActivity {
     private int mYear, mMonth, mDay, mHour, mMinute;
     private String userNameLoggedIn;
     private CalendarView calendarView;
-
-
-
     private  ListView myAct;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mRef ;
