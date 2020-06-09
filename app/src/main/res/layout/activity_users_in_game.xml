@@ -126,11 +126,9 @@
         android:layout_alignTop="@+id/inviteButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="305dp"
-        android:layout_marginBottom="38dp"
         android:text="הזמן חברים" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -140,11 +138,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="45dp"
         android:layout_marginTop="623dp"
         android:layout_marginEnd="323dp"
-        android:layout_marginBottom="65dp"
         android:clickable="true"
         android:foreground="@android:drawable/ic_input_add"
         app:backgroundTint="#FFFFFF" />
