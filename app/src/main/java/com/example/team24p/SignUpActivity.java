@@ -9,17 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.EventListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail, editTextPassword, editTextValidatePassword, editTextId,editTextFullName,editTextAddress,editTextPhoneNumber,editTextAge;

@@ -1,23 +1,11 @@
 package com.example.team24p;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-
 import android.os.Build;
-import android.util.Patterns;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 
