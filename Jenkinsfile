@@ -34,17 +34,17 @@ pipeline {
         sh './gradlew assembleDebug'
       }
     }
-    stage('Unit & Integration Tests') {
-                steps {
-                    script{
+    //stage('Unit & Integration Tests') {
+      //          steps {
+        //            script{
                       //run a gradle test
-                        sh './gradlew clean test --no-daemon'
-                        sh './gradlew assemble connectedAndroidTest'
-                        junit '*/build/androidTests/connected/*.html'
-                    }
+          //              sh './gradlew clean test --no-daemon'
+            //            sh './gradlew assemble connectedAndroidTest'
+              //          junit '*/build/androidTests/connected/*.html'
+                //    }
 
-                }
-            }
+                //}
+            //}
 
 //     stage ('Cloud Test Lab'){
 //       steps {
