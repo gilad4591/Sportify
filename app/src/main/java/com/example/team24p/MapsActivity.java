@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location myLocation;
     private String userNameLoggedIn;
     Marker marker;
+    String isAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_maps);
         userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
+        isAdmin = getIntent().getStringExtra("isAdmin");
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -154,6 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent = new Intent(MapsActivity.this, GamesActivity.class);
                 intent.putExtra("markerName", marker.getTitle());
                 intent.putExtra("userNameLoggedIn", userNameLoggedIn);
+                intent.putExtra("isAdmin",isAdmin);
                 startActivity(intent);
 
             }

@@ -15,7 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 public class SignUpIntegrationTest {
     @Rule
-    public ActivityTestRule<MainActivity> main = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<SignUpActivity> main = new ActivityTestRule<>(SignUpActivity.class);
 
     @Test
     public void signUpCheck(){

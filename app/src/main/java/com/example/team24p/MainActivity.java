@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         pendingGames = (ListView)findViewById(R.id.myPendingGames);
         myAct.setVisibility(View.INVISIBLE);
         pendingGames.setVisibility((View.INVISIBLE));
-        String isAdmin = sharedPref.getString("isAdmin", "False");
+        final String isAdmin = sharedPref.getString("isAdmin", "False");
         myAct.setAdapter(null);
 
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent stNav = new Intent(getApplicationContext(), MapsActivity.class);
                 stNav.putExtra("userNameLoggedIn",userNameLoggedIn);
+                stNav.putExtra("isAdmin",isAdmin);
                 startActivity(stNav);
             }
         });
