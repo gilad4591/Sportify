@@ -10,6 +10,7 @@ import androidx.test.rule.ActivityTestRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -27,6 +28,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@RunWith(JUnit4.class)
 public class LoginIntegrationTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
@@ -39,5 +41,6 @@ public class LoginIntegrationTest {
         Espresso.onView(withId(R.id.EditTextEmail)).perform(typeText("a@a.a"));
         Espresso.onView(withId(R.id.EditTextPassword)).perform(typeText("123456"));
         Espresso.onView(withId(R.id.loginButton)).perform(click());
+
     }
 }

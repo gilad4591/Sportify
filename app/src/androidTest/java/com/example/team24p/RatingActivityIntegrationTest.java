@@ -8,12 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 /**
@@ -22,15 +19,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(JUnit4.class)
-public class MainIntegrationTest {
+public class RatingActivityIntegrationTest {
     @Rule
-    public ActivityTestRule<MainActivity> main = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<RatingActivity> rating = new ActivityTestRule<>(RatingActivity.class);
 
     @Test
-    public void MainCheck(){
-        Espresso.onView(withId(R.id.menuButton)).check(matches(isClickable()));
-        Espresso.onView(withId(R.id.button2)).check(matches(isClickable()));
-        Espresso.onView(withId(R.id.messageButton)).check(matches(isDisplayed()));
+    public void RatingCheck(){
+        Espresso.onView(withId(R.id.ratingBar)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.buttonBack)).check(matches(isClickable()));
+        Espresso.onView(withId(R.id.numOfRate)).check(matches(isDisplayed()));
+        Espresso.onView(withId(R.id.rateUs)).check(matches(isDisplayed()));
 
     }
 }

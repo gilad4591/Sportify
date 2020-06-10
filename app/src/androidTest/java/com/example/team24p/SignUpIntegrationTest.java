@@ -5,6 +5,8 @@ import androidx.test.rule.ActivityTestRule;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
@@ -13,6 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
+@RunWith(JUnit4.class)
 public class SignUpIntegrationTest {
     @Rule
     public ActivityTestRule<SignUpActivity> main = new ActivityTestRule<>(SignUpActivity.class);
@@ -26,5 +29,6 @@ public class SignUpIntegrationTest {
         Espresso.onView(withId(R.id.PasswordTextView)).check(matches(withHint("Password")));
         Espresso.onView(withId(R.id.PhoneTextView)).perform(typeText("0524567411"));
         Espresso.onView(withId(R.id.NameTextView)).perform(typeText("Gilad Cohen"));
+
     }
 }
