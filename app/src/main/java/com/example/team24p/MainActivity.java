@@ -275,9 +275,62 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-//           mRef = mDatabase.getReference().child("messages");
-//            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
+           mRef = mDatabase.getReference().child("messages");
+           mRef.orderByChild("user1").equalTo(userNameLoggedIn).addValueEventListener(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   if(dataSnapshot.getValue()!=null) {
+                    Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
+                    for(Object key: messages.keySet()) {
+                        Map<String, Object> singleMes = (HashMap<String, Object>) messages.get(key);
+                        Map<String, Object> messageList = (HashMap<String, Object>) singleMes.get("messageList");
+                        if(messageList!=null)
+                        for(Object key2: messageList.keySet()) {
+                            Map<String, Object> newMess = (HashMap<String, Object>) messageList.get(key2);
+                            if(newMess!=null) {
+                                if (newMess.get("read").equals("False") && (!newMess.get("sender").equals(userNameLoggedIn))) {
+                                    String user = newMess.get("sender").toString();
+                                    notification(user);
+                                }
+                            }
+                        }
+                        }
+                     }
+
+               }
+
+               @Override
+               public void onCancelled(@NonNull DatabaseError databaseError) {
+
+               }
+           });
+            mRef.orderByChild("user2").equalTo(userNameLoggedIn).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.getValue()!=null) {
+                        Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
+                        for(Object key: messages.keySet()) {
+                            Map<String, Object> singleMes = (HashMap<String, Object>) messages.get(key);
+                            Map<String, Object> messageList = (HashMap<String, Object>) singleMes.get("messageList");
+                            if(messageList!=null)
+                            for(Object key2: messageList.keySet()) {
+                                Map<String, Object> newMess = (HashMap<String, Object>) messageList.get(key2);
+                                if(newMess!=null) {
+                                    if (newMess.get("read").equals("False") && (!newMess.get("sender").equals(userNameLoggedIn))) {
+                                        String user = newMess.get("sender").toString();
+                                        notification(user);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
 //                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                    Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
 //                    for(Object key: messages.keySet()) {
@@ -290,37 +343,7 @@ public class MainActivity extends AppCompatActivity {
 //                                    Map<String, String> newMs = (HashMap<String, String>) dataSnapshot.getValue();
 //                                    String user = newMs.get("sender");
 //                                    notification(user);
-//                                }
-//                                @Override
-//                                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                                }
-//                            });
-//                        }
-//
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
+
 
 
 
@@ -404,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, id)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("new message")
-                .setContentText("you got new message from" + user)
+                .setContentText("you got new message from " + user)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(MainActivity.this);

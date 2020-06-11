@@ -65,7 +65,24 @@ public class chatActivity extends AppCompatActivity {
                     DatabaseReference refChildKey = mRef.child(selctedKey);
                     refChildKey.setValue(userData2);
                 }
+                mRef.child(selctedKey).child("messageList").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        final Map<String, Object> value = (HashMap) dataSnapshot.getValue();
+                        for(String key:value.keySet()) {
+                            Map<String, String> value2 = (Map<String, String>) value.get(key);
+                            if (!value2.get("sender").equals(userNameLoggedIn)) {
+                                DatabaseReference refChildKey2 = mRef.child(selctedKey).child("messageList").child(key).child("read");
+                                refChildKey2.setValue("True");
+                            }
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 mRef.child(selctedKey).child("messageList").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -117,6 +134,7 @@ public class chatActivity extends AppCompatActivity {
 
        // onMessage(msg,true);
         final Map<String, String> userData = new HashMap<String, String>();
+        userData.put("read","False");
         userData.put("sender",userNameLoggedIn);
         userData.put("text",msg);
         userData.put("timeStamp", String.valueOf(System.currentTimeMillis()));
