@@ -5,14 +5,14 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'checkstyle'
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('C:\\Users\\Tamir\\Desktop\\team24p.jks')
-            storePassword 't12345'
-            keyAlias = 'Team24p'
-            keyPassword 't12345'
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file('C:\\Users\\Tamir\\Desktop\\team24p.jks')
+//            storePassword 't12345'
+//            keyAlias = 'Team24p'
+//            keyPassword 't12345'
+//        }
+//    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
