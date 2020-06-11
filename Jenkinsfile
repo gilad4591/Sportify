@@ -42,8 +42,9 @@ pipeline {
 //                        sh './gradlew assemble connectedAndroidTest'
 //                        junit '*/build/androidTests/connected/*.html'
 //                    }
-//                }
-//            }
+
+               // }
+           // }
 
 //     stage ('Cloud Test Lab'){
 //       steps {
