@@ -57,64 +57,69 @@ public class chatActivity extends AppCompatActivity {
                         selctedKey = key;
                     }
                 }
-                if(selctedKey==null) {
+                if (selctedKey == null) {
                     selctedKey = mRef.push().getKey();
                     final Map<String, String> userData2 = new HashMap<String, String>();
-                    userData2.put("user1",userNameLoggedIn);
-                    userData2.put("user2",userSelected);
+                    userData2.put("user1", userNameLoggedIn);
+                    userData2.put("user2", userSelected);
                     DatabaseReference refChildKey = mRef.child(selctedKey);
                     refChildKey.setValue(userData2);
                 }
-                mRef.child(selctedKey).child("messageList").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final Map<String, Object> value = (HashMap) dataSnapshot.getValue();
-                        for(String key:value.keySet()) {
-                            Map<String, String> value2 = (Map<String, String>) value.get(key);
-                            if (!value2.get("sender").equals(userNameLoggedIn)) {
-                                DatabaseReference refChildKey2 = mRef.child(selctedKey).child("messageList").child(key).child("read");
-                                refChildKey2.setValue("True");
+                    mRef.child(selctedKey).child("messageList").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot!=null) {
+                                final Map<String, Object> value = (HashMap) dataSnapshot.getValue();
+                                if(value!=null) {
+                                    for (String key : value.keySet()) {
+                                        Map<String, String> value2 = (Map<String, String>) value.get(key);
+                                        if (!value2.get("sender").equals(userNameLoggedIn)) {
+                                            DatabaseReference refChildKey2 = mRef.child(selctedKey).child("messageList").child(key).child("read");
+                                            refChildKey2.setValue("True");
+                                        }
+                                    }
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-                mRef.child(selctedKey).child("messageList").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        final Map<String, String> value = (HashMap) dataSnapshot.getValue();
-                        String text = value.get("text");
-                        boolean belg = userNameLoggedIn.equals(value.get("sender"));
-                        onMessage(text,belg);
-                    }
+                        }
+                    });
+                    mRef.child(selctedKey).child("messageList").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            if(dataSnapshot!=null) {
+                                final Map<String, String> value = (HashMap) dataSnapshot.getValue();
+                                String text = value.get("text");
+                                boolean belg = userNameLoggedIn.equals(value.get("sender"));
+                                onMessage(text, belg);
+                            }
+                        }
 
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
 
-            }
-
+                }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
