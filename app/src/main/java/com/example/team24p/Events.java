@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Events implements Serializable {
+    //var declaration
     String ground;
     String  date;
     String Hour;
@@ -11,7 +12,7 @@ public class Events implements Serializable {
     String maxP;
     String type;
     ArrayList<User> users = new ArrayList<>();
-
+//class events , ctors,setters and getters
     public Events(){
         this.id = "";
         this.ground = "";

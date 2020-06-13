@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class DayActivity extends AppCompatActivity {
+    // -- screen that leads to add game activity - here youll see the current field and date events that already created
 
     private ListView mMainList;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -36,6 +37,7 @@ public class DayActivity extends AppCompatActivity {
 
         mMainList = (ListView) findViewById(R.id.listEv);
         mMainList.setAdapter(null);
+        //get vars that passed from previous acitivity and set them in local vars
         String year = getIntent().getStringExtra("year");
         String month = getIntent().getStringExtra("month");
         String dayOfMonth = getIntent().getStringExtra("dayOfMonth");
@@ -44,7 +46,7 @@ public class DayActivity extends AppCompatActivity {
         userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
         markerName = getIntent().getStringExtra("markerName");
         dateGameText = (TextView)findViewById(R.id.dateGameText);
-        dateGameText.setText("משחקי ה - "+date);
+        dateGameText.setText("משחקי ה - "+date); // headline of current day games with today date
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
 
@@ -55,6 +57,7 @@ public class DayActivity extends AppCompatActivity {
                 ImageButton button = (ImageButton) findViewById(R.id.cButton);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
+                    //when click plus it will take the user to pick his event details
                     public void onClick(View v) {
                         Intent intent = getIntent();
                         finish();
@@ -71,6 +74,7 @@ public class DayActivity extends AppCompatActivity {
                 ArrayList<String> dd = new ArrayList<>();
                 String value = "";
                 int i = 0;
+                //the next loop will check from all events which is the current day and current field and it will show it on screen
                 Map<String,Object> eventsAll = (Map<String,Object>)  dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                 Object[] keysets =  eventsAll.keySet().toArray();
                 for (Object key : eventsAll.values()) {
@@ -102,12 +106,10 @@ public class DayActivity extends AppCompatActivity {
                             event.setType(value);
                         }
                         else {
-                            //if userlist
                             String value2 = "";
+                            //get single event details
                             Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
-
-                            //mRef= mRef.child(key);
-                            for (Object lists : listOfUsers.values()) {
+                            for (Object lists : listOfUsers.values()) { //register user to event's user list
                                 User user = new User();
                                 Map<String, String> singleUser = (Map<String, String>) lists;
                                 for(Object key3 : singleUser.keySet())
@@ -128,23 +130,22 @@ public class DayActivity extends AppCompatActivity {
 
                                 usersArrayList.add(user);
                             }
-                            //if userlist
-                            event.setUsername(usersArrayList);
+                            event.setUsername(usersArrayList); //set the user in event
                         }
 
                     }
                     String keyEvent = keysets[i].toString();
                     i++;
                     event.setId(keyEvent);
-                    eventsArrayList.add(event);
+                    eventsArrayList.add(event); // add user to listview
 
                 }
 
                 eveUserlist = new ArrayList<>();
                 ArrayList<String> items = new ArrayList<>();
                 items.clear();
-
                 for(Events ev : eventsArrayList){
+                    //check if date and ground equals to the what the user choosed
                     if((ev.getDate().equals(date)) && (ev.getGround().equals(groundName))){
                         items.add(ev.getHour());
                         eveUserlist=ev.getUsername();
@@ -155,15 +156,12 @@ public class DayActivity extends AppCompatActivity {
                 mMainList.setAdapter(null);
                 mMainList.setAdapter(adapter);
 
-                //when clicking on hour:
-
                 mMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = getIntent();
                         finish();
                         startActivity(intent);
-
                         Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                         appInfo.putExtra("userNameLoggedIn",userNameLoggedIn);
                         appInfo.putExtra("eventlistGame",(Serializable)eventsArrayList);
