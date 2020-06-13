@@ -38,7 +38,7 @@ public class addGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_game);
-
+    //get content from previous activity of the relevant details
         date = getIntent().getStringExtra("date");
         ground = getIntent().getStringExtra("markerName");
         username = getIntent().getStringExtra("userNameLoggedIn");
@@ -61,6 +61,7 @@ public class addGameActivity extends AppCompatActivity {
         soccerOff.setVisibility(View.INVISIBLE);
         soccerOn.setVisibility(View.INVISIBLE);
 
+        //get the location table from db so we can check what type of ground is it
         mRef = mDatabase.getReference().child("locations");
         mRef.orderByChild("Name").equalTo(ground).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -92,13 +93,13 @@ public class addGameActivity extends AppCompatActivity {
 
 
         final Spinner numOfParticipants = findViewById(R.id.maxPart);
-        String [] items = new String[]{"1","2","3","4","5","6","7","8","9","10+"};
+        String [] items = new String[]{"2","3","4","5","6","7","8","9","10"}; //drop down box for max num of participants
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,items);
         numOfParticipants.setAdapter(adapter);
         text = numOfParticipants.getSelectedItem().toString();
 
 
-        if(username!=null) {
+        if(username!=null) { //if user logged in he can create a new game so we take his information
             mRef = mDatabase.getReference().child("Users");
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -122,7 +123,7 @@ public class addGameActivity extends AppCompatActivity {
 
         }
         Button addGame = (Button)findViewById(R.id.gameAddcButton);
-        if(username==null || username == ""){
+        if(username==null || username == ""){ //send message to the user if he not logged in
             addGame.setVisibility(View.INVISIBLE);
             Toast.makeText(addGameActivity.this, "אינך מחובר, התחבר על מנת ליצור משחק" , Toast.LENGTH_SHORT).show();
         }
@@ -134,7 +135,7 @@ public class addGameActivity extends AppCompatActivity {
 
 
                 hour = hourText.getText().toString().trim();
-                if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
+                if (!hour.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) { //regular expression of hour pattern
                     hourText.setError("נא להזין שעה תקינה");
                     hourText.requestFocus();
                 }
@@ -153,8 +154,8 @@ public class addGameActivity extends AppCompatActivity {
                     if(basketOff.getVisibility()==View.VISIBLE) type="כדורסל";
                     if(tennisOff.getVisibility()==View.VISIBLE) type="טניס";
 
-
-
+                    //put the game into the db
+                    //the db is based on hashmaps so we need to create hashmap inside hashmap inside hashmap
                     games.put("date", date);
                     games.put("ground", ground);
                     games.put("hour", hour);
@@ -170,9 +171,9 @@ public class addGameActivity extends AppCompatActivity {
                     User.put("name", name);
                     User.put("email", username);
 
-                    mRef.push().updateChildren(User);
+                    mRef.push().updateChildren(User); //push it to firebase db
                     Toast.makeText(addGameActivity.this, "The game schedule successfully" , Toast.LENGTH_SHORT).show();
-                    finish();
+                    finish(); //return to previous activity
                 }
             }
         });

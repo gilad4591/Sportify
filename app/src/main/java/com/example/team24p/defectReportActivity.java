@@ -58,7 +58,7 @@ public class defectReportActivity extends AppCompatActivity {
         date.setText(dateS);
         ground.setText(groundS);
 
-
+        //get the user that logged in details
         mRef = mDatabase.getReference().child("Users");
         if(email!=null) {
             rep.setVisibility(View.VISIBLE);
@@ -85,6 +85,7 @@ public class defectReportActivity extends AppCompatActivity {
             Toast.makeText(this,"You are not logged in. \n log in before sending a defect report" , Toast.LENGTH_SHORT).show();
         }
         mRef = mDatabase.getReference().child("Defects");
+        //if user decide to report and click the report button it set the details to firebase
         rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +101,7 @@ public class defectReportActivity extends AppCompatActivity {
                     def.put("hour", hourS);
                     def.put("userReports", email);
                     mRef.push().updateChildren(def);
-                    Intent intent = new Intent(defectReportActivity.this,GamesActivity.class);
+                    Intent intent = new Intent(defectReportActivity.this,GamesActivity.class); //move to games activity after that
                     intent.putExtra("userNameLoggedIn",email);
                     intent.putExtra("markerName",groundS);
                     startActivity(intent);
