@@ -31,7 +31,6 @@
         <activity android:name=".AdminActivity" />
         <activity android:name=".addGameActivity" />
         <activity android:name=".GamesActivity" />
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".RatingActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity" />

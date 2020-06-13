@@ -1,10 +1,12 @@
 package com.example.team24p;
 
+
+// class for userAndPassword table
 public class UsersAndPasswords {
     private String userName;
     private String password;
     private String enabled;
-
+//ctors
     public UsersAndPasswords(String userName, String password, String enabled) {
         this.userName = userName;
         this.password = password;
@@ -16,6 +18,7 @@ public class UsersAndPasswords {
         this.enabled = "";
     }
 
+    //setters and getters
     public String getUserName() {
         return userName;
     }
