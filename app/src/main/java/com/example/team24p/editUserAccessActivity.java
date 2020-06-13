@@ -53,6 +53,11 @@ public class editUserAccessActivity extends AppCompatActivity {
                             checkBoxButton.setChecked(true);
                             switchFlag ="True";
                         }
+                        else
+                        {
+                            checkBoxButton.setChecked(false);
+                            switchFlag ="False";
+                        }
                           userData.put("Password", value.get("Password").toString());
                           userData.put("UserName", userToEdit);
                           userData.put("enabled",value.get("enabled").toString());
