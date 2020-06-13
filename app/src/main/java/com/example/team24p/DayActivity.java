@@ -44,7 +44,7 @@ public class DayActivity extends AppCompatActivity {
         userNameLoggedIn= getIntent().getStringExtra("userNameLoggedIn");
         markerName = getIntent().getStringExtra("markerName");
         dateGameText = (TextView)findViewById(R.id.dateGameText);
-        dateGameText.setText( "משחקי ה - "+date);
+        dateGameText.setText("משחקי ה - "+date);
 
         final ArrayList<Events> eventsArrayList = new ArrayList<>();
 

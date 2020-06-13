@@ -43,6 +43,7 @@ import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
+    //variables--------------------------
     static int count = 0;
     private TextView welcomeTextView;
     private TextView editPrivateText;
@@ -66,20 +67,18 @@ public class MainActivity extends AppCompatActivity {
     private Map<String, Object > pendingGamesList;
     private Map<String, Object > pendingGamesKeys;
     final ArrayList<Events> eventsArrayList = new ArrayList<>();
-
+//----------------------------------------------------
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //initialize--------------------------
         items = new ArrayList<>();
         pendingGamesList = new HashMap<>();
         pendingGamesKeys = new HashMap<>();
-
         sharedPref= getSharedPreferences("mypref", MODE_PRIVATE);
         userNameLoggedIn = sharedPref.getString("name", null);
-
-
         items.clear();
         messageBut = (FloatingActionButton) findViewById(R.id.messageButton);
         firstText = (TextView)findViewById(R.id.firstText);
@@ -102,16 +101,12 @@ public class MainActivity extends AppCompatActivity {
         loginText.setVisibility(View.VISIBLE);
         helpBut = (FloatingActionButton)findViewById(R.id.helpBut);
         help = (View)findViewById(R.id.helpView);
-
         helpBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonShowPopupWindowClick(help);
             }
         });
-
-
-
         adminPanelButton = (FloatingActionButton) findViewById(R.id.buttonManagePanel);
         FloatingActionButton logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         adminPanelButton.setVisibility(View.INVISIBLE);
@@ -123,17 +118,20 @@ public class MainActivity extends AppCompatActivity {
         final String isAdmin = sharedPref.getString("isAdmin", "False");
         myAct.setAdapter(null);
 
+        //---------------------------------------------------------------
+
         FloatingActionButton menuButton = (FloatingActionButton)findViewById(R.id.menuButton);
         welcomeTextView.setText("");
         try {
-            if(userNameLoggedIn==null) {
+            if(userNameLoggedIn==null) { //check if user is logged in
                 userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
             }
-            if (isAdmin.equals("True")){
+            if (isAdmin.equals("True")){ //check if user is admin
                 adminPanelButton.setVisibility(View.VISIBLE);
             }
         } catch (Exception e){
         }
+        //------------------if user press maps activity -----------------
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stNav);
             }
         });
+        //------------------------------------------------------------------
+        //
             FloatingActionButton LoginButton = (FloatingActionButton) findViewById(R.id.LoginButton);
             if (count != 0){
                 count++;
