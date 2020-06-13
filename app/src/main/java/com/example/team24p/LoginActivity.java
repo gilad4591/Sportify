@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
+//--declaration of vars
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -33,8 +33,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
-
-
         editTextPassword = (EditText) findViewById(R.id.EditTextPassword);
         editTextEmail =(EditText) findViewById(R.id.EditTextEmail);
         buttonSignIn = (Button) findViewById(R.id.loginButton);
@@ -45,8 +43,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin() {
+        // get text from edit text
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
+        //regex for form
         if (email.isEmpty()){
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 int succeded = 0;
                 SharedPreferences.Editor editor = getSharedPreferences("mypref",MODE_PRIVATE).edit();
                 Map<String, Object> usersList = (HashMap<String, Object>) dataSnapshot.getValue();
+                //get values from db to hash map
                     for (String key : usersList.keySet()) {
                         Map<String,Object> value = (HashMap<String,Object>)usersList.get(key);
                         if (email.equalsIgnoreCase(value.get("UserName").toString()) && password.equals(value.get("Password").toString()) && value.get("enabled").toString().equals("True"))  {
@@ -85,10 +86,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //put your value
                             editor.putString("name", email);
                             editor.putString("isAdmin",isAdmin);
-                            //commits your edits
                             editor.apply();
                             Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                            intent.putExtra("userNameLoggedIn", email);
+                            intent.putExtra("userNameLoggedIn", email); //send vars to other activity
                             intent.putExtra("isAdmin",isAdmin);
                             MainActivity.count+=1;
                             startActivity(intent);
@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 progressDialog.dismiss();
                 }
+                    //error msg if user not valid
                 if (succeded == 0) {
                     Toast.makeText(getApplicationContext(), "User or password incorrect", Toast.LENGTH_SHORT).show();
                     return;
