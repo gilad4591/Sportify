@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressDialog progressDialog;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference m_up = mDatabase.getReference().child("UsersAndPasswords");
-    private DatabaseReference m_users = mDatabase.getReference().child("Users");
+    private DatabaseReference m_users = mDatabase.getReference().child("Users"); //CONNECT TO DB WITH RELEVANT TABLE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final String adress = editTextAddress.getText().toString().trim();
         final String phone = editTextPhoneNumber.getText().toString().trim();
         final String age = editTextAge.getText().toString().trim();
-
+//-----------regex to form
         if (!fullName.matches("^[a-zA-Z]+ [ a-zA-Z]+$")){
             editTextFullName.setError("Please enter valid name");
             editTextFullName.requestFocus();
@@ -106,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             editTextValidatePassword.requestFocus();
             flag = false;
         }
-        if (flag) {
+        if (flag) { //-- check if all forms valid and user not registered
             m_up.orderByChild("UserName").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -121,8 +121,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         userData.put("UserName", email);
                         userData.put("isAdmin", "False");
                         userData.put("enabled", "True");
-                        m_up.push().setValue(userData);
-                        userData.clear();
+                        m_up.push().setValue(userData); //upload to db
+                        userData.clear(); //clear to use same obj again
                         userData.put("Name", fullName);
                         userData.put("address", adress);
                         userData.put("age", age);
@@ -131,6 +131,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         userData.put("username", email);
                         m_users.push().setValue(userData);
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        //send vars to other activity
                         intent.putExtra("userNameLoggedIn", email);
                         intent.putExtra("isAdmin", "False");
                         progressDialog.dismiss();
