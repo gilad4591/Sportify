@@ -32,6 +32,8 @@ import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, GoogleMap.OnMarkerClickListener {
 
+
+    //Maps Activity variables
     private GoogleMap mMap;
     private static final int REQUEST_PERMISSION_LOCATION = 255;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -41,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String userNameLoggedIn;
     Marker marker;
     String isAdmin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Add a marker in Sydney, Australia,
+        // Add a marker in Sydney, Australia, By Default
         // and move the map's camera to the same location.
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -79,7 +82,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                //Getting sports locations from The Server To ArrayLists
+                //use the location in loop to show them on screen by every lat&lon of the locations
                 ArrayList<Map<String, String>> locations = (ArrayList<Map<String, String>>) dataSnapshot.getValue();
                 ArrayList<LatLng> latLngList = new ArrayList<LatLng>();
                 ArrayList<String> names = new ArrayList<>();
@@ -102,7 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         else if(key.equals("Type")){
                             types.add(value);
                         }
-                    }
+                    }       // if location OK Add new Lating
                     if(lat!=0.0)latLngList.add(new LatLng(lat, lon));
                 }
                 int i =0;
@@ -111,10 +115,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     int height = 200;
                     int width = 100;
                     Bitmap smallMarker = null;
-
+                    // Using Bitmap Drawable to show different Icons on the location
+                    // by Location-Type: If Soccer- show Soccer Ball Icon
                     MarkerOptions marker = new MarkerOptions().position(latLng)
                             .title(names.get(i)).snippet("לחץ כאן כדי לפתוח משחק חדש!");
-
+                    // by Location-Type: If Soccer- show marker_basketball Icon
                     if(types.get(i).equals("כדורסל")) {
                         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_basketball);
                         Bitmap b = bitmapdraw.getBitmap();
@@ -125,13 +130,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Bitmap b = bitmapdraw.getBitmap();
                         smallMarker= Bitmap.createScaledBitmap(b, width, height, false);
                     }
+
+                    // by Location-Type: If Soccer- show Tennis Icon
                     else if(types.get(i).equals("טניס")){
 
                         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_tennis);
                         Bitmap b = bitmapdraw.getBitmap();
                         smallMarker= Bitmap.createScaledBitmap(b, width, height, false);
 
-                    }
+                    } // by Location-Type: If Hybrid Icon
                     else if(types.get(i).equals("משולב")) {
                         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_both);
                         Bitmap b = bitmapdraw.getBitmap();
@@ -152,9 +159,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
+            // After User Clock On location Store And Send the important details
+            //to Games Activity Class By Itenet
             public void onInfoWindowClick(Marker marker) {
                 Intent intent = new Intent(MapsActivity.this, GamesActivity.class);
                 intent.putExtra("markerName", marker.getTitle());
+                // Checks That User STILL LOGGED IN
                 intent.putExtra("userNameLoggedIn", userNameLoggedIn);
                 intent.putExtra("isAdmin",isAdmin);
                 startActivity(intent);
@@ -164,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    @Override
+    @Override   // Change The Camera Screen by chenge the position touching the map
     public void onLocationChanged(Location location) {
         myLocation = location;
         double myLatitude = myLocation.getLatitude();
@@ -196,7 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return false;
     }
 
-    @Override
+    @Override       // Ask Permission Work With googlesLocation
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
