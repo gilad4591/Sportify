@@ -2,6 +2,8 @@ package com.example.team24p;
 
 import java.io.Serializable;
 
+//class for username (not user and pass)
+
 public class User implements Serializable {
     private String userName;
     private String name;
@@ -10,6 +12,8 @@ public class User implements Serializable {
     private String id;
     private String age;
     private String phoneNumber;
+
+    //default ctor
 
     public User() {
         this.userName = "";
@@ -21,6 +25,8 @@ public class User implements Serializable {
         this.phoneNumber = "";
     }
 
+    //copy c'tor
+
     public User(String userName, String name, String adress, String isAdmin, String id, String age, String phoneNumber) {
         this.userName = userName;
         this.name = name;
@@ -30,6 +36,8 @@ public class User implements Serializable {
         this.age = age;
         this.phoneNumber = phoneNumber;
     }
+
+    //--------setters and getters
 
     public void setUserName(String userName) {
         this.userName = userName;
