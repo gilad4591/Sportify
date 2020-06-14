@@ -67,10 +67,27 @@ public class ExampleUnitTest {
     public void testEmailCheck5(){
         assertEquals(true,us.checkCorrectEmail("NAME@EMAIL.coM"));
     }
-//    @Test
-//    public void testEmailCheck6(){
-//        assertEquals(true,us.checkCorrectEmail("NAME"));
-//    }
+    @Test
+    public void testPhoneNumber1(){assertEquals(true,us.checkCorrectPhoneNumber("0524565541"));}
+    @Test
+    public void testPhoneNumber2(){assertEquals(false,us.checkCorrectPhoneNumber("05245655"));}
+    @Test
+    public void testPhoneNumber3(){assertEquals(false,us.checkCorrectPhoneNumber("056636445a"));}
+    @Test
+    public void testPhoneNumber4(){assertEquals(false,us.checkCorrectPhoneNumber("1234567"));}
+    @Test
+    public void testPhoneNumber5(){assertEquals(false,us.checkCorrectPhoneNumber("ahfhejd"));}
+    @Test
+    public void testid1(){assertEquals(true,us.checkCorrectId("203722334"));}
+    @Test
+    public void testid2(){assertEquals(false,us.checkCorrectId("47589"));}
+    @Test
+    public void testid3(){assertEquals(false,us.checkCorrectId("20377333a"));}
+    @Test
+    public void testid4(){assertEquals(false,us.checkCorrectId("203722@34"));}
+    @Test
+    public void testid5(){assertEquals(false,us.checkCorrectId("20372232234"));}
+
     @Test
     public void testCheckDate() {
         Date d = new Date();

@@ -43,6 +43,19 @@ public class UsefullFunctions {
             return true;
         return false;
     }
+
+    public boolean checkCorrectPhoneNumber(String phone){
+        if (phone.matches("^05[0-9]{8}$"))
+            return true;
+        return false;
+    }
+
+    public boolean checkCorrectId(String id){
+        if (id.matches("^[0-9]{9}$"))
+            return true;
+        return false;
+    }
+
     public String getRandomColor() {
         Random r = new Random();
         StringBuffer sb = new StringBuffer("#");
