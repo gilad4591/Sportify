@@ -33,14 +33,15 @@ public class addFriendActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //intialize variables
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         userNameLoggedIn = getIntent().getStringExtra("userNameLoggedIn");
         searchLine = getIntent().getStringExtra("searchLine");
-
         mRef= mDatabase.getReference().child("Users");
         userListSearched = (ListView)findViewById(R.id.SearchedList);
 
+        //get users that were relevant to the search from db
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -48,6 +49,7 @@ public class addFriendActivity extends AppCompatActivity {
                 for (String key : userTable.keySet()) {
                     Map<String, Object> value = (HashMap<String, Object>) userTable.get(key);
                     User user = new User();
+                    //get the username that contains chars from the searchline
                     if (value.get("username").toString().contains(searchLine)&&!value.get("username").equals(userNameLoggedIn)) {
                         user.setUserName(value.get("username").toString());
                         userArrayList.add(user);
@@ -56,7 +58,7 @@ public class addFriendActivity extends AppCompatActivity {
                 }
 
                 userListSearched.setAdapter(null);
-                userListSearched.setAdapter(new ListResources(addFriendActivity.this));
+                userListSearched.setAdapter(new ListResources(addFriendActivity.this)); //add all the users relevant to the list
             }
 
             @Override
@@ -69,7 +71,7 @@ public class addFriendActivity extends AppCompatActivity {
 
     }
 
-
+// custom user list of the search result - have plus button to add the user
     class ListResources extends BaseAdapter {
         ArrayList<User>mydata;
         User temp;
@@ -113,6 +115,7 @@ public class addFriendActivity extends AppCompatActivity {
             flag = 0;
             flag2=0;
 
+            //get the friend table from db and see if the searched user is already friend of mine
             mRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -124,9 +127,9 @@ public class addFriendActivity extends AppCompatActivity {
                             for (String key2 : friendlist.keySet()) {
                                 Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
 
-                                if (value2.get("username").equals(userNameLoggedIn) && value2.get("enabled").toString() == "true") {
-                                    accBut.setVisibility(View.INVISIBLE);
-                                    pending.setVisibility(View.INVISIBLE);
+                                if (value2.get("username").equals(userNameLoggedIn) && value2.get("enabled").toString() == "true") {  //if user is friend
+                                    accBut.setVisibility(View.INVISIBLE); //plus button will go invisible
+                                    pending.setVisibility(View.INVISIBLE); //pending text will appear
                                 }
                                 temp.setId(key);
                             }
@@ -148,11 +151,12 @@ public class addFriendActivity extends AppCompatActivity {
                             flag2=1;
                         }
                     }
+                    //if user click add user button
                     accBut.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if(flag!=1){ //if there is no such user in friends table (first friend) of the added
-                                Map<String, Object> user = new HashMap<>();
+                                Map<String, Object> user = new HashMap<>(); //create the user hash map and put details inside
                                 Map<String, Object> newFriend = new HashMap<>();
                                 Map<String, Object> friendlist = new HashMap<>();
                                 newFriend.put("enabled",true);

@@ -147,12 +147,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //------------------------------------------------------------------
-        //
             FloatingActionButton LoginButton = (FloatingActionButton) findViewById(R.id.LoginButton);
             if (count != 0){
                 count++;
             }
-            if (userNameLoggedIn != null){
+            if (userNameLoggedIn != null){ // if user is logged in -> intialize visible for buttons and such
                 firstText.setVisibility(View.INVISIBLE);
                 LoginButton.setVisibility(View.INVISIBLE);
                 loginText.setVisibility(View.INVISIBLE);
@@ -166,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
                 welcomeTextView.setText("Welcome"+" " +(userNameLoggedIn));
                 editPrivateText.setVisibility(View.VISIBLE);
                 messageBut.setVisibility(View.VISIBLE);
-
             }
+            //-------------------user click today games -----------------
             menuButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -179,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(stMenu);
                 }
             });
-
+            //-----------------------------------------------------------
+            //-------------------user click login -----------------
             LoginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
+            //-------------------user click logout button -----------------
             logoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
+        //-------------------user click changing details row -----------------
         editPrivateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stSelfEditDetails);
             }
         });
+        //-------------------user click admin panel = he can see it only if he admin -----------------
         adminPanelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,25 +227,26 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stAdmin);
             }
         });
-        items.clear();
+        items.clear(); // items is list for user games
         if(userNameLoggedIn!=null) {
-
+            //-------------------retrvive data from db for games of the user -----------------
             mRef.addValueEventListener(new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //intialize the date format
                     String d = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/M/yyyy"));
                     Date d1, d2;
                     DateFormat dtf = new SimpleDateFormat("dd/M/yyyy");
                     d1 = dtf.parse(d, new ParsePosition(0));
-
+                    //------------------------
 
                     Map<String, Object> eventsAll = (Map<String, Object>) dataSnapshot.getValue();//hash map for all events 0 - 50 f.e
                     for (Object key : eventsAll.values()) {
                         Map<String, Object> singleEvent = (Map<String, Object>) key;
                         for (Object key2 : singleEvent.keySet()) {
                             d2 = dtf.parse(singleEvent.get("date").toString(), new ParsePosition(0));
-                            if ((key2.toString().equals("userlist")) && (d2.compareTo(d1) >= 0)) {
+                            if ((key2.toString().equals("userlist")) && (d2.compareTo(d1) >= 0)) { // gets the event from today and forward
                                 Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
 
                                 for (Object lists : listOfUsers.values()) {
@@ -264,18 +266,18 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    if(items.isEmpty())items.add("עדיין לא הצטרפת לאף משחק");
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);
+                    if(items.isEmpty())items.add("עדיין לא הצטרפת לאף משחק"); // if not join to any game
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items); //adapter is for change array to listview
                     myAct.setAdapter(null);
                     myAct.setAdapter(adapter);
                 }
-
+                //----------------------------------------------------------------------------
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
-
+            //-------------------------get data from message db , check if there any message waiting for user ------------
            mRef = mDatabase.getReference().child("messages");
            mRef.orderByChild("user1").equalTo(userNameLoggedIn).addValueEventListener(new ValueEventListener() {
                @Override
@@ -289,9 +291,9 @@ public class MainActivity extends AppCompatActivity {
                         for(Object key2: messageList.keySet()) {
                             Map<String, Object> newMess = (HashMap<String, Object>) messageList.get(key2);
                             if(newMess!=null) {
-                                if (newMess.get("read").equals("False") && (!newMess.get("sender").equals(userNameLoggedIn))) {
+                                if (newMess.get("read").equals("False") && (!newMess.get("sender").equals(userNameLoggedIn))) {  //check if the message is unread and the user who send the message is not me
                                     String user = newMess.get("sender").toString();
-                                    notification(user);
+                                    notification(user); // go to notification func and send the custom notification by the sender
                                 }
                             }
                         }
@@ -305,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
 
                }
            });
+           //same as before of the notification - can cause by user is not the first user he is the second user
             mRef.orderByChild("user2").equalTo(userNameLoggedIn).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -332,22 +335,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    Map<String, Object> messages = (HashMap<String, Object>) dataSnapshot.getValue();
-//                    for(Object key: messages.keySet()) {
-//                        Map<String, Object> singleMes = (HashMap<String, Object>) messages.get(key);
-//                        if (singleMes.get("user1").toString().equals(userNameLoggedIn) || (singleMes.get("user2").toString().equals(userNameLoggedIn))) {
-//                            mRef=mRef.child(key.toString()).child("messageList");
-//                            mRef.addChildEventListener(new ChildEventListener() {
-//                                @Override
-//                                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                                    Map<String, String> newMs = (HashMap<String, String>) dataSnapshot.getValue();
-//                                    String user = newMs.get("sender");
-//                                    notification(user);
-
-
-
-
+            //--------------------------start message activity - user click hodaot ----------
             messageBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -356,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(stMess);
                 }
             });
-
+            //------------------------------check if someone invite the user to game
             mRef = mDatabase.getReference().child("Invites");
             mRef.addChildEventListener(new ChildEventListener() {
                 @Override
@@ -394,6 +382,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    //--------------------pop up help show------------
     public void onButtonShowPopupWindowClick(View view) {
 
         // inflate the layout of the popup window
@@ -422,10 +412,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    // notification function
     private void notification(String user) {
         String id = createNotificationChannel();
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, id)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, id) //set the details of the notification
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("new message")
                 .setContentText("you got new message from " + user)
@@ -436,7 +426,7 @@ public class MainActivity extends AppCompatActivity {
         notificationManagerCompat.notify(100,builder.build());
 
     }
-    private String createNotificationChannel() {
+    private String createNotificationChannel() { // chanel for notification
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         String id = null;
@@ -454,6 +444,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return id;
     }
+    //custom adapter for confirm and decline invites list
     class ListResources extends BaseAdapter {
         Map<String, Object >mydata;
         String temp;
@@ -490,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
             final Map<String, Object > obj = (Map<String, Object >) getItem(position);
             inviteby.setText("הוזמנת על ידי " + obj.get("Inviter"));
             usText.setText(obj.get("Text").toString());
-
+            //if user click decline invite
             decBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -501,6 +492,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            //bring the event details for preparing the user in game activity so we have event object
             mRef = mRef.getDatabase().getReference().child("Events");
             mRef.addValueEventListener(new ValueEventListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -572,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
+            //if user accept to the invite he will transfer to user in game activity
             accBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -581,11 +573,12 @@ public class MainActivity extends AppCompatActivity {
                     mRef = mRef.getDatabase().getReference().child("Events");
                     Intent appInfo = new Intent(getApplicationContext(), UsersInGame.class);
                     appInfo.putExtra("userNameLoggedIn", userNameLoggedIn);
-                    appInfo.putExtra("eventlistGame", (Serializable) eventsArrayList);
+                    appInfo.putExtra("eventlistGame", (Serializable) eventsArrayList); //send the event object to the new activity
                     appInfo.putExtra("hour", x[2]);
                     appInfo.putExtra("markerName", x[1]);
                     appInfo.putExtra("date", x[0]);
 
+                    //set the invite to dissapear it
                     mRef = mRef.getDatabase().getReference().child("Invites").child(pendingGamesKeys.get(String.valueOf(position+1)).toString()).child("enabled");
                     mRef.setValue("False");
                     pendingGamesList.remove(position);

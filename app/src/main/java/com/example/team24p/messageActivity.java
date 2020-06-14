@@ -51,7 +51,7 @@ public class messageActivity extends AppCompatActivity {
 
 
 
-
+        //get data of friends - confirmed and not confirmed and set it to two lists
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,9 +64,9 @@ public class messageActivity extends AppCompatActivity {
                             Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
 
                             if (value2.get("confirmed").toString().equals("true")&& value2.get("enabled").toString() =="true") {
-                                userConfirmed.add(value2.get("username").toString());
+                                userConfirmed.add(value2.get("username").toString()); //set the confirmed list if the user already friend
                             } else if (value2.get("confirmed").toString().equals("false") && value2.get("enabled").toString()=="true"){
-                                userNotConfirmed.add(value2.get("username").toString());
+                                userNotConfirmed.add(value2.get("username").toString()); //set the unconfirmed list
                             }
                         }
                         break;
@@ -86,6 +86,7 @@ public class messageActivity extends AppCompatActivity {
             }
         });
 
+        //if the user press search he moves to the add friend activity so he can add new friend
         ImageButton searchB = (ImageButton) findViewById(R.id.searchButton);
         final TextInputEditText lineToSearch = (TextInputEditText)findViewById(R.id.searchFriends);
         searchB.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +98,7 @@ public class messageActivity extends AppCompatActivity {
                     finish();
                     startActivity(inte);
 
-                    Intent intent = new Intent(messageActivity.this,addFriendActivity.class);
+                    Intent intent = new Intent(messageActivity.this,addFriendActivity.class); // move to add friend activity
                     intent.putExtra("searchLine",s);
                     intent.putExtra("userNameLoggedIn",userNameLoggedIn);
                     startActivity(intent);
@@ -108,6 +109,7 @@ public class messageActivity extends AppCompatActivity {
             }
         });
 
+        //if user click on friend he initiate the chat activity with the selected friend
         confirmedList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,7 +122,7 @@ public class messageActivity extends AppCompatActivity {
     }
 
 
-
+    //custom adapter of x / v pending friend request
     class ListResources extends BaseAdapter{
         ArrayList<String>mydata;
         String temp;
@@ -155,6 +157,7 @@ public class messageActivity extends AppCompatActivity {
 
             temp = mydata.get(position);
 
+            //if user click confirm button
             accBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -164,18 +167,20 @@ public class messageActivity extends AppCompatActivity {
                             Map<String, Object> friendsTable = (HashMap<String, Object>) dataSnapshot.getValue();
                             for (String key : friendsTable.keySet()) {
                                 Map<String, Object> value = (HashMap<String, Object>) friendsTable.get(key);
+                                //set the new friend on my firebase table
                                 if (value.get("username").toString().equals(userNameLoggedIn)) {
                                     Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
                                     for (String key2 : friendlist.keySet()) {
                                         Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
 
                                         if (value2.get("username").equals(temp) && value2.get("enabled").toString() == "true") {
-                                            value2.put("confirmed",true);
+                                            value2.put("confirmed",true); //change from request to confirm friend
                                             DatabaseReference refChildKey = mRef.child(key).child("friendlist").child(key2);
                                             refChildKey.setValue(value2);
                                         }
                                     }
                                 }
+                                //set me on the new friend firebase table
                                 if(value.get("username").toString().equals(temp)){
                                     Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
                                     for (String key2 : friendlist.keySet()) {
@@ -204,7 +209,7 @@ public class messageActivity extends AppCompatActivity {
 
                 }
             });
-
+            //if user click decline button
             decBut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -218,7 +223,7 @@ public class messageActivity extends AppCompatActivity {
                                     Map<String, Object> friendlist = (HashMap<String, Object>) value.get("friendlist");
                                     for (String key2 : friendlist.keySet()) {
                                         Map<String, Object> value2 = (HashMap<String, Object>) friendlist.get(key2);
-
+                                        //set the request to off!
                                         if (value2.get("username").equals(temp) && value2.get("enabled").toString() == "true") {
                                             value2.put("enabled",false);
                                             DatabaseReference refChildKey = mRef.child(key).child("friendlist").child(key2);

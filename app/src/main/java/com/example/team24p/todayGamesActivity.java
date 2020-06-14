@@ -44,7 +44,7 @@ public class todayGamesActivity extends AppCompatActivity {
         items.clear();
         myAct.setAdapter(null);
 
-
+        //get the today games from event table on the db
         mRef.addValueEventListener(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -64,7 +64,7 @@ public class todayGamesActivity extends AppCompatActivity {
                     Map<String, Object> singleEvent = (Map<String, Object>) key;
                     for (Object key2 : singleEvent.keySet()) {
                         d2 = dtf.parse(singleEvent.get("date").toString(),new ParsePosition(0));
-                        if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)==0)){
+                        if((key2.toString().equals("userlist"))&&(d2.compareTo(d1)==0)){ //relevant date - today
                             Map<String, String> listOfUsers = (Map<String, String>) singleEvent.get("userlist");
                             String x = singleEvent.get("date").toString() + " - " +
                                     singleEvent.get("ground").toString() + " - " +
@@ -121,6 +121,7 @@ public class todayGamesActivity extends AppCompatActivity {
 
             }
         });
+        //if user click on one of the events he will move to see the users that were joined
         myAct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String str = (String) myAct.getItemAtPosition(position);

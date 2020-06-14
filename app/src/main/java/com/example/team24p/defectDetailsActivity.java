@@ -40,7 +40,7 @@ public class defectDetailsActivity extends AppCompatActivity {
         }
         else {
 
-
+            //get the table of users to check if user is admin
             mRef.orderByChild("UserName").equalTo(userNameLoggedIn).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,7 +58,7 @@ public class defectDetailsActivity extends AppCompatActivity {
 
                 }
             });
-
+            //if user is admin he can click on fix button if someone fix it already
             fixB.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,6 +71,7 @@ public class defectDetailsActivity extends AppCompatActivity {
 
         }
     }
+    //function to get the relevant defect details for user to see more information about
     public void getDefectDetails(String defKey){
         mRef = mDatabase.getReference().child("Defects").child(defKey);
 
